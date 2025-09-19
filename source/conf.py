@@ -45,7 +45,7 @@ html_css_files = [
 #   "dark_code": auto,
 # }
 
-
+html_extra_path = ['CNAME']
 
 #Google Analytics
 
