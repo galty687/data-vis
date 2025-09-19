@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Seaborn 入门 - data visulization 0.1 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="Pandas 入门" href="pandas.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Seaborn 入门"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Seaborn 入门</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#pandas">&#19982;Pandas&#30340;&#32472;&#22270;&#23545;&#27604;</a></li>
+<li><a class="reference internal" href="#id1">&#24555;&#36895;&#20837;&#38376;</a><ul>
+<li><a class="reference internal" href="#id2">&#25955;&#28857;&#22270;&#23545;&#27604;</a></li>
+<li><a class="reference internal" href="#id3">&#30456;&#20851;&#24615;&#26816;&#39564;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">&#32654;&#21270;</a><ul>
+<li><a class="reference internal" href="#marker">&#25913;&#21464;marker</a></li>
+<li><a class="reference internal" href="#listening-vs-speaking">Listening vs Speaking &#25955;&#28857;&#22270;&#32654;&#21270;</a></li>
+<li><a class="reference internal" href="#id5">&#20027;&#39064;&#19982;&#39118;&#26684;</a></li>
+<li><a class="reference internal" href="#id6">Seaborn &#20840;&#23616;&#35774;&#32622;&#36895;&#26597;&#34920;</a><ul>
+<li><a class="reference internal" href="#id7">&#19981;&#21516;&#39118;&#26684;</a></li>
+<li><a class="reference internal" href="#id8">&#19981;&#21516;&#22330;&#26223;</a></li>
+<li><a class="reference internal" href="#id9">&#19981;&#21516;&#37197;&#33394;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10"><strong>&#32472;&#22270;&#32654;&#21270;&#36895;&#26597;&#34920;</strong></a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Seaborn 入门</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="seaborn">
+<h1>Seaborn 入门<a class="headerlink" href="#seaborn" title="Link to this heading">¶</a></h1>
+<p><strong><a class="reference external" href="https://seaborn.pydata.org">Seaborn</a></strong> 是基于 Matplotlib 的高级可视化库。</p>
+<p>特点：</p>
+<ul class="simple">
+<li><p>默认风格美观，适合做统计图表。</p></li>
+<li><p>和 <strong>Pandas DataFrame</strong> 无缝结合。</p></li>
+<li><p>内置多种数据集（如 tips、iris、flights）。</p></li>
+<li><p>内置统计功能（回归拟合、分布可视化）。</p></li>
+</ul>
+<p>Seaborn 支持多种不同的数据集格式，大多数函数都能接受由 <strong>pandas</strong> 或 <strong>numpy</strong> 库的对象表示的数据，以及 Python 内置类型（如 <strong>列表</strong> 和 <strong>字典</strong>）。理解这些不同选项对应的使用模式，将帮助你快速为几乎任何数据集创建有用的可视化图表。</p>
+<p><strong>安装方法</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>seaborn
+</span></pre></div>
+</div>
+<section id="pandas">
+<h2>与Pandas的绘图对比<a class="headerlink" href="#pandas" title="Link to this heading">¶</a></h2>
+<p>主要是数据分析库，绘图功能是“附带的”，适合快速看数据，而且其绘图师基于 Matplotlib的，样式比较“原始”。</p>
+<ul class="simple">
+<li><p><strong>Pandas</strong>：只能画基本的折线、直方图、条形图、散点图等。</p></li>
+<li><p><strong>Seaborn</strong>：内置很多高级统计图，比如：</p>
+<ul>
+<li><p><strong>箱线图 (boxplot)</strong>、<strong>小提琴图 (violinplot)</strong> → 展示分布和差异</p></li>
+<li><p><strong>热力图 (heatmap)</strong> → 展示相关性矩阵</p></li>
+<li><p><strong>回归拟合图 (lmplot)</strong> → 自动加回归线</p></li>
+<li><p><strong>Pairplot</strong> → 多变量关系总览</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id1">
+<h2>快速入门<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 在 Python 中导入</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="4"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="5">
+</span><span data-line="6">
+</span><span data-line="7">
+</span></pre></div>
+</div>
+<section id="id2">
+<h3>散点图对比<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p><strong>Pandas 散点图</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Listening&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Speaking&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><strong>Seaborn 散点图（带分组和更美观样式）</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Listening&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Speaking&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Gender&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Listening vs Speaking Scores&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>进行快速演示时，用 Pandas 自带的绘图功能已经足够，但在撰写分析报告或需要更高级的可视化时，Seaborn 会显得更加专业。</p>
+</section>
+<section id="id3">
+<h3>相关性检验<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 皮尔逊相关系数（Pearson Correlation）</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Listening&quot;</span><span class="p">,</span> <span class="s2">&quot;Speaking&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>如果相关系数 <strong>&gt; 0.6</strong>，说明二者关系较强，可以考虑作为学习上的配套指标。</p>
+</div></blockquote>
+</section>
+</section>
+<section id="id4">
+<h2>美化<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="marker">
+<h3>改变marker<a class="headerlink" href="#marker" title="Link to this heading">¶</a></h3>
+<p>把默认的圆点（&quot;o&quot;) 换成 “x”，只需要设置 marker=&quot;x&quot;，还可以用 marker=&quot;^&quot;（三角形）、marker=&quot;s&quot;（方块）等。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 把默认的圆点（&quot;o&quot;) 换成 “x”，只需要设置 marker=&quot;x&quot;</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Listening&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Speaking&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Gender&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Listening vs Speaking Scores&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="listening-vs-speaking">
+<h3>Listening vs Speaking 散点图美化<a class="headerlink" href="#listening-vs-speaking" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>  <span class="c1"># 设置背景</span>
+</span><span data-line="5"><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+</span><span data-line="6">    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Listening&quot;</span><span class="p">,</span>
+</span><span data-line="7">    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Speaking&quot;</span><span class="p">,</span>
+</span><span data-line="8">    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Gender&quot;</span><span class="p">,</span>
+</span><span data-line="9">    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+</span><span data-line="10">    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>   <span class="c1"># 改 marker</span>
+</span><span data-line="11">    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>        <span class="c1"># 点大小</span>
+</span><span data-line="12">    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>    <span class="c1"># 透明度</span>
+</span><span data-line="13">    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span> <span class="c1"># 配色方案</span>
+</span><span data-line="14"><span class="p">)</span>
+</span><span data-line="15"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Listening vs Speaking Scores&quot;</span><span class="p">)</span>
+</span><span data-line="16"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Listening Score&quot;</span><span class="p">)</span>
+</span><span data-line="17"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Speaking Score&quot;</span><span class="p">)</span>
+</span><span data-line="18"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>主题与风格<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>   <span class="c1"># 背景带网格</span>
+</span><span data-line="2"><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">)</span>     <span class="c1"># 适合讲座展示</span>
+</span><span data-line="3"><span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>     <span class="c1"># 配色方案</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>Seaborn 全局设置速查表<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>功能</p></th>
+<th class="head"><p>方法</p></th>
+<th class="head"><p>可选参数值</p></th>
+<th class="head"><p>示例</p></th>
+<th class="head"><p>用途说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>背景风格 (style)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_style()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;white&quot;</span></code>（纯白背景）、<code class="docutils literal notranslate"><span class="pre">&quot;dark&quot;</span></code>（深色背景）、<code class="docutils literal notranslate"><span class="pre">&quot;whitegrid&quot;</span></code>（白底带网格）、<code class="docutils literal notranslate"><span class="pre">&quot;darkgrid&quot;</span></code>（暗色带网格）、<code class="docutils literal notranslate"><span class="pre">&quot;ticks&quot;</span></code>（带刻度线）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_style(&quot;darkgrid&quot;)</span></code></p></td>
+<td><p>控制背景和网格样式，常用 <code class="docutils literal notranslate"><span class="pre">&quot;whitegrid&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;darkgrid&quot;</span></code>，适合数据展示</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>展示场景 (context)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_context()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;paper&quot;</span></code>（最小，适合论文）、<code class="docutils literal notranslate"><span class="pre">&quot;notebook&quot;</span></code>（默认，适合日常分析）、<code class="docutils literal notranslate"><span class="pre">&quot;talk&quot;</span></code>（放大字号，适合讲座）、<code class="docutils literal notranslate"><span class="pre">&quot;poster&quot;</span></code>（最大，适合大屏展示）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_context(&quot;talk&quot;)</span></code></p></td>
+<td><p>调整字体、线条、点的整体缩放比例，根据场景切换展示效果</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>配色方案 (palette)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_palette()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;deep&quot;</span></code>（默认）、<code class="docutils literal notranslate"><span class="pre">&quot;muted&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;bright&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;pastel&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;dark&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;colorblind&quot;</span></code>，以及分类配色（如 <code class="docutils literal notranslate"><span class="pre">&quot;Set1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Set2&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Set3&quot;</span></code>），或渐变配色（如 <code class="docutils literal notranslate"><span class="pre">&quot;coolwarm&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Blues&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;viridis&quot;</span></code>）</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_palette(&quot;Set2&quot;)</span></code></p></td>
+<td><p>控制颜色风格，分组绘图时效果明显，能提升可读性和美观度</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="id7">
+<h4>不同风格<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h4>
+<p><img alt="output-style" src="../_images/output-style.png" /></p>
+</section>
+<section id="id8">
+<h4>不同场景<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h4>
+<p><img alt="output-context" src="../_images/output-context.png" /></p>
+</section>
+<section id="id9">
+<h4>不同配色<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h4>
+<p><img alt="output-palette" src="../_images/output-palette.png" /></p>
+</section>
+</section>
+<section id="id10">
+<h3><strong>绘图美化速查表</strong><a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>功能</strong></p></th>
+<th class="head"><p><strong>参数/方法</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+<th class="head"><p><strong>效果说明</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>点的形状 (marker)</strong></p></td>
+<td><p>marker</p></td>
+<td><p>marker=&quot;x&quot;</p></td>
+<td><p>点形状：&quot;o&quot; 圆点 (默认)，&quot;x&quot; 叉号，&quot;s&quot; 方块，&quot;^&quot; 三角形</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>点的大小 (size)</strong></p></td>
+<td><p>s</p></td>
+<td><p>s=100</p></td>
+<td><p>控制点的大小</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>透明度 (alpha)</strong></p></td>
+<td><p>alpha</p></td>
+<td><p>alpha=0.6</p></td>
+<td><p>让点更透明，避免重叠过密</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>颜色 (color)</strong></p></td>
+<td><p>color</p></td>
+<td><p>color=&quot;red&quot;</p></td>
+<td><p>所有点统一颜色</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>调色板 (palette)</strong></p></td>
+<td><p>palette</p></td>
+<td><p>palette=&quot;Set2&quot;</p></td>
+<td><p>分组配色，可选 &quot;deep&quot;, &quot;Set1&quot;, &quot;coolwarm&quot; 等</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>背景风格 (style)</strong></p></td>
+<td><p>sns.set_style()</p></td>
+<td><p>sns.set_style(&quot;whitegrid&quot;)</p></td>
+<td><p>可选 &quot;white&quot;, &quot;dark&quot;, &quot;whitegrid&quot;, &quot;darkgrid&quot;</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>展示场景 (context)</strong></p></td>
+<td><p>sns.set_context()</p></td>
+<td><p>sns.set_context(&quot;talk&quot;)</p></td>
+<td><p>缩放字体/线宽/点大小；可选 &quot;paper&quot; &lt; &quot;notebook&quot;(默认) &lt; &quot;talk&quot; &lt; &quot;poster&quot;</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>趋势线</strong></p></td>
+<td><p>sns.lmplot() / sns.regplot()</p></td>
+<td><p>sns.lmplot(x=&quot;X&quot;, y=&quot;Y&quot;, data=df)</p></td>
+<td><p>自动加回归线，便于看趋势</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>标题 (title)</strong></p></td>
+<td><p>plt.title()</p></td>
+<td><p>plt.title(&quot;Listening vs Speaking&quot;)</p></td>
+<td><p>添加图表标题</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>轴标签 (xlabel, ylabel)</strong></p></td>
+<td><p>plt.xlabel(), plt.ylabel()</p></td>
+<td><p>plt.xlabel(&quot;Listening&quot;)</p></td>
+<td><p>设置横纵坐标说明</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="pandas.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Pandas 入门</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=52efc512"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

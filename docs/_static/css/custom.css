@@ -1,0 +1,14 @@
+/* 文章正文区：下调标题粗细 */
+.yue h1 { font-weight: 600; }  /* 原 800 */
+.yue h2 { font-weight: 500; }  /* 原 700 */
+.yue h3 { font-weight: 400; }  /* 原 600 */
+/* 如需同步： */
+.yue h4 { font-weight: 500; }  /* 原 600 */
+.yue h5, .yue h6 { font-weight: 500; }  /* 原 600 */
+
+/* 右侧栏（小目录等）：去掉 600，统一调轻 */
+.sy-rside-inner > div > h3 { font-weight: 500; }
+/* 语言特定规则也要覆盖（Shibuya 有 lang 前缀选择器） */
+html[lang="zh"] .sy-rside-inner > div > h3,
+html[lang="zh-CN"] .sy-rside-inner > div > h3,
+html[lang="zh-TW"] .sy-rside-inner > div > h3 { font-weight: 500; }
