@@ -99,6 +99,12 @@ data-aria-dark="切换到自动模式">
 <li><a class="reference internal" href="#id10"><strong>&#32472;&#22270;&#32654;&#21270;&#36895;&#26597;&#34920;</strong></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#id11">&#20351;&#29992; Seaborn &#33258;&#24102;&#25968;&#25454;&#38598;&#36827;&#34892;&#25506;&#32034;</a><ul>
+<li><a class="reference internal" href="#id12">&#26597;&#30475; Seaborn &#33258;&#24102;&#25968;&#25454;&#38598;</a></li>
+<li><a class="reference internal" href="#id13">&#21152;&#36733;&#25968;&#25454;&#38598;</a></li>
+<li><a class="reference internal" href="#id14">&#22522;&#26412;&#25506;&#32034;</a></li>
+</ul>
+</li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -351,6 +357,51 @@ data-aria-dark="切换到自动模式">
 </tr>
 </tbody>
 </table>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>使用 Seaborn 自带数据集进行探索<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<p>Seaborn 附带了一些常见的数据集，可以帮助我们快速学习可视化方法，而不必自己准备数据。</p>
+<section id="id12">
+<h3>查看 Seaborn 自带数据集<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># 列出所有内置数据集名称</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">get_dataset_names</span><span class="p">())</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>加载数据集<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 加载“小费”数据集</span>
+</span><span data-line="2"><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>基本探索<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 查看数据基本信息</span>
+</span><span data-line="2"><span class="n">tips</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># 描述性统计</span>
+</span><span data-line="5"><span class="n">tips</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># 散点图：账单与小费关系</span>
+</span><span data-line="8"><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+</span><span data-line="9">
+</span><span data-line="10"><span class="c1"># 箱线图：不同性别的小费差异</span>
+</span><span data-line="11"><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="c1"># 小提琴图：不同日期的小费分布</span>
+</span><span data-line="14"><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="c1"># 热力图：变量之间的相关性</span>
+</span><span data-line="17"><span class="n">corr</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># 计算相关性矩阵</span>
+</span><span data-line="18"><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+</span><span data-line="19"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
 </div>
 </section>
 </section>

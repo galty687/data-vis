@@ -177,3 +177,55 @@ sns.set_palette("Set2")     # 配色方案
 | **趋势线**                  | sns.lmplot() / sns.regplot() | sns.lmplot(x="X", y="Y", data=df)  | 自动加回归线，便于看趋势                                     |
 | **标题 (title)**            | plt.title()                  | plt.title("Listening vs Speaking") | 添加图表标题                                                 |
 | **轴标签 (xlabel, ylabel)** | plt.xlabel(), plt.ylabel()   | plt.xlabel("Listening")            | 设置横纵坐标说明                                             |
+
+
+
+## 使用 Seaborn 自带数据集进行探索
+
+Seaborn 附带了一些常见的数据集，可以帮助我们快速学习可视化方法，而不必自己准备数据。
+
+
+### 查看 Seaborn 自带数据集
+```python
+import seaborn as sns
+
+# 列出所有内置数据集名称
+print(sns.get_dataset_names())
+```
+
+
+
+### 加载数据集
+
+```python
+# 加载“小费”数据集
+tips = sns.load_dataset("tips")
+tips.head()
+```
+
+
+
+### 基本探索
+
+```python
+# 查看数据基本信息
+tips.info()
+
+# 描述性统计
+tips.describe()
+
+# 散点图：账单与小费关系
+sns.scatterplot(x="total_bill", y="tip", data=tips)
+
+# 箱线图：不同性别的小费差异
+sns.boxplot(x="sex", y="tip", data=tips)
+
+# 小提琴图：不同日期的小费分布
+sns.violinplot(x="day", y="tip", data=tips)
+
+# 热力图：变量之间的相关性
+corr = tips.corr(numeric_only=True)   # 计算相关性矩阵
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.show()
+```
+
