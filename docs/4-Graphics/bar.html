@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>条形图绘制 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="直方图与核密度图" href="histogram.html" /><link rel="prev" title="Seaborn 入门" href="../3-ToolChain/seaborn.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="条形图绘制"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">各类可视图的绘制</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sina.html">西纳图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">散点图</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#32032;&#26448;</a></li>
+<li><a class="reference internal" href="#id3">&#25968;&#25454;&#22788;&#29702;</a></li>
+<li><a class="reference internal" href="#id4">&#32472;&#22270;</a><ul>
+<li><a class="reference internal" href="#id5">&#30452;&#25509;&#20986;&#22270;</a></li>
+<li><a class="reference internal" href="#id6">&#23545;&#25968;&#25454;&#36827;&#34892;&#25490;&#24207;</a></li>
+<li><a class="reference internal" href="#id7">&#28155;&#21152;&#21051;&#24230;</a></li>
+<li><a class="reference internal" href="#id8">&#20351;&#29992;&#39068;&#33394;&#36827;&#19968;&#27493;&#21306;&#20998;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9">&#28857;&#22270;&#32472;&#21046;</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">条形图绘制</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>条形图绘制<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>素材<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+</section>
+<section id="id3">
+<h2>数据处理<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>导入必要库</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w">  </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span></pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">df2</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;movies_weekend_gross.csv&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">df2</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id4">
+<h2>绘图<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<section id="id5">
+<h3>直接出图<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Weekend_gross&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="unordered-bar" src="../_images/unordered-bar.png" /></p>
+<p>这个图不便于读者了解票房的排名和差异。</p>
+</section>
+<section id="id6">
+<h3>对数据进行排序<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 排序依据 Weekend_gross，降序</span>
+</span><span data-line="2"><span class="n">df2_sorted</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Weekend_gross&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># 保存排序后的数据，</span>
+</span><span data-line="5"><span class="n">df2_sorted</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;movies_weekend_gross_sorted.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># 重新基于排序后的数据绘图</span>
+</span><span data-line="8"><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ddf2_sorted</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Weekend_gross&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">)</span>
+</span><span data-line="9">
+</span><span data-line="10">
+</span><span data-line="11">
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>pandas 在保存 CSV 时，<strong>默认会把 DataFrame 的行索引（index）也写进 CSV 文件</strong>，作为最左边的一列。加上 index=False 就告诉 pandas：不要把 index 写到 CSV 里。</p>
+</div></blockquote>
+</section>
+<section id="id7">
+<h3>添加刻度<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">xlim()</span></code>用来设置横坐标（x 轴）的最小值和最大值，0 表示 x 轴的起始值，80000000 表示 x 轴的结束值。</p>
+<p><code class="docutils literal notranslate"><span class="pre">xticks（）</span></code>可以指定 <strong>x 轴刻度的位置</strong>，并指定<strong>对应刻度的显示文字</strong>。20M表示 20 million（两千万），是一种简写格式，更方便读者阅读。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 增加刻度</span>
+</span><span data-line="2"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000000</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20000000</span><span class="p">,</span> <span class="mi">40000000</span><span class="p">,</span> <span class="mi">60000000</span><span class="p">,</span> <span class="mi">80000000</span><span class="p">],</span>
+</span><span data-line="4">           <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;20M&quot;</span><span class="p">,</span> <span class="s2">&quot;40M&quot;</span><span class="p">,</span> <span class="s2">&quot;60M&quot;</span><span class="p">,</span> <span class="s2">&quot;80M&quot;</span><span class="p">])</span>
+</span><span data-line="5">
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># 添加X轴，Y轴和标题</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Weekend Gross&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Movie Title&quot;</span><span class="p">)</span>
+</span><span data-line="11"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Movies Weekend Gross&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id8">
+<h3>使用颜色进一步区分<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>在 seaborn 的绘图函数里，hue 是一个非常重要的参数，可用来指定&quot;分类变量&quot;，即让同一个 x 或 y 位置的条形（或点、线）按照类别再分组，显示成不同颜色。简单说：hue=&quot;某一列&quot; ，seaborn 会根据这一列的不同取值，自动分配不同的颜色。</p>
+<p>调色板有不同类型：</p>
+<ul class="simple">
+<li><p>顺序调色板 (Sequential palettes)：颜色从浅到深连续变化，用来表现有大小顺序的数据，比如数值大小、概率高低。例子：&quot;Blues&quot;, &quot;rocket&quot;, &quot;mako&quot;。</p></li>
+<li><p>定性调色板 (Qualitative palettes)：每种颜色差别明显，没有深浅顺序，用来区分类别，比如不同的电影、城市。例子：&quot;deep&quot;, &quot;bright&quot;, &quot;Set2&quot;。</p></li>
+</ul>
+<p><strong>顺序调色板</strong></p>
+<p>这里的 &quot;Blues&quot; 是一个 <strong>顺序调色板</strong>（Sequential colormap），默认颜色是从浅蓝到深蓝。大多数 seaborn / matplotlib 的调色板都支持加 &quot;_r&quot; 来反转，<code class="docutils literal notranslate"><span class="pre">Blues_r</span></code>，表示从深蓝到浅蓝。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df2_sorted</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Weekend_gross&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="blues" src="../_images/blues.png" /></p>
+<p><strong>定性调色板</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">palette</span></code>可选择预制调色板</p>
+<p>你可以把 &quot;pastel&quot; 换成其他名字，比如：</p>
+<ul class="simple">
+<li><p>&quot;deep&quot;</p></li>
+<li><p>&quot;bright&quot;</p></li>
+<li><p>&quot;muted&quot;</p></li>
+<li><p>&quot;colorblind&quot;</p></li>
+<li><p>&quot;Set2&quot;</p></li>
+<li><p>&quot;Paired&quot;</p></li>
+<li><p>&quot;rocket&quot;</p></li>
+<li><p>&quot;RdBu&quot;</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 替换上一步的代码，其他不变</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df2_sorted</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Weekend_gross&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span><span class="n">dodge</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+</span><span data-line="4">
+</span><span data-line="5">
+</span></pre></div>
+</div>
+<p>Pastel 配色的效果</p>
+<p><img alt="color-bar" src="../_images/color-bar.png" /></p>
+</section>
+</section>
+<section id="id9">
+<h2>点图绘制<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<p>用点的位置表示数值，不强调面积或长度，不一定要从零开始，可以聚焦在一个区间，突出细微差别。</p>
+<p>适用场景：</p>
+<ul class="simple">
+<li><p>数值范围相对集中时：比如预期寿命（60–81 岁），如果用 bar 图，柱子差别不大；点图更能突出小的差异。</p></li>
+<li><p>要减少视觉负担时：点比条形更简洁，不会因为条太长而分散注意力。</p></li>
+<li><p>需要比较多个组的分布：点图能清晰显示每组的具体位置，适合多个条件对比。</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="4">
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">df3</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;life_expectancy_americas_2007.csv&#39;</span><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># 绘制点图</span>
+</span><span data-line="9"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</span><span data-line="10"><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span>
+</span><span data-line="11">    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+</span><span data-line="12">    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;LifeExp&quot;</span><span class="p">,</span>
+</span><span data-line="13">    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Country&quot;</span><span class="p">,</span>
+</span><span data-line="14">    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+</span><span data-line="15">    <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+</span><span data-line="16">    <span class="n">jitter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span data-line="17">    <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;h&quot;</span>
+</span><span data-line="18"><span class="p">)</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;life expectancy (years)&quot;</span><span class="p">)</span>
+</span><span data-line="21"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span data-line="22"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Life Expectancy in the Americas (2007)&quot;</span><span class="p">)</span>
+</span><span data-line="23"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">82</span><span class="p">)</span>
+</span><span data-line="24">
+</span><span data-line="25"><span class="c1"># 开启网格</span>
+</span><span data-line="26"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span><span data-line="27"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="dot" src="../_images/dot.png" /></p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../3-ToolChain/seaborn.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">Seaborn 入门</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="histogram.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">直方图与核密度图</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

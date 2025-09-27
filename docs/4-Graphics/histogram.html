@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>直方图与核密度图 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="箱线图" href="boxplot.html" /><link rel="prev" title="条形图绘制" href="bar.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="直方图与核密度图"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">各类可视图的绘制</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bar.html">条形图绘制</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sina.html">西纳图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">散点图</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#30452;&#26041;&#22270;&#31616;&#20171;</a></li>
+<li><a class="reference internal" href="#id3">&#32472;&#21046;&#30452;&#26041;&#22270;</a><ul>
+<li><a class="reference internal" href="#id4">&#36755;&#20986;&#35835;&#21462;</a></li>
+<li><a class="reference internal" href="#id5">&#32472;&#21046;&#30452;&#26041;&#22270;</a></li>
+<li><a class="reference internal" href="#kde">&#22686;&#21152;KDE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kernel-density-estimation-kde">&#26680;&#23494;&#24230;&#20272;&#35745;&#65288;Kernel Density Estimation, KDE&#65289;</a><ul>
+<li><a class="reference internal" href="#id6">&#23450;&#20041;</a></li>
+<li><a class="reference internal" href="#id7">&#21151;&#33021;</a></li>
+<li><a class="reference internal" href="#id8">KDE &#19982;&#30452;&#26041;&#22270;&#30340;&#24322;&#21516;</a></li>
+<li><a class="reference internal" href="#id9">KDE &#30340;&#20248;&#21183;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">&#32472;&#21046;kde</a></li>
+<li><a class="reference internal" href="#id11">&#21516;&#26102;&#21487;&#35270;&#21270;&#22810;&#20010;&#20998;&#24067;</a><ul>
+<li><a class="reference internal" href="#id12">&#30452;&#26041;&#22270;&#21516;&#26102;&#26174;&#31034;&#30007;&#22899;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">&#37325;&#21472;&#24335;&#22534;&#21472;</a></li>
+<li><a class="reference internal" href="#id14">&#37325;&#21472;&#24335;KDE</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">直方图与核密度图</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>直方图与核密度图<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>直方图简介<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>直方图是一种常见的统计图表，用来展示数据的分布情况。</p>
+<p>直方图是把连续型数据（如年龄、身高、收入）按照一定的区间（bin，组距）进行分组统计，然后用相邻的矩形柱子表示各区间的数据频数（人数）或频率（比例）的图表。</p>
+<ul class="simple">
+<li><p><strong>横轴 (x-axis)</strong>：数值区间（如年龄 0–10 岁、10–20 岁……）。</p></li>
+<li><p><strong>纵轴 (y-axis)</strong>：落在该区间内的数据数量（频数）或比例（频率）。</p></li>
+<li><p><strong>矩形面积</strong>：与该区间的数据量成正比。</p></li>
+</ul>
+<p>作用</p>
+<ol class="arabic simple">
+<li><p><strong>展示数据分布</strong><br />
+可以直观地看到数据是集中在某些区间，还是比较分散。<br />
+例如：泰坦尼克号的直方图能看出 20 岁左右的乘客最多。</p></li>
+<li><p><strong>发现数据特征</strong></p>
+<ul class="simple">
+<li><p>是否呈正态分布（钟形曲线）。</p></li>
+<li><p>是否偏态（偏向一边）。</p></li>
+<li><p>是否有多峰（多个高点）。</p></li>
+</ul>
+</li>
+<li><p><strong>发现异常值</strong><br />
+如果有个柱子远离其他数据，说明该区间人数异常少或异常多，可能有特殊情况或异常值。</p></li>
+<li><p><strong>便于比较</strong><br />
+不同群体（如男性 vs 女性）的直方图可以放在一起比较，观察差异。</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>绘制直方图<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>数据来源：<a class="reference external" href="https://www.kaggle.com/c/titanic/data">Titanic - Machine Learning from Disaster</a></p>
+<section id="id4">
+<h3>输出读取<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 引入所需库</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w">  </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="4"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># 读取和查看数据</span>
+</span><span data-line="7"><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Titanic.csv&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span><span data-line="9"><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># 去除没有Age数据的行</span>
+</span><span data-line="12"><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">])</span>
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># 查看数据形状</span>
+</span><span data-line="15"><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</span><span data-line="16">
+</span><span data-line="17">
+</span></pre></div>
+</div>
+<p>df.shape，的输出是 (1046, 12)，其含义是：</p>
+<ul class="simple">
+<li><p>1046：数据框（DataFrame）里有 1046 行，即 1046 条乘客记录。</p></li>
+<li><p>12：数据框里有 12 列，即包含 12 个不同的字段（比如 Name, Age, Sex, Fare 等）。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>绘制直方图<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Age Distribution of Titanic Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="age-histogram" src="../_images/age-histogram.png" /></p>
+</section>
+<section id="kde">
+<h3>增加KDE<a class="headerlink" href="#kde" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 将kde参数设置为True</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Age Distribution of Titanic Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+</span><span data-line="7"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="kde-histogram" src="../_images/kde-histogram.png" /></p>
+</section>
+</section>
+<section id="kernel-density-estimation-kde">
+<h2>核密度估计（Kernel Density Estimation, KDE）<a class="headerlink" href="#kernel-density-estimation-kde" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>定义<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>核密度估计是一种<strong>非参数方法</strong>，用于估计随机变量的概率密度函数。它通过在每个样本点位置放置一个小的平滑函数（通常是高斯函数），再把这些函数叠加平均，得到一条连续的分布曲线。其数学公式为：</p>
+<p><img alt="math" src="../_images/math.svg" /></p>
+<ul class="simple">
+<li><p>(nn)：样本数量</p></li>
+<li><p>(h)：带宽（bandwidth），控制曲线的平滑程度</p></li>
+<li><p>(K(\cdot))：核函数（kernel），常用高斯核</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>功能<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>显示数据的整体分布趋势</p></li>
+<li><p>判断分布形态（单峰、多峰、偏态等）</p></li>
+<li><p>提供连续化的分布估计，便于概率计算</p></li>
+</ul>
+<p>不同带宽的效果图如下：</p>
+<p><img alt="Bandwidths" src="../_images/Bandwidths.png" /></p>
+</section>
+<section id="id8">
+<h3>KDE 与直方图的异同<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>相同点</p>
+<ul class="simple">
+<li><p>都用于描述数据的分布情况</p></li>
+<li><p>都能显示数据在哪些区间更集中</p></li>
+</ul>
+<p>不同点</p>
+<ul class="simple">
+<li><p><strong>直方图</strong>：</p>
+<ul>
+<li><p>将数据分成若干区间（bin），统计每个区间的频数/频率</p></li>
+<li><p>图形呈阶梯状，结果依赖于 bin 的大小和起点选择</p></li>
+</ul>
+</li>
+<li><p><strong>KDE</strong>：</p>
+<ul>
+<li><p>用平滑核函数叠加形成连续曲线</p></li>
+<li><p>不依赖于 bin 的划分，受带宽参数影响  -</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id9">
+<h3>KDE 的优势<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>平滑直观</strong>：相比直方图的“方块感”，KDE 更易看出分布趋势</p></li>
+<li><p><strong>不依赖分箱</strong>：避免了直方图中因 bin 宽度选择不同而导致的形态差异</p></li>
+<li><p><strong>可揭示潜在结构</strong>：能更清晰地发现数据中的多峰现象或细微差别</p></li>
+<li><p><strong>便于比较</strong>：在同一坐标轴上叠加多条 KDE 曲线，比直方图更容易比较不同群体的分布</p></li>
+</ol>
+<p>直方图是“离散的统计”，KDE 是“连续的估计”。KDE 能更平滑、直观地展示数据分布，是直方图的重要补充。</p>
+</section>
+</section>
+<section id="id10">
+<h2>绘制kde<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Age Density of Titanic Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="kde" src="../_images/kde.png" /></p>
+<blockquote>
+<div><p>和直方图比，核密度图能更平滑地展示分布趋势，不会因为柱子宽度不同而让图形忽上忽下，更容易看出总体趋势。</p>
+</div></blockquote>
+</section>
+<section id="id11">
+<h2>同时可视化多个分布<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h3>直方图同时显示男女<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p>假设我们想看看泰坦尼克号乘客的年龄在男性与女性之间是如何分布的。男性和女性乘客的年龄总体上是否相似，还是在性别之间存在年龄差异？</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Age Distribution of Titanic Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="stack-bar" src="../_images/stack-bar.png" /></p>
+<p>Multiple 可选参数为：</p>
+<ul class="simple">
+<li><p>layer，默认，不同类别的直方图重叠显示，会重叠</p></li>
+<li><p>stack，堆叠直方图</p></li>
+<li><p>fill （100% 堆叠图。每个柱子高度标准化为 1）</p></li>
+<li><p>dodge (男女并排)</p></li>
+</ul>
+<p>调整男女数据堆叠是顺序：</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span data-line="1"> <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">]</span>  <span class="c1"># 指定顺序</span>
+</span><span data-line="2">  
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="id13">
+<h2>重叠式堆叠<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;layer&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Age Distribution of Titanic Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Passengers&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8">
+</span></pre></div>
+</div>
+<p>男女的数据是一起堆叠的，而且男性的蓝色和女性的橙色，融合后成为了灰色。</p>
+<p><img alt="layer" src="../_images/layer.png" /></p>
+</section>
+<section id="id14">
+<h2>重叠式KDE<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># KDE 按性别分组填充</span>
+</span><span data-line="2"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span>
+</span><span data-line="3">    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+</span><span data-line="4">    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span>
+</span><span data-line="5">    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span>                 <span class="c1"># 分类：male / female</span>
+</span><span data-line="6">    <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                 <span class="c1"># 填充曲线下面积</span>
+</span><span data-line="7">    <span class="n">common_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>         <span class="c1"># 各组各自归一化，更利于对比</span>
+</span><span data-line="8">    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>                 <span class="c1"># 透明度</span>
+</span><span data-line="9">    <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>             <span class="c1"># 带宽调节，&lt;1 更尖锐，&gt;1 更平滑</span>
+</span><span data-line="10">    <span class="n">clip</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>            <span class="c1"># 不允许出现负年龄</span>
+</span><span data-line="11">    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+</span><span data-line="12">    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span>         <span class="c1"># 颜色主题</span>
+</span><span data-line="13"><span class="p">)</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="c1"># 标注与范围</span>
+</span><span data-line="16"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;age (years)&quot;</span><span class="p">)</span>
+</span><span data-line="17"><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;scaled density&quot;</span><span class="p">)</span>      <span class="c1"># 与示例一致的坐标轴文字</span>
+</span><span data-line="18"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Age density of Titanic passengers&quot;</span><span class="p">)</span>
+</span><span data-line="19"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span><span data-line="20"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;male&quot;</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">])</span>         <span class="c1"># 图例标题</span>
+</span><span data-line="21">
+</span><span data-line="22"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="kde-multiple" src="../_images/kde-multiple.png" /></p>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="bar.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">条形图绘制</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="boxplot.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">箱线图</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

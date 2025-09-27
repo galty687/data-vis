@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>散点图 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="西纳图" href="sina.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="散点图"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">各类可视图的绘制</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bar.html">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sina.html">西纳图</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">散点图</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#31616;&#20171;</a><ul>
+<li><a class="reference internal" href="#id3">&#21151;&#33021;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">&#20248;&#28857;</a><ul>
+<li><a class="reference internal" href="#id5">&#32570;&#28857;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">&#32472;&#21046;&#25955;&#28857;&#22270;</a><ul>
+<li><a class="reference internal" href="#id7">&#32472;&#21046;&#30005;&#35270;&#24191;&#21578;&#25237;&#20837;&#19982;&#38144;&#37327;&#20043;&#38388;&#30340;&#25955;&#28857;&#22270;</a></li>
+<li><a class="reference internal" href="#id8">&#28155;&#21152;&#22238;&#24402;&#20989;&#25968;</a></li>
+<li><a class="reference internal" href="#id9">&#35745;&#31639;&#30456;&#20851;&#24615;&#25351;&#25968;</a></li>
+<li><a class="reference internal" href="#id10">&#32472;&#21046;&#27531;&#24046;&#22270;</a></li>
+<li><a class="reference internal" href="#id11">&#32472;&#21046;&#25104;&#23545;&#20851;&#31995;&#22270;</a><ul>
+<li><a class="reference internal" href="#sales">&#33258;&#21464;&#37327;&#19982;&#38144;&#21806;&#39069; (sales) &#30340;&#20851;&#31995;</a></li>
+<li><a class="reference internal" href="#id12">&#33258;&#21464;&#37327;&#20043;&#38388;&#30340;&#20851;&#31995;</a></li>
+<li><a class="reference internal" href="#id13">&#21333;&#21464;&#37327;&#20998;&#24067;</a></li>
+<li><a class="reference internal" href="#id14">&#24635;&#32467;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">&#25311;&#21512;&#20989;&#25968;</a><ul>
+<li><a class="reference internal" href="#sklearn">&#20351;&#29992;sklearn</a></li>
+<li><a class="reference internal" href="#python">Python&#23450;&#20041;&#20989;&#25968;</a></li>
+<li><a class="reference internal" href="#id16">&#39044;&#27979;&#38144;&#37327;</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">散点图</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>散点图<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>简介<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>散点图是一种二维图表，用点的形式表示两个变量之间的对应关系。</p>
+<ul class="simple">
+<li><p>横坐标（x 轴）：一个变量（自变量）</p></li>
+<li><p>纵坐标（y 轴）：另一个变量（因变量）</p></li>
+<li><p>每个点代表一组观测值</p></li>
+</ul>
+<section id="id3">
+<h3>功能<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>展示变量之间的关系</strong></p>
+<ul class="simple">
+<li><p>判断变量之间是否存在线性关系、非线性关系或无关性。</p></li>
+</ul>
+</li>
+<li><p><strong>发现相关性</strong></p>
+<ul class="simple">
+<li><p>趋势向上 → 正相关</p></li>
+<li><p>趋势向下 → 负相关</p></li>
+<li><p>无明显趋势 → 无相关</p></li>
+</ul>
+</li>
+<li><p><strong>检测异常值 (outliers)</strong></p>
+<ul class="simple">
+<li><p>离群点会远离大部分数据，提示数据异常或特殊情况。</p></li>
+</ul>
+</li>
+<li><p><strong>分布与聚类分析</strong></p>
+<ul class="simple">
+<li><p>观察点的分布形态，判断是否存在某种分组或聚类现象。</p></li>
+</ul>
+</li>
+<li><p><strong>建模前的可视化检查</strong></p>
+<ul class="simple">
+<li><p>帮助决定是否适合用线性回归、多项式回归等模型。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="id4">
+<h2>优点<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>直观性强</strong>：能快速判断变量之间的关系。</p></li>
+<li><p><strong>信息量大</strong>：能同时展示所有观测点的分布情况。</p></li>
+<li><p><strong>易于发现规律</strong>：趋势、相关性和聚类模式一目了然。</p></li>
+<li><p><strong>支持扩展</strong>：可以通过颜色、大小等增加第三个变量的维度。</p></li>
+</ul>
+<section id="id5">
+<h3>缺点<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>只能展示两个变量</strong>（或加上颜色/大小后扩展到 3 个维度）。</p></li>
+<li><p><strong>数据量太大时会重叠</strong>，难以看清规律（需用透明度或采样）。</p></li>
+<li><p><strong>关系复杂时不易解释</strong>，尤其是非线性或多重交互效应。</p></li>
+<li><p><strong>不提供定量指标</strong>，只能作为定性分析工具，需要配合统计方法（如相关系数、回归分析）。</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>绘制散点图<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>绘制电视广告投入与销量之间的散点图<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Advertising.csv&quot;</span><span class="p">)</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sales&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot: TV ads vs Sales&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;TV Advertising Budget (thousands of $)&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sales (thousands of units)&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="scatter-o" src="../_images/scatter-o.png" /></p>
+</section>
+<section id="id8">
+<h3>添加回归函数<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear Regression: TV ads vs Sales&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;TV Advertising Budget (thousands of $)&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sales (thousands of units)&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="scatter" src="../_images/scatter-reg.png" /></p>
+</section>
+<section id="id9">
+<h3>计算相关性指数<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># 计算 TV 与 sales 的相关系数</span>
+</span><span data-line="4"><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TV&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">])</span>
+</span><span data-line="5"><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>0.7822244248616066， r&gt;0.6，证明两者有相关性</p>
+</div></blockquote>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>r 值范围</p></th>
+<th class="head"><p>相关性强度</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>|r| &gt; 0.7</p></td>
+<td><p>强相关</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.3 ≤ |r| ≤ 0.7</p></td>
+<td><p>中等相关</p></td>
+</tr>
+<tr class="row-even"><td><p>|r| &lt; 0.3</p></td>
+<td><p>弱相关或几乎无关</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id10">
+<h3>绘制残差图<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sales&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Residual Plot: TV vs Sales&quot;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="residual" src="../_images/residual.png" /></p>
+<p>观察残差分布的作用主要是用来 <strong>验证模型是否合适</strong>。残差就是「真实值 - 模型预测值」，如果模型合理，残差应该是“随机噪声”。如果点云在 0 上下随机分布 → 说明线性回归的假设成立。如果残差呈现出弯曲趋势 → 表明模型可能需要换成非线性回归。</p>
+</section>
+<section id="id11">
+<h3>绘制成对关系图<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="s2">&quot;radio&quot;</span><span class="p">,</span> <span class="s2">&quot;newspaper&quot;</span><span class="p">,</span> <span class="s2">&quot;sales&quot;</span><span class="p">]],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="pairplot" src="../_images/pairplot.png" /></p>
+<section id="sales">
+<h4>自变量与销售额 (sales) 的关系<a class="headerlink" href="#sales" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>TV vs sales</strong>：关系最明显，几乎呈线性正相关，说明电视广告投入越多，销量越高。</p></li>
+<li><p><strong>radio vs sales</strong>：也有正相关，但散点比 TV 分散，关系不如 TV 明显。</p></li>
+<li><p><strong>newspaper vs sales</strong>：相关性最弱，点云比较散，说明报纸广告对销量影响不大。</p></li>
+</ul>
+</section>
+<section id="id12">
+<h4>自变量之间的关系<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>TV 与 radio</strong> 基本没有明显关系（点比较分散）。</p></li>
+<li><p><strong>radio 与 newspaper</strong> 有一定弱相关。</p></li>
+<li><p><strong>TV 与 newspaper</strong> 几乎无关。</p></li>
+</ul>
+</section>
+<section id="id13">
+<h4>单变量分布<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p>对角线上的 KDE 曲线展示了每个变量的分布：</p></li>
+<li><p><strong>TV</strong> 投入主要集中在 50~300 区间，有两个峰。</p></li>
+<li><p><strong>radio</strong> 投入相对均匀分布。</p></li>
+<li><p><strong>newspaper</strong> 投入偏小，大部分在 0~50 之间。</p></li>
+<li><p><strong>sales</strong>（销量）大部分集中在 10~20 之间。</p></li>
+</ul>
+</section>
+<section id="id14">
+<h4>总结<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>电视广告</strong> 是影响销量的最主要因素；</p></li>
+<li><p><strong>广播广告</strong> 有一定作用，但不如电视显著；</p></li>
+<li><p><strong>报纸广告</strong> 几乎没有明显作用；</p></li>
+<li><p><strong>各广告渠道之间</strong> 基本独立。</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id15">
+<h2>拟合函数<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="sklearn">
+<h3>使用sklearn<a class="headerlink" href="#sklearn" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="s2">&quot;radio&quot;</span><span class="p">,</span> <span class="s2">&quot;newspaper&quot;</span><span class="p">]]</span>  <span class="c1"># 多元自变量</span>
+</span><span data-line="4"><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">]</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</span><span data-line="7"><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;截距:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</span><span data-line="10"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;回归系数:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">截距</span><span class="p">:</span> <span class="mf">2.9388893694594085</span>
+</span><span data-line="2"><span class="n">回归系数</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.04576465</span>  <span class="mf">0.18853002</span> <span class="o">-</span><span class="mf">0.00103749</span><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<section id="python">
+<h3>Python定义函数<a class="headerlink" href="#python" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">predict_sales</span><span class="p">(</span><span class="n">TV</span><span class="p">,</span> <span class="n">radio</span><span class="p">,</span> <span class="n">newspaper</span><span class="p">):</span>
+</span><span data-line="2">    <span class="n">intercept</span> <span class="o">=</span> <span class="mf">2.9388893694594085</span>
+</span><span data-line="3">    <span class="n">coef_TV</span> <span class="o">=</span> <span class="mf">0.04576465</span>
+</span><span data-line="4">    <span class="n">coef_radio</span> <span class="o">=</span> <span class="mf">0.18853002</span>
+</span><span data-line="5">    <span class="n">coef_newspaper</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.00103749</span>
+</span><span data-line="6">    
+</span><span data-line="7">    <span class="n">sales</span> <span class="o">=</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">coef_TV</span> <span class="o">*</span> <span class="n">TV</span> <span class="o">+</span> <span class="n">coef_radio</span> <span class="o">*</span> <span class="n">radio</span> <span class="o">+</span> <span class="n">coef_newspaper</span> <span class="o">*</span> <span class="n">newspaper</span>
+</span><span data-line="8">    <span class="k">return</span> <span class="n">sales</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id16">
+<h3>预测销量<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># 输入 TV=100, radio=20, newspaper=30</span>
+</span><span data-line="2"><span class="nb">print</span><span class="p">(</span><span class="n">predict_sales</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>  
+</span><span data-line="3">
+</span></pre></div>
+</div>
+<blockquote>
+<div><p>11.254830069459409</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="sina.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">西纳图</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

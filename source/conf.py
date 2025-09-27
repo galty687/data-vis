@@ -12,7 +12,7 @@ from enum import auto
 project = 'data visulization'
 copyright = '2025, Zhijun Gao'
 author = 'Zhijun Gao'
-release = '0.1'
+release = '0.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
