@@ -22,7 +22,7 @@ extensions = []
 templates_path = ['_templates']
 extensions = [
     'sphinx.ext.githubpages',
-    'sphinxcontrib.googleanalytics',
+    'sphinxcontrib.gtagjs',
     'sphinx.ext.todo',
     'sphinx_comments',
     'sphinx_copybutton',
