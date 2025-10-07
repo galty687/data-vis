@@ -22,7 +22,6 @@ extensions = []
 templates_path = ['_templates']
 extensions = [
     'sphinx.ext.githubpages',
-    'sphinxcontrib.gtagjs',
     'sphinx.ext.todo',
     'sphinx_comments',
     'sphinx_copybutton',
@@ -40,6 +39,8 @@ html_css_files = [
     'css/custom.css'
 ]
 
+
+
 # html_theme_options = {
 #   "accent_color": "grass",
 #   "dark_code": auto,
@@ -49,6 +50,15 @@ html_extra_path = ['CNAME']
 
 #Google Analytics
 
-gtagjs_ids = [
-    'G-YSF8MXKHBM'
-]
+
+def setup(app):
+    app.add_js_file(
+        'https://www.googletagmanager.com/gtag/js?id=G-YSF8MXKHBM',
+        **{'async': 'async'}
+    )
+    app.add_js_file(None, body=r"""
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YSF8MXKHBM');
+""")
