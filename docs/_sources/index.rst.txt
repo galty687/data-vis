@@ -37,3 +37,11 @@
    4-Graphics/stripplot.md
    4-Graphics/sina.md
    4-Graphics/scatter.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 数据类型与分析
+
+   5-Data/data-type.md
+   5-Data/data-analysis.md
+   5-Data/descriptive.md

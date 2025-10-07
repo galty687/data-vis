@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jupyter - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Visual Studio Code" href="vs_code.html" /><link rel="prev" title="Python 入门" href="python.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>常见数据类型 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="常见分析方法" href="data-analysis.html" /><link rel="prev" title="散点图" href="../4-Graphics/scatter.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="Jupyter"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="常见数据类型"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -62,12 +62,12 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="python.html">Python 入门</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vs_code.html">Visual Studio Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pandas.html">Pandas 入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="seaborn.html">Seaborn 入门</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">各类可视图的绘制</span></p>
 <ul>
@@ -80,10 +80,10 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../4-Graphics/scatter.html">散点图</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descriptive.html">描述性统计常见指标</a></li>
 </ul>
 
         </div>
@@ -96,10 +96,14 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id1">&#23433;&#35013;&#26041;&#27861; 1</a></li>
-<li><a class="reference internal" href="#id2">&#23433;&#35013;&#26041;&#27861; 2</a></li>
-<li><a class="reference internal" href="#id3">&#24120;&#29992;&#24555;&#25463;&#38190;</a></li>
-<li><a class="reference internal" href="#markdown">Markdown &#22522;&#26412;&#35821;&#27861;</a></li>
+<li><a class="reference internal" href="#id2">&#25353;&#27979;&#37327;&#23610;&#24230;&#65288;&#32479;&#35745;&#23398;&#24120;&#29992;&#65289;</a><ul>
+<li><a class="reference internal" href="#nominal-data">&#21517;&#20041;&#22411;&#25968;&#25454; (Nominal Data)</a></li>
+<li><a class="reference internal" href="#ordinal-data">&#39034;&#24207;&#22411;&#25968;&#25454; (Ordinal Data)</a></li>
+<li><a class="reference internal" href="#interval-data">&#21306;&#38388;&#22411;&#25968;&#25454; (Interval Data)</a></li>
+<li><a class="reference internal" href="#ratio-data">&#27604;&#20363;&#22411;&#25968;&#25454; (Ratio Data)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">&#25353;&#25968;&#25454;&#26469;&#28304;</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -117,7 +121,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Jupyter</strong>
+        <strong itemprop="name">常见数据类型</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -130,70 +134,48 @@ data-aria-dark="切换到自动模式">
 </div><div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="jupyter">
-<h1>Jupyter<a class="headerlink" href="#jupyter" title="Link to this heading">¶</a></h1>
-<p><a class="reference external" href="https://jupyter.org">Jupyter Notebook</a>是一个交互式编程环境，可以在网页界面中运行 Python 代码并即时看到结果。</p>
-<p>特点：</p>
-<ul class="simple">
-<li><p>支持 <strong>代码 + 文本 + 图表</strong> 混合展示，特别适合数据分析和可视化教学。</p></li>
-<li><p>文本单元格支持 <strong>Markdown</strong>，方便写说明文档。</p></li>
-<li><p>广泛应用于数据科学、机器学习、工程管理数据分析。</p></li>
-</ul>
-<section id="id1">
-<h2>安装方法 1<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>安装 VS Code 扩展</p>
-<ol class="arabic simple">
-<li><p>打开 VS Code。</p></li>
-<li><p>点击左侧 <strong>扩展 (Extensions)</strong> 图标。</p></li>
-<li><p>搜索并安装以下扩展：</p>
-<ul class="simple">
-<li><p><strong>Python</strong> （微软官方）</p></li>
-<li><p><strong>Jupyter</strong> （微软官方）</p></li>
-</ul>
-</li>
-</ol>
-</section>
+          <section id="id1">
+<h1>常见数据类型<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>安装方法 2<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<p>在终端中直接使用 <code class="docutils literal notranslate"><span class="pre">pip</span></code>安装：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>notebook
-</span></pre></div>
-</div>
-<p>启动：</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">jupyter<span class="w"> </span>notebook
-</span></pre></div>
-</div>
-</section>
-<section id="id3">
-<h2>常用快捷键<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p>Markdown 和 Code 都可以。</p>
+<h2>按测量尺度（统计学常用）<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="nominal-data">
+<h3>名义型数据 (Nominal Data)<a class="headerlink" href="#nominal-data" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p><strong>Shift + Enter</strong>：运行当前单元格，并跳到下一个单元格</p></li>
-<li><p><strong>Ctrl + Enter</strong>：运行当前单元格，不跳转</p></li>
-<li><p><strong>Alt + Enter</strong>：运行当前单元格，并在下方新建一个单元格</p></li>
+<li><p>特点：类别型、无顺序</p></li>
+<li><p>例子：性别（男/女）、血型（A/B/AB/O）、国家</p></li>
 </ul>
 </section>
-<section id="markdown">
-<h2>Markdown 基本语法<a class="headerlink" href="#markdown" title="Link to this heading">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"># 一级标题
-</span><span data-line="2">## 二级标题
-</span><span data-line="3">### 三级标题
-</span><span data-line="4">
-</span><span data-line="5">这是**加粗**，这是*斜体*，这是`代码`。
-</span><span data-line="6">
-</span><span data-line="7">- 列表项 1
-</span><span data-line="8">- 列表项 2
-</span><span data-line="9">
-</span><span data-line="10">1. 有序列表 1
-</span><span data-line="11">2. 有序列表 2
-</span><span data-line="12">
-</span><span data-line="13">公式示例：$y = x^2 + 1$
-</span><span data-line="14">
-</span><span data-line="15">代码块：
-</span><span data-line="16">```python
-</span><span data-line="17">print(&quot;Hello, Markdown in Jupyter!&quot;)
-</span></pre></div>
-</div>
+<section id="ordinal-data">
+<h3>顺序型数据 (Ordinal Data)<a class="headerlink" href="#ordinal-data" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>特点：有顺序，但间距不等</p></li>
+<li><p>例子：满意度（满意/一般/不满意）、教育程度（小学/中学/大学）</p></li>
+</ul>
+</section>
+<section id="interval-data">
+<h3>区间型数据 (Interval Data)<a class="headerlink" href="#interval-data" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>特点：有顺序，间距相等，但没有绝对零点</p></li>
+<li><p>例子：温度（摄氏/华氏）、智商分数</p></li>
+</ul>
+</section>
+<section id="ratio-data">
+<h3>比例型数据 (Ratio Data)<a class="headerlink" href="#ratio-data" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>特点：有顺序、间距相等、且有绝对零点</p></li>
+<li><p>例子：身高、体重、收入、时间</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>按数据来源<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>定性数据 (Qualitative Data)：用文字描述，如访谈、评论</p></li>
+<li><p>定量数据 (Quantitative Data)：用数字表示，分为离散（人数、次数）和连续（身高、温度）</p></li>
+<li><p>结构化数据 (Structured Data)：表格化，行列清晰，如 Excel</p></li>
+<li><p>非结构化数据 (Unstructured Data)：文本、图片、视频</p></li>
+</ul>
 </section>
 </section>
 
@@ -203,16 +185,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="python.html">
+    <a href="../4-Graphics/scatter.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">Python 入门</div></div>
+        <span>上一章</span><div class="title">散点图</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="vs_code.html">
+    <a href="data-analysis.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">Visual Studio Code</div>
+        <div class="title">常见分析方法</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

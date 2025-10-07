@@ -50,5 +50,5 @@ html_extra_path = ['CNAME']
 #Google Analytics
 
 gtagjs_ids = [
-    'UA-1234-1234',
+    'UA-1234-1234'
 ]
