@@ -49,4 +49,4 @@ html_extra_path = ['CNAME']
 
 #Google Analytics
 
-googleanalytics_id = 'G-GESLLLJC6M'
+googleanalytics_id = 'G-YSF8MXKHBM'

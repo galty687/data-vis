@@ -2,6 +2,18 @@
 
 
 
+## 可视化图
+
+[Visual Vocabulary](https://ft-interactive.github.io/visual-vocabulary/)
+
+
+
+## 动态可视化
+
+[看见统计](https://seeing-theory.brown.edu/cn.html) （基于D3.js开发）
+
+
+
 ## 常见数据平台
 
 1. [**Kaggle Datasets**](https://www.kaggle.com/datasets)
