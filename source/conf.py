@@ -49,4 +49,6 @@ html_extra_path = ['CNAME']
 
 #Google Analytics
 
-googleanalytics_id = 'G-YSF8MXKHBM'
+gtagjs_ids = [
+    'UA-1234-1234',
+]
