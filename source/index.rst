@@ -45,3 +45,10 @@
    5-Data/data-type.md
    5-Data/data-analysis.md
    5-Data/descriptive.md
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 数据叙事
+
+   6-Storytelling/stories.md
