@@ -28,7 +28,7 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: 各类可视图的绘制
+   :caption: 描述性分析
 
    4-Graphics/bar.md   
    4-Graphics/histogram.md
@@ -36,7 +36,17 @@
    4-Graphics/violin.md
    4-Graphics/stripplot.md
    4-Graphics/sina.md
-   4-Graphics/scatter.md
+   
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 探索性分析
+   
+   4B-Graphics/scatter.md
+   4B-Graphics/CA.md
+   4B-Graphics/FA.md
+   4B-Graphics/PCA.md
 
 .. toctree::
    :maxdepth: 2

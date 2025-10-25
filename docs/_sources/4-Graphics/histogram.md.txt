@@ -73,7 +73,7 @@ df.shape，的输出是 (1046, 12)，其含义是：
 ### 绘制直方图
 
 ```python
-sns.histplot(data=df, x="Age", bins=10)
+sns.histplot(data=df, x="Age", bins=8)
 
 plt.title("Age Distribution of Titanic Passengers")
 plt.xlabel("Age")
@@ -94,7 +94,7 @@ plt.xlim(0, 90)
 ```python
 # 将kde参数设置为True
 
-sns.histplot(data=df, x="Age", bins=10, kde=True)
+sns.histplot(data=df, x="Age", bins=8, kde=True)
 
 plt.title("Age Distribution of Titanic Passengers")
 plt.xlabel("Age")

@@ -108,6 +108,10 @@ print(r)
 | 0.3 ≤ \|r\| ≤ 0.7 | 中等相关         |
 | \|r\| < 0.3       | 弱相关或几乎无关 |
 
+不同r值的数据分布示例：
+
+![r](images/r.png)
+
 ### 绘制残差图
 
 ```python
@@ -157,6 +161,41 @@ plt.show()
 - **广播广告** 有一定作用，但不如电视显著；  
 - **报纸广告** 几乎没有明显作用；  
 - **各广告渠道之间** 基本独立。  
+
+
+
+### 相关矩阵热图 （correlogram）
+
+```python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 读取数据
+df = pd.read_csv("Advertising.csv", index_col=0)
+
+# 计算相关矩阵
+corr = df.corr()
+
+# 创建下三角掩码(
+# 避免信息冗余
+mask = np.triu(np.ones_like(corr, dtype=bool))
+
+# 绘制热图
+sns.set_theme(style="white")
+plt.figure(figsize=(6, 5))
+ax = sns.heatmap(
+    corr, mask=mask, cmap="vlag", center=0, annot=True,
+    cbar_kws={"shrink": 0.8, "label": "correlation"}
+)
+
+# 设置标题
+plt.title("Correlation Matrix of Advertising Data", fontsize=13, pad=10)
+plt.show()
+```
+
+![corr-heatmap](images/corr-heatmap.png)
 
 
 

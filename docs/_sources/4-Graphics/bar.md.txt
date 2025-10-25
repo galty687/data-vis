@@ -54,7 +54,7 @@ df2_sorted = df2.sort_values(by="Weekend_gross", ascending=False)
 df2_sorted.to_csv("movies_weekend_gross_sorted.csv", index=False)
 
 # 重新基于排序后的数据绘图
-sns.barplot(data=ddf2_sorted, x="Weekend_gross", y="Title")
+sns.barplot(data=df2_sorted, x="Weekend_gross", y="Title")
 
 
 

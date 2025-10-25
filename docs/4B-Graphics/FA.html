@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>因子分析 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="主成分分析" href="PCA.html" /><link rel="prev" title="相关性分析" href="CA.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="因子分析"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/bar.html">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/sina.html">西纳图</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">探索性分析</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">散点图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CA.html">相关性分析</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">因子分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">主成分分析</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#22240;&#23376;&#20998;&#26512;&#27493;&#39588;</a><ul>
+<li><a class="reference internal" href="#id3"><strong>1. &#25968;&#25454;&#20934;&#22791;&#19982;&#26631;&#20934;&#21270;</strong></a></li>
+<li><a class="reference internal" href="#id4"><strong>2. &#36866;&#29992;&#24615;&#26816;&#39564;</strong></a></li>
+<li><a class="reference internal" href="#factor-extraction"><strong>3. &#25552;&#21462;&#22240;&#23376;&#65288;Factor Extraction&#65289;</strong></a></li>
+<li><a class="reference internal" href="#factor-rotation"><strong>4. &#22240;&#23376;&#26059;&#36716;&#65288;Factor Rotation&#65289;</strong></a></li>
+<li><a class="reference internal" href="#factor-scores"><strong>5. &#22240;&#23376;&#24471;&#20998;&#35745;&#31639;&#65288;Factor Scores&#65289;</strong></a></li>
+<li><a class="reference internal" href="#id5"><strong>6. &#22240;&#23376;&#35299;&#37322;&#19982;&#21629;&#21517;</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">&#21487;&#35270;&#21270;&#22270;&#34920;&#24635;&#32467;&#34920;</a></li>
+<li><a class="reference internal" href="#id7">&#20195;&#30721;</a></li>
+<li><a class="reference internal" href="#id8">&#22270;&#34920;&#20998;&#26512;</a><ul>
+<li><a class="reference internal" href="#id9">&#30456;&#20851;&#24615;&#28909;&#21147;&#22270;</a></li>
+<li><a class="reference internal" href="#scree-plot">&#30862;&#30707;&#22270;&#65288;Scree Plot)</a></li>
+<li><a class="reference internal" href="#id10">&#22240;&#23376;&#36733;&#33655;&#30697;&#38453;</a><ul>
+<li><a class="reference internal" href="#id11">&#22270;&#30340;&#21547;&#20041;</a></li>
+<li><a class="reference internal" href="#id12">&#25214;&#8220;&#39640;&#36733;&#33655;&#8221;&#30340;&#21464;&#37327;&#32676;</a></li>
+<li><a class="reference internal" href="#id13">&#20174;&#28909;&#22270;&#35266;&#23519;&#32467;&#26500;</a></li>
+<li><a class="reference internal" href="#id14">&#38405;&#35835;&#25216;&#24039;</a></li>
+<li><a class="reference internal" href="#id15">&#31616;&#35201;&#24635;&#32467;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#factor-scores-scatter-plot">&#22240;&#23376;&#24471;&#20998;&#25955;&#28857;&#22270;&#65288;Factor Scores Scatter Plot&#65289;</a><ul>
+<li><a class="reference internal" href="#id16">&#22270;&#30340;&#32467;&#26500;&#21547;&#20041;</a></li>
+<li><a class="reference internal" href="#id17">&#22914;&#20309;&#35299;&#35835;&#24471;&#20998;&#20998;&#24067;</a></li>
+<li><a class="reference internal" href="#id18">&#32467;&#21512;&#21069;&#38754;&#30340;&#22240;&#23376;&#35299;&#37322;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id19">&#22240;&#23376;&#35299;&#37322;&#19982;&#21629;&#21517;</a><ul>
+<li><a class="reference internal" href="#id20">&#21629;&#21517;&#30340;&#22522;&#26412;&#36923;&#36753;</a></li>
+<li><a class="reference internal" href="#id21">&#36880;&#20010;&#22240;&#23376;&#30340;&#21629;&#21517;&#24605;&#36335;</a></li>
+<li><a class="reference internal" href="#id22">&#21629;&#21517;&#26102;&#24212;&#36991;&#20813;&#30340;&#24120;&#35265;&#38169;&#35823;</a></li>
+<li><a class="reference internal" href="#id23">&#27491;&#24335;&#25253;&#21578;&#20889;&#27861;&#65288;&#20013;&#33521;&#21452;&#35821;&#33539;&#20363;&#65289;</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">因子分析</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>因子分析<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>因子分析是一种<strong>多变量统计方法</strong>，用于研究多个观测变量之间的相关结构，从中提取出少数几个能够解释这些变量共同变化的<strong>潜在因子（latent factors）</strong>。</p>
+<p>它的基本思想是：</p>
+<blockquote>
+<div><p>一组高度相关的变量往往受到某些共同潜在因素的影响，因子分析通过数学方法将这些潜在因素提取出来，以揭示数据的内在结构。</p>
+</div></blockquote>
+<p>因子分析不是为了预测，而是为了“发现结构”。它告诉我们，哪些变量是一类（由同一个潜在因子驱动），以及这些潜在因子各自代表什么。</p>
+<section id="id2">
+<h2>因子分析步骤<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3><strong>1. 数据准备与标准化</strong><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>目的</strong>：消除量纲影响，使不同指标可比。</p></li>
+<li><p><strong>操作</strong>：使用 StandardScaler 或 Z-score 标准化。</p></li>
+<li><p><strong>输出图表</strong>：</p>
+<ul>
+<li><p><strong>相关矩阵热图（Correlation Heatmap）</strong></p>
+<p>用于直观观察变量间相关性是否较强（适合做因子分析）。</p>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3><strong>2. 适用性检验</strong><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>目的</strong>：判断数据是否适合做因子分析。</p></li>
+<li><p><strong>操作</strong>：</p>
+<ul>
+<li><p><strong>KMO 检验</strong>（Kaiser-Meyer-Olkin）</p></li>
+<li><p><strong>Bartlett 球形检验</strong></p></li>
+</ul>
+</li>
+<li><p><strong>结果解释</strong>：</p>
+<ul>
+<li><p>KMO &gt; 0.6 表示适合；</p></li>
+<li><p>Bartlett 检验显著（p &lt; 0.05）表示相关性足够。</p></li>
+</ul>
+</li>
+<li><p><strong>输出表格</strong>：</p>
+<ul>
+<li><p>KMO 值和 Bartlett 检验结果表。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="factor-extraction">
+<h3><strong>3. 提取因子（Factor Extraction）</strong><a class="headerlink" href="#factor-extraction" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>目的</strong>：确定潜在因子数量。</p></li>
+<li><p><strong>方法</strong>：主成分法（Principal Component）或最大似然法（ML）。</p></li>
+<li><p><strong>输出图表</strong>：</p>
+<ul>
+<li><p><strong>碎石图（Scree Plot）</strong>：展示特征值（Eigenvalues）的下降趋势，确定拐点位置。</p></li>
+<li><p><strong>累计方差贡献率图（Cumulative Variance Plot）</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="factor-rotation">
+<h3><strong>4. 因子旋转（Factor Rotation）</strong><a class="headerlink" href="#factor-rotation" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>目的</strong>：让因子结构更清晰（每个变量主要载荷在一个因子上）。</p></li>
+<li><p><strong>方法</strong>：常用 Varimax（正交旋转）或 Oblimin（斜交旋转）。</p></li>
+<li><p><strong>输出表格</strong>：</p>
+<ul class="simple">
+<li><p><strong>因子载荷矩阵（Factor Loadings Table）</strong></p></li>
+<li><p>若有旋转前后对比，也可输出两张表比较。</p></li>
+</ul>
+</li>
+<li><p><strong>输出图表</strong>：</p>
+<ul>
+<li><p><strong>因子载荷热图（Factor Loadings Heatmap）</strong></p>
+<p>用颜色显示变量在不同因子上的载荷强度。</p>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="factor-scores">
+<h3><strong>5. 因子得分计算（Factor Scores）</strong><a class="headerlink" href="#factor-scores" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p><strong>目的</strong>：计算每个样本在各因子上的得分。</p></li>
+<li><p><strong>输出图表</strong>：</p>
+<ul>
+<li><p><strong>因子得分散点图（Factor Score Scatter Plot）</strong></p>
+<p>可用前两个因子作坐标轴，展示样本聚类特征。</p>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3><strong>6. 因子解释与命名</strong><a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>目的</strong>：根据高载荷变量解释每个因子的含义。</p></li>
+<li><p><strong>输出表格</strong>：</p>
+<ul>
+<li><p>因子命名表（列出每个因子对应的高载荷变量及解释）。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>可视化图表总结表<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>步骤</strong></p></th>
+<th class="head"><p><strong>图表类型</strong></p></th>
+<th class="head"><p><strong>图表内容</strong></p></th>
+<th class="head"><p><strong>工具（Python）</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>相关矩阵热图</p></td>
+<td><p>各变量之间的相关性</p></td>
+<td><p>sns.heatmap(corr)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>KMO &amp; Bartlett表</p></td>
+<td><p>检验统计结果</p></td>
+<td><p>factor_analyzer.calculate_kmo, calculate_bartlett_sphericity</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>碎石图</p></td>
+<td><p>特征值趋势确定因子数</p></td>
+<td><p>plt.plot(eigenvalues)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>累计方差贡献图</p></td>
+<td><p>解释方差占比</p></td>
+<td><p>plt.bar()</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>因子载荷热图</p></td>
+<td><p>各变量在因子上的权重</p></td>
+<td><p>sns.heatmap(loadings)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>因子得分散点图</p></td>
+<td><p>样本分布</p></td>
+<td><p>plt.scatter(scores[:,0], scores[:,1])</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>因子解释表</p></td>
+<td><p>各因子的含义说明</p></td>
+<td><p>pd.DataFrame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h2>代码<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># =========================================================</span>
+</span><span data-line="2"><span class="c1"># 因子分析（以 winequality-red.csv 为例，Seaborn 绘图版）</span>
+</span><span data-line="3"><span class="c1"># 特点：</span>
+</span><span data-line="4"><span class="c1"># - 中文注释 + 英文图表</span>
+</span><span data-line="5"><span class="c1"># - 包含 Correlation Heatmap</span>
+</span><span data-line="6"><span class="c1"># - Scree Plot 含累计方差曲线与红线（Eigenvalue=1）</span>
+</span><span data-line="7"><span class="c1"># - 因子提取与 Varimax 旋转</span>
+</span><span data-line="8"><span class="c1"># =========================================================</span>
+</span><span data-line="9">
+</span><span data-line="10"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span data-line="11"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="12"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="13"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</span><span data-line="14"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">FactorAnalysis</span>
+</span><span data-line="17">
+</span><span data-line="18"><span class="c1"># -----------------------------</span>
+</span><span data-line="19"><span class="c1"># 0) 数据读取与预处理</span>
+</span><span data-line="20"><span class="c1"># -----------------------------</span>
+</span><span data-line="21"><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+</span><span data-line="22">
+</span><span data-line="23"><span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;winequality-red.csv&quot;</span>  <span class="c1"># 请修改为你的路径</span>
+</span><span data-line="24"><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">):</span>
+</span><span data-line="25">    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;请将 winequality-red.csv 放在脚本同目录下。&quot;</span><span class="p">)</span>
+</span><span data-line="26">
+</span><span data-line="27"><span class="c1"># 读取 UCI 红酒数据（分号分隔），仅保留数值列</span>
+</span><span data-line="28"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</span><span data-line="29"><span class="n">cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span data-line="30"><span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+</span><span data-line="31">
+</span><span data-line="32"><span class="c1"># 标准化数据</span>
+</span><span data-line="33"><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+</span><span data-line="34"><span class="n">X_std</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span><span data-line="35"><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X_std</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span data-line="36"><span class="n">n</span> <span class="o">=</span> <span class="n">X_std</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span data-line="37">
+</span><span data-line="38"><span class="c1"># -----------------------------</span>
+</span><span data-line="39"><span class="c1"># 1) 相关性热图 (Correlation Matrix Heatmap)</span>
+</span><span data-line="40"><span class="c1"># -----------------------------</span>
+</span><span data-line="41"><span class="c1"># 说明：因子分析前通常需查看变量之间的相关程度</span>
+</span><span data-line="42"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span><span class="p">))</span>
+</span><span data-line="43"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">),</span>
+</span><span data-line="44">                 <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span data-line="45">                 <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="46"><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix Heatmap&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span><span data-line="47"><span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+</span><span data-line="48"><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span data-line="49"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="50"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span><span data-line="51">
+</span><span data-line="52"><span class="c1"># -----------------------------</span>
+</span><span data-line="53"><span class="c1"># 2) 特征值分析 (Scree Plot + Cumulative Variance)</span>
+</span><span data-line="54"><span class="c1"># -----------------------------</span>
+</span><span data-line="55"><span class="c1"># 说明：分析相关矩阵的特征值以确定因子数量</span>
+</span><span data-line="56"><span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+</span><span data-line="57"><span class="n">evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">evals</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span><span data-line="58"><span class="n">cumvar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">evals</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">evals</span><span class="p">)</span>
+</span><span data-line="59">
+</span><span data-line="60"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span><span data-line="61"><span class="c1"># 绘制特征值曲线</span>
+</span><span data-line="62"><span class="n">ax1</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">evals</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+</span><span data-line="63">                   <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eigenvalue&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+</span><span data-line="64">
+</span><span data-line="65"><span class="c1"># 红线：Eigenvalue = 1</span>
+</span><span data-line="66"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eigenvalue = 1&quot;</span><span class="p">)</span>
+</span><span data-line="67">
+</span><span data-line="68"><span class="c1"># 累积方差曲线（右轴）</span>
+</span><span data-line="69"><span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+</span><span data-line="70"><span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">cumvar</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
+</span><span data-line="71">             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Cumulative Variance&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+</span><span data-line="72"><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Variance&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</span><span data-line="73"><span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">)</span>
+</span><span data-line="74">
+</span><span data-line="75"><span class="c1"># 标题与轴标签</span>
+</span><span data-line="76"><span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Scree Plot with Cumulative Variance&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span><span data-line="77"><span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Component number&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</span><span data-line="78"><span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Eigenvalue&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</span><span data-line="79"><span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span data-line="80">
+</span><span data-line="81"><span class="c1"># 合并图例</span>
+</span><span data-line="82"><span class="n">h1</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+</span><span data-line="83"><span class="n">h2</span><span class="p">,</span> <span class="n">l2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+</span><span data-line="84"><span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">h2</span><span class="p">,</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+</span><span data-line="85">
+</span><span data-line="86"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="87"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span><span data-line="88">
+</span><span data-line="89"><span class="c1"># -----------------------------</span>
+</span><span data-line="90"><span class="c1"># 3) 因子提取 (Factor Extraction)</span>
+</span><span data-line="91"><span class="c1"># -----------------------------</span>
+</span><span data-line="92"><span class="c1"># 说明：使用 Kaiser 规则 (eigenvalue &gt; 1) 选择因子数</span>
+</span><span data-line="93"><span class="n">n_factors</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">evals</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">))</span>
+</span><span data-line="94"><span class="n">n_factors</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_factors</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</span><span data-line="95"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected number of factors: </span><span class="si">{</span><span class="n">n_factors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="96">
+</span><span data-line="97"><span class="c1"># 使用最大似然法提取因子</span>
+</span><span data-line="98"><span class="n">fa</span> <span class="o">=</span> <span class="n">FactorAnalysis</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_factors</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span data-line="99"><span class="n">fa</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span>
+</span><span data-line="100"><span class="n">loadings</span> <span class="o">=</span> <span class="n">fa</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># (p, k)</span>
+</span><span data-line="101">
+</span><span data-line="102"><span class="c1"># -----------------------------</span>
+</span><span data-line="103"><span class="c1"># 4) Varimax 旋转 (Rotation)</span>
+</span><span data-line="104"><span class="c1"># -----------------------------</span>
+</span><span data-line="105"><span class="k">def</span><span class="w"> </span><span class="nf">varimax</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+</span><span data-line="106"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Kaiser (1958) Varimax 旋转：使载荷更稀疏，便于解释&quot;&quot;&quot;</span>
+</span><span data-line="107">    <span class="n">p</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">Phi</span><span class="o">.</span><span class="n">shape</span>
+</span><span data-line="108">    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span><span data-line="109">    <span class="n">d</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span><span data-line="110">    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+</span><span data-line="111">        <span class="n">d_old</span> <span class="o">=</span> <span class="n">d</span>
+</span><span data-line="112">        <span class="n">Lambda</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">R</span>
+</span><span data-line="113">        <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span>
+</span><span data-line="114">            <span class="n">Phi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">Lambda</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Lambda</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Lambda</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))))</span>
+</span><span data-line="115">        <span class="p">)</span>
+</span><span data-line="116">        <span class="n">R</span> <span class="o">=</span> <span class="n">u</span> <span class="o">@</span> <span class="n">vh</span>
+</span><span data-line="117">        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span data-line="118">        <span class="k">if</span> <span class="n">d_old</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">/</span> <span class="n">d_old</span> <span class="o">&lt;</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">tol</span><span class="p">:</span>
+</span><span data-line="119">            <span class="k">break</span>
+</span><span data-line="120">    <span class="k">return</span> <span class="n">Phi</span> <span class="o">@</span> <span class="n">R</span>
+</span><span data-line="121">
+</span><span data-line="122"><span class="n">rot_loadings</span> <span class="o">=</span> <span class="n">varimax</span><span class="p">(</span><span class="n">loadings</span><span class="p">)</span>
+</span><span data-line="123"><span class="n">loadings_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rot_loadings</span><span class="p">,</span>
+</span><span data-line="124">                           <span class="n">index</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span>
+</span><span data-line="125">                           <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Factor_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_factors</span><span class="p">)])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span data-line="126">
+</span><span data-line="127"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Rotated Factor Loadings (head):&quot;</span><span class="p">)</span>
+</span><span data-line="128"><span class="nb">print</span><span class="p">(</span><span class="n">loadings_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span><span data-line="129">
+</span><span data-line="130"><span class="c1"># 可视化：旋转换荷热图（英文标签）</span>
+</span><span data-line="131"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.8</span> <span class="o">*</span> <span class="n">n_factors</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.45</span> <span class="o">*</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span><span class="p">))</span>
+</span><span data-line="132"><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">loadings_df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+</span><span data-line="133"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Factor Loadings Heatmap (Varimax rotated)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span><span data-line="134"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="135"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span><span data-line="136">
+</span><span data-line="137"><span class="c1"># -----------------------------</span>
+</span><span data-line="138"><span class="c1"># 5) 因子得分散点图（F1 vs F2）</span>
+</span><span data-line="139"><span class="c1"># -----------------------------</span>
+</span><span data-line="140"><span class="c1"># 若有分组列（如 quality），用于上色；否则不分组</span>
+</span><span data-line="141"><span class="n">plot_df</span> <span class="o">=</span> <span class="n">scores_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span data-line="142"><span class="k">if</span> <span class="n">group_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="143">    <span class="n">plot_df</span><span class="p">[</span><span class="n">group_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_num</span><span class="p">[</span><span class="n">group_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</span><span data-line="144">
+</span><span data-line="145"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span><span data-line="146"><span class="k">if</span> <span class="n">group_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="147">    <span class="c1"># 按质量分组上色（离散色板）</span>
+</span><span data-line="148">    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+</span><span data-line="149">        <span class="n">data</span><span class="o">=</span><span class="n">plot_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;F1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;F2&quot;</span><span class="p">,</span>
+</span><span data-line="150">        <span class="n">hue</span><span class="o">=</span><span class="n">group_col</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="kc">None</span>
+</span><span data-line="151">    <span class="p">)</span>
+</span><span data-line="152">    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">group_col</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+</span><span data-line="153"><span class="k">else</span><span class="p">:</span>
+</span><span data-line="154">    <span class="c1"># 不分组的简单散点</span>
+</span><span data-line="155">    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+</span><span data-line="156">        <span class="n">data</span><span class="o">=</span><span class="n">plot_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;F1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;F2&quot;</span><span class="p">,</span>
+</span><span data-line="157">        <span class="n">s</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="kc">None</span>
+</span><span data-line="158">    <span class="p">)</span>
+</span><span data-line="159">
+</span><span data-line="160"><span class="c1"># 英文坐标轴与标题</span>
+</span><span data-line="161"><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</span><span data-line="162"><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</span><span data-line="163"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Factor Scores Scatter (F1 vs F2)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span><span data-line="164"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Factor 1 score&quot;</span><span class="p">)</span>
+</span><span data-line="165"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Factor 2 score&quot;</span><span class="p">)</span>
+</span><span data-line="166"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="167"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="id8">
+<h2>图表分析<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>相关性热力图<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>大多数变量间相关系数 &gt; 0.3，则说明有共同特征 ，这说明可做因子分析。</p>
+<p><img alt="corr-heatmap-2" src="../_images/corr-heatmap-2.png" /></p>
+</section>
+<section id="scree-plot">
+<h3>碎石图（Scree Plot)<a class="headerlink" href="#scree-plot" title="Link to this heading">¶</a></h3>
+<p>用于帮助判断因子分析或主成分分析中应当提取多少个因子（或主成分）</p>
+<p><img alt="scree" src="../_images/scree.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">Selected</span> <span class="n">number</span> <span class="n">of</span> <span class="n">factors</span><span class="p">:</span> <span class="mi">4</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">Rotated</span> <span class="n">Factor</span> <span class="n">Loadings</span> <span class="p">(</span><span class="n">head</span><span class="p">):</span>
+</span><span data-line="4">                  <span class="n">Factor_1</span>  <span class="n">Factor_2</span>  <span class="n">Factor_3</span>  <span class="n">Factor_4</span>
+</span><span data-line="5"><span class="n">fixed</span> <span class="n">acidity</span>        <span class="mf">0.990</span>     <span class="mf">0.004</span>    <span class="o">-</span><span class="mf">0.097</span>    <span class="o">-</span><span class="mf">0.083</span>
+</span><span data-line="6"><span class="n">volatile</span> <span class="n">acidity</span>    <span class="o">-</span><span class="mf">0.194</span>    <span class="o">-</span><span class="mf">0.168</span>     <span class="mf">0.048</span>     <span class="mf">0.700</span>
+</span><span data-line="7"><span class="n">citric</span> <span class="n">acid</span>          <span class="mf">0.639</span>     <span class="mf">0.130</span>     <span class="mf">0.066</span>    <span class="o">-</span><span class="mf">0.553</span>
+</span><span data-line="8"><span class="n">residual</span> <span class="n">sugar</span>       <span class="mf">0.145</span>     <span class="mf">0.076</span>     <span class="mf">0.226</span>     <span class="mf">0.044</span>
+</span><span data-line="9"><span class="n">chlorides</span>            <span class="mf">0.085</span>    <span class="o">-</span><span class="mf">0.231</span>     <span class="mf">0.030</span>    <span class="o">-</span><span class="mf">0.187</span>
+</span></pre></div>
+</div>
+<p>从图中可以看到三条关键信息：</p>
+<ul class="simple">
+<li><p><strong>蓝线（Eigenvalue）</strong>：显示每个成分解释的方差量。</p></li>
+<li><p><strong>橙线（Cumulative Variance）</strong>：显示累计解释的方差比例。</p></li>
+<li><p><strong>红线（Eigenvalue = 1）</strong>：表示 Kaiser 规则的阈值。</p></li>
+</ul>
+<p>如果你沿着橙线往上看，会发现：</p>
+<ul class="simple">
+<li><p>到 <strong>第 3 个成分</strong>，累计方差大约在 <strong>60% 左右</strong>；</p></li>
+<li><p>到 <strong>第 4 个成分</strong>，累计方差上升到 <strong>约 70%</strong>；</p></li>
+<li><p>此后增长幅度变缓。</p></li>
+</ul>
+<p><strong>如何判断应该取多少个因子</strong></p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>方法</strong></p></th>
+<th class="head"><p><strong>含义</strong></p></th>
+<th class="head"><p><strong>实际应用建议</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Kaiser 规则</strong></p></td>
+<td><p>保留特征值 &gt; 1 的因子</p></td>
+<td><p>从图上看，前 4 个因子均 &gt; 1，因此建议取 <strong>4 因子</strong>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>碎石图拐点法 (Elbow)</strong></p></td>
+<td><p>找到蓝线弯折明显处</p></td>
+<td><p>蓝线在第 4 个点之后趋于平缓，也支持 <strong>4 因子</strong>。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>累计方差解释率</strong></p></td>
+<td><p>累计方差应达到 60–70%</p></td>
+<td><p>到第 4 个因子约 70%，解释力较好。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>综合三者判断：</p>
+<blockquote>
+<div><p>这张图显示 <strong>取 4 个因子是合理选择</strong>。
+前 4 个因子能共同解释约 70% 的方差，之后的成分增益已经非常小。</p>
+</div></blockquote>
+</section>
+<section id="id10">
+<h3>因子载荷矩阵<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p><img alt="factor-loadings-heatmap" src="../_images/factor-loadings-heatmap.png" /></p>
+<section id="id11">
+<h4>图的含义<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>纵轴（行）</strong>：每一个观测变量（红酒的化学特征，如酸度、酒精度、硫含量等）</p></li>
+<li><p><strong>横轴（列）</strong>：提取出的 4 个因子（Factor_1 ~ Factor_4）</p></li>
+<li><p><strong>颜色</strong>：表示载荷（loading）的大小和方向</p>
+<ul>
+<li><p>红色（接近 +1）：该变量与该因子强烈正相关</p></li>
+<li><p>蓝色（接近 -1）：强烈负相关</p></li>
+<li><p>接近 0：几乎无关联</p></li>
+</ul>
+</li>
+<li><p><strong>数值</strong>：每个单元格的载荷值（一般 |loading| &gt; 0.5 视为显著相关）</p></li>
+</ul>
+</section>
+<section id="id12">
+<h4>找“高载荷”的变量群<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h4>
+<p>每个因子（列）通常会有若干变量载荷显著高（红色或蓝色明显）。</p>
+<p>这些变量共同反映了该因子的潜在含义。</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>因子</strong></p></th>
+<th class="head"><p><strong>高载荷变量</strong></p></th>
+<th class="head"><p><strong>含义解释（推测）</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Factor_1</strong></p></td>
+<td><p>fixed acidity (+0.99), citric acid (+0.64), density (+0.69), pH (-0.67)</p></td>
+<td><p><strong>酸度因子 (Acidity Factor)</strong>：酸度越高，密度越大，pH 越低（酸性更强）</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Factor_2</strong></p></td>
+<td><p>alcohol (+0.98), quality (+0.46), density (-0.44)</p></td>
+<td><p><strong>酒精与品质因子 (Alcohol &amp; Quality Factor)</strong>：酒精度高的酒通常品质评分更高、密度更低</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Factor_3</strong></p></td>
+<td><p>total sulfur dioxide (+0.97), free sulfur dioxide (+0.68)</p></td>
+<td><p><strong>硫化物防腐因子 (Sulfur Preservation Factor)</strong>：表示与亚硫酸盐防腐相关的变量群</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Factor_4</strong></p></td>
+<td><p>volatile acidity (+0.70), citric acid (-0.55), sulphates (-0.36)</p></td>
+<td><p><strong>挥发与芳香因子 (Volatile/Aromatic Factor)</strong>：与酸香气、易挥发物质相关</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id13">
+<h4>从热图观察结构<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Factor_1</strong>（最左列）呈现强烈红色的固定酸度和密度，同时蓝色的 pH，说明这些变量构成一个统一维度（酸度结构）。</p></li>
+<li><p><strong>Factor_2</strong> 以酒精度（alcohol）为主导，是最单一、最强的因子。</p></li>
+<li><p><strong>Factor_3</strong> 明显由两类硫酸盐变量组成，代表保存性。</p></li>
+<li><p><strong>Factor_4</strong> 较为复杂，有正有负，可能与香气和风味特征相关。</p></li>
+</ul>
+</section>
+<section id="id14">
+<h4>阅读技巧<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p><strong>看颜色块的聚集</strong>：相邻红块说明这些变量属于同一个因子维度；</p></li>
+<li><p><strong>看蓝红相反方向</strong>：说明变量在该维度上呈相反关系（如 pH 与 acidity）。</p></li>
+<li><p><strong>忽略接近 0 的浅灰格</strong>：它们在该因子上贡献不显著。</p></li>
+</ol>
+</section>
+<section id="id15">
+<h4>简要总结<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h4>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>因子</strong></p></th>
+<th class="head"><p><strong>代表意义</strong></p></th>
+<th class="head"><p><strong>主要高载荷变量</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Factor 1</strong></p></td>
+<td><p>Acidity &amp; Density</p></td>
+<td><p>fixed acidity (+), citric acid (+), pH (-)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Factor 2</strong></p></td>
+<td><p>Alcohol &amp; Quality</p></td>
+<td><p>alcohol (+), quality (+), density (-)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Factor 3</strong></p></td>
+<td><p>Sulfur Compounds</p></td>
+<td><p>total sulfur dioxide (+), free sulfur dioxide (+)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Factor 4</strong></p></td>
+<td><p>Volatile Aromas</p></td>
+<td><p>volatile acidity (+), citric acid (-), sulphates (-)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="factor-scores-scatter-plot">
+<h3>因子得分散点图（Factor Scores Scatter Plot）<a class="headerlink" href="#factor-scores-scatter-plot" title="Link to this heading">¶</a></h3>
+<p>因子得分散点图（Factor Scores Scatter Plot），展示了每个样本（每瓶红酒）在前两个因子上的位置与分布。我们可以从三个层面来解读这张图。</p>
+<section id="id16">
+<h4>图的结构含义<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span data-line="1">•	横轴 (Factor 1 score)：样本在第 1 个因子上的得分。
+</span></pre></div>
+</div>
+<p>得分高 → 在该因子上具有更强的特征；得分低 → 特征较弱或相反。
+•	纵轴 (Factor 2 score)：样本在第 2 个因子上的得分。
+•	颜色 (quality)：红酒品质等级。颜色越亮代表质量分数越高。</p>
+<p>每个点代表一瓶酒，它的坐标是 (F1_score, F2_score)，颜色反映酒的质量等级。</p>
+</section>
+<section id="id17">
+<h4>如何解读得分分布<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h4>
+<ol class="arabic simple">
+<li><p>点的集中区域
+大部分样本分布在中心（0, 0）附近，说明大部分酒在这两个潜在维度上比较“平均”，没有极端特征。</p>
+<ol class="arabic simple" start="2">
+<li><p>四象限解读
+•	右上象限（F1、F2 都高）：在两个因子上得分都高的酒，可能同时具备高酸度与高酒精度（取决于因子定义）。
+•	右下象限（F1 高、F2 低）：在 Factor 1 维度上突出，但在 Factor 2 上较弱。
+•	左上象限（F1 低、F2 高）：与上相反，第二个因子特征强。
+•	左下象限（两者都低）：在两个维度上特征都弱的酒。</p></li>
+<li><p>颜色梯度的意义
+•	颜色由深到浅（3 → 8）代表品质从低到高。
+•	如果亮色点（高 quality）倾向集中在某个区域，比如右上象限，说明那一类因子组合对应的酒更高质量。
+•	例如：若右上方主要是亮黄点，而左下方是深蓝点，则说明“高 F1 + 高 F2”型酒质量更好。</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="id18">
+<h4>结合前面的因子解释<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h4>
+<p>假设：</p>
+<ul class="simple">
+<li><p><strong>Factor 1</strong> 是“酸度因子 (Acidity)”</p></li>
+<li><p><strong>Factor 2</strong> 是“酒精与品质因子 (Alcohol &amp; Quality)”</p></li>
+</ul>
+<p>那么图的含义可解释为：</p>
+<blockquote>
+<div><p>横轴越右 → 酸度越高；
+纵轴越上 → 酒精度和综合品质越高。</p>
+</div></blockquote>
+<p>若高质量酒集中在右上方，就意味着：</p>
+<blockquote>
+<div><p>“酸度适中 + 酒精度较高” 的酒在感官评分中更受欢迎。</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="id19">
+<h2>因子解释与命名<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># =========================================================</span>
+</span><span data-line="2"><span class="c1"># 6) 因子解释与命名（中文版输出）</span>
+</span><span data-line="3"><span class="c1"># =========================================================</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># 设置高载荷阈值</span>
+</span><span data-line="6"><span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># 提取每个因子对应的高载荷变量</span>
+</span><span data-line="9"><span class="n">factor_dict</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="10"><span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">loadings_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span><span data-line="11">    <span class="n">high_vars</span> <span class="o">=</span> <span class="n">loadings_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">loadings_df</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span data-line="12">    <span class="n">factor_dict</span><span class="p">[</span><span class="n">factor</span><span class="p">]</span> <span class="o">=</span> <span class="n">high_vars</span>
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># 生成因子命名表（自动提取前三个代表变量，可人工修改命名）</span>
+</span><span data-line="15"><span class="n">factor_names</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="16"><span class="n">factor_meanings</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span data-line="17">
+</span><span data-line="18"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">vars_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">factor_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span><span data-line="19">    <span class="n">name_guess</span> <span class="o">=</span> <span class="s2">&quot;、&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vars_</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="k">if</span> <span class="n">vars_</span> <span class="k">else</span> <span class="s2">&quot;无显著载荷变量&quot;</span>
+</span><span data-line="20">    <span class="n">factor_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;因子 </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="21">    <span class="n">factor_meanings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;主要变量：</span><span class="si">{</span><span class="n">name_guess</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="22">
+</span><span data-line="23"><span class="n">factor_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span><span data-line="24">    <span class="s2">&quot;因子编号&quot;</span><span class="p">:</span> <span class="n">factor_names</span><span class="p">,</span>
+</span><span data-line="25">    <span class="s2">&quot;高载荷变量&quot;</span><span class="p">:</span> <span class="n">factor_dict</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span>
+</span><span data-line="26">    <span class="s2">&quot;解释说明（可人工修改）&quot;</span><span class="p">:</span> <span class="n">factor_meanings</span>
+</span><span data-line="27"><span class="p">})</span>
+</span><span data-line="28">
+</span><span data-line="29"><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">【因子命名表】&quot;</span><span class="p">)</span>
+</span><span data-line="30"><span class="n">display</span><span class="p">(</span><span class="n">factor_table</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><img alt="factors-name" src="../_images/factors-name.png" /></p>
+<section id="id20">
+<h3>命名的基本逻辑<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<p>人类专家命名时，通常遵循以下三步：</p>
+<ol class="arabic simple">
+<li><p><strong>找出每个因子的高载荷变量</strong></p>
+<ul class="simple">
+<li><p>即载荷绝对值较高（一般 ≥0.5）的变量。</p></li>
+<li><p>这些变量反映了因子在数据中“代表的主题”。</p></li>
+</ul>
+</li>
+<li><p><strong>识别这些变量的共性</strong></p>
+<ul class="simple">
+<li><p>它们是否都描述某个化学性质、感官特征或保存方式？</p></li>
+<li><p>例如：如果包含 <em>fixed acidity</em>, <em>citric acid</em>, <em>pH</em>，很可能和“酸度”有关。</p></li>
+</ul>
+</li>
+<li><p><strong>给出一个简洁、有意义的标签（命名）</strong></p>
+<ul class="simple">
+<li><p>名称要能总结该组变量的核心含义。</p></li>
+<li><p>名称可视报告语言而定。</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id21">
+<h3>逐个因子的命名思路<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>因子编号</strong></p></th>
+<th class="head"><p><strong>高载荷变量</strong></p></th>
+<th class="head"><p><strong>专家判断逻辑</strong></p></th>
+<th class="head"><p><strong>建议命名</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>因子 1</strong></p></td>
+<td><p>fixed acidity, citric acid, density, pH</p></td>
+<td><p>这些变量都与酸度和密度有关，且 pH 与酸度呈负相关。说明该因子反映了<strong>酸度结构</strong>。</p></td>
+<td><p><strong>酸度因子 (Acidity Factor)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>因子 2</strong></p></td>
+<td><p>alcohol</p></td>
+<td><p>只有酒精度高载荷，说明该因子几乎完全反映酒精含量的差异。</p></td>
+<td><p><strong>酒精因子 (Alcohol Factor)</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>因子 3</strong></p></td>
+<td><p>free sulfur dioxide, total sulfur dioxide</p></td>
+<td><p>这两个指标都与防腐和保存有关（SO₂ 是防腐剂）。</p></td>
+<td><p><strong>防腐因子 / 硫化物因子 (Sulfur Preservation Factor)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>因子 4</strong></p></td>
+<td><p>volatile acidity, citric acid</p></td>
+<td><p>挥发性酸与芳香酸度有关，反映了红酒的香气与风味特征。</p></td>
+<td><p><strong>芳香因子 / 挥发性酸因子 (Aroma / Volatile Factor)</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id22">
+<h3>命名时应避免的常见错误<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>错误做法</strong></p></th>
+<th class="head"><p><strong>问题</strong></p></th>
+<th class="head"><p><strong>改进建议</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>直接用变量名当因子名</strong></p></td>
+<td><p>太机械，缺乏解释性</p></td>
+<td><p>提炼共同概念，如“酸度因子”</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>过度主观化</strong></p></td>
+<td><p>未基于变量含义，而凭感觉命名</p></td>
+<td><p>必须有变量层面的证据支撑</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>命名太长</strong></p></td>
+<td><p>难以记忆与报告引用</p></td>
+<td><p>控制在 2–4 个词以内</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id23">
+<h3>正式报告写法（中英双语范例）<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<p>因子解释与命名（Factor Interpretation and Naming）</p>
+<p>根据旋转后的因子载荷结果，研究者依据高载荷变量的化学意义，对四个因子进行了如下解释与命名：</p>
+<ul class="simple">
+<li><p>酸度因子（Acidity Factor）：主要由 fixed acidity、citric acid、density 和 pH 构成，代表红酒的酸度结构特征。</p></li>
+<li><p>酒精因子（Alcohol Factor）：由 alcohol 主导，反映酒精含量差异。</p></li>
+<li><p>防腐因子（Sulfur Preservation Factor）：由 free sulfur dioxide 和 total sulfur dioxide 构成，描述红酒防腐与稳定性。</p></li>
+<li><p>芳香因子（Aroma / Volatile Factor）：由 volatile acidity 与 citric acid 组成，反映挥发性酸与芳香物质特征。</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="CA.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">相关性分析</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="PCA.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">主成分分析</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-YSF8MXKHBM"></script>
+      <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YSF8MXKHBM');
+</script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

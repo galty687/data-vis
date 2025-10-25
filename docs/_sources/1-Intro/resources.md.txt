@@ -6,6 +6,8 @@
 
 [Visual Vocabulary](https://ft-interactive.github.io/visual-vocabulary/)
 
+[各种图标大全](https://datavizproject.com)
+
 
 
 ## 动态可视化
@@ -44,3 +46,9 @@
 - https://docs.google.com/document/d/1Ads4XsCjXmDrdGRgfmm_OgRdpFcl6Qhs6SOllNGyq7Y/edit
 - https://bagrow.com/dsv/datasets.html
 - https://www.datasciencecentral.com/
+
+
+
+## 大模型辅助数据可视化
+
+- [microsoft](https://github.com/microsoft)[data-formulator](https://github.com/microsoft/data-formulator)
