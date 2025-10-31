@@ -45,8 +45,12 @@
    
    4B-Graphics/scatter.md
    4B-Graphics/CA.md
-   4B-Graphics/FA.md
+   4B-Graphics/casual-chick.md
    4B-Graphics/PCA.md
+   4B-Graphics/FA.md
+   4B-Graphics/casual.md
+   
+   
 
 .. toctree::
    :maxdepth: 2

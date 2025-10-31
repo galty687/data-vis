@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>小提琴图 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="条带图" href="stripplot.html" /><link rel="prev" title="箱线图" href="boxplot.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>因果分析挑战 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="常见数据类型" href="../5-Data/data-type.html" /><link rel="prev" title="因子分析" href="FA.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="小提琴图"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="因果分析挑战"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -70,22 +70,22 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="bar.html">条形图绘制</a></li>
-<li class="toctree-l1"><a class="reference internal" href="histogram.html">直方图与核密度图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boxplot.html">箱线图</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">小提琴图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stripplot.html">条带图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sina.html">西纳图</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/bar.html">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/sina.html">西纳图</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">探索性分析</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/scatter.html">散点图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/CA.html">相关性分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual-chick.html">因果分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/PCA.html">主成分分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/FA.html">因子分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual.html">因果分析挑战</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">散点图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CA.html">相关性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="casual-chick.html">因果分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">主成分分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FA.html">因子分析</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">因果分析挑战</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
 <ul>
@@ -108,7 +108,15 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id2">&#32472;&#21046;</a></li>
+<li><a class="reference internal" href="#id2">&#30740;&#31350;&#20171;&#32461;</a><ul>
+<li><a class="reference internal" href="#id3">&#32972;&#26223;</a></li>
+<li><a class="reference internal" href="#id4">&#23454;&#39564;&#35774;&#35745;</a></li>
+<li><a class="reference internal" href="#id5">&#25968;&#25454;&#25910;&#38598;</a></li>
+<li><a class="reference internal" href="#id6">&#25511;&#21046;&#26426;&#21046;</a></li>
+<li><a class="reference internal" href="#id7">&#21518;&#32493;&#36319;&#36394;&#30740;&#31350;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">&#25968;&#25454;&#20998;&#26512;&#19982;&#21487;&#35270;&#21270;</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -126,7 +134,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">小提琴图</strong>
+        <strong itemprop="name">因果分析挑战</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -140,44 +148,86 @@ data-aria-dark="切换到自动模式">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
           <section id="id1">
-<h1>小提琴图<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>小提琴图（violin plot）结合了箱线图（box plot）和核密度估计（KDE）的优点，用来展示数据分布。</p>
-<p><strong>外形</strong></p>
-<p>小提琴的“外形”是通过核密度估计画出的，越宽代表该数值区间的数据越密集，越窄代表数据稀疏。对称的“左右两半”是为了美观，本质上是一条密度曲线的镜像。</p>
-<p><strong>内嵌箱线图</strong></p>
-<p>小提琴图中通常嵌有一个小的箱线图，中间的白点或横线表示中位数，粗的矩形区域表示四分位距，细线延伸的部分表示数据的大致范围。</p>
-<p>小提琴图回答的是两个问题——数据大致分布在哪些区间？以及分布的形态是均匀的、偏斜的，还是多峰的。相比单纯的箱线图，它能更直观地展示“数据密度的形状”。</p>
+<h1>因果分析挑战<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>绘制<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span data-line="4">
-</span><span data-line="5"><span class="c1"># 日期处理</span>
-</span><span data-line="6"><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DATE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;DATE&quot;</span><span class="p">])</span>
-</span><span data-line="7"><span class="n">df</span><span class="p">[</span><span class="s2">&quot;MONTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DATE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
-</span><span data-line="8">
-</span><span data-line="9"><span class="c1"># 温度从华氏转摄氏</span>
-</span><span data-line="10"><span class="n">df</span><span class="p">[</span><span class="s2">&quot;TEMP_C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;TEMP&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
-</span><span data-line="11">
-</span><span data-line="12"><span class="c1"># 绘制小提琴图</span>
-</span><span data-line="13"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-</span><span data-line="14"><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span>
-</span><span data-line="15">    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
-</span><span data-line="16">    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;MONTH&quot;</span><span class="p">,</span> 
-</span><span data-line="17">    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;TEMP_C&quot;</span><span class="p">,</span> 
-</span><span data-line="18">    <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">,</span>       <span class="c1"># 在小提琴内部加上箱线图</span>
-</span><span data-line="19">    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span>     <span class="c1"># 颜色主题</span>
-</span><span data-line="20"><span class="p">)</span>
-</span><span data-line="21">
-</span><span data-line="22"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Monthly Temperature Distribution in Beijing (2024, °C)&quot;</span><span class="p">)</span>
-</span><span data-line="23"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
-</span><span data-line="24"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (°C)&quot;</span><span class="p">)</span>
-</span><span data-line="25"><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
-</span><span data-line="26"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></pre></div>
+<h2>研究介绍<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>背景<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>1985 年，田纳西州政府授权开展一项大规模随机实验，来应对“班级规模是否影响学生成绩”的教育政策争论，实验名为 “Student-Teacher Achievement Ratio (STAR) Project”，旨在通过真实随机分配，判断班级规模缩小或加助教是否对学生成绩有因果效应。</p>
+<p>全田纳西州有幼儿园至三年级（K-3）班级的公立学校被邀请参加，参加学校须满足“校内三种班级类型都能设置”条件，即在同一学校中：小班、常规班、常规班+助教都存在，从而实现同校内随机分配（within-school design）。这样可将学校资源、地理、领导等学校层面因素控制住。</p>
+</section>
+<section id="id4">
+<h3>实验设计<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>在每一参与学校中，学生和教师都被随机分配至三种班级类型：</p>
+<ul class="simple">
+<li><p>小班：约 13-17 名学生／1位教师</p></li>
+<li><p>常规班：约 22-25 名学生／1位教师</p></li>
+<li><p>常规班＋教师助教：学生数同常规班（22-25人），但配有一位助教</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>数据收集<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>实验从幼儿园起始，持续至三年级（大约4学年）</p></li>
+<li><p>在此期间，对学生进行标准化成绩测试（例如 Stanford Achievement Test 及州内对应测试，覆盖阅读和数学）以衡量成绩</p></li>
+<li><p>同时记录学生背景（性别、种族、家庭贫困情况）、学校类型（城市/郊区/农村）、教师经验等控制变量</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>控制机制<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>采用 “同校内设计”（within-school design）：在同一学校内设置三种班级类型，从而控制学校级别差异</p></li>
+<li><p>学校类型（inner-city／urban／suburban／rural）在样本中均有体现，以增强外部效度</p></li>
+<li><p>确保随机分配过程是公平且无偏的：学生入学或幼儿园时即随机分配；教师也随机分配</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>后续跟踪研究<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>在基本实验结束后，还开展了“Lasting Benefits Study”跟踪学生至以后年级，以评估小班效应是否持续</p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2>数据分析与可视化<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>数据集名称</strong></p></th>
+<th class="head"><p><strong>文件大小</strong></p></th>
+<th class="head"><p><strong>数据层级</strong></p></th>
+<th class="head"><p><strong>内容简介</strong></p></th>
+<th class="head"><p><strong>典型用途</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Star High Schools Data</strong></p></td>
+<td><p>15 KB</p></td>
+<td><p>学校级（High School）</p></td>
+<td><p>每一行代表一所高中，包含学校规模、城乡类型、学生族群比例、贫困率（免费午餐比例）、课程设置（如法语、西语、拉丁语、线性代数等）等信息。</p></td>
+<td><p>用于分析高中阶段教育资源分布差异，如<strong>城乡差异</strong>、<strong>课程机会不平等</strong>等。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Star K–3 Schools Data</strong></p></td>
+<td><p>16 KB</p></td>
+<td><p>学校级（K–3 Elementary）</p></td>
+<td><p>每一行代表一所小学（K–3），记录学校基本信息、平均班级规模、教师人数、地区属性等。</p></td>
+<td><p>用于描述参与实验的学校特征，或校级层面的<strong>随机化平衡性检验</strong>。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Star Student Data</strong></p></td>
+<td><p>8770 KB</p></td>
+<td><p>学生级（Individual Level）</p></td>
+<td><p>每一行代表一名学生，含其班级类型（小班/常规/常规+助教）、年级、阅读和数学成绩、性别、种族、家庭贫困状态等。</p></td>
+<td><p><strong>核心实验数据集</strong>；用于估计“小班教学”对学生成绩的<strong>因果效应</strong>。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Comparison Student Data</strong></p></td>
+<td><p>353 KB</p></td>
+<td><p>学生级（对照组）</p></td>
+<td><p>包含未参加 STAR 实验但可比较的学生群体信息（来自同州其他学校），便于检验外部效度。</p></td>
+<td><p>用于与实验组学生比较，进行<strong>外部效度分析</strong>与<strong>可推广性研究</strong>。</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p><img alt="beijing-temp" src="../_images/beijing-temp.png" /></p>
 </section>
 </section>
 
@@ -187,16 +237,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="boxplot.html">
+    <a href="FA.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">箱线图</div></div>
+        <span>上一章</span><div class="title">因子分析</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="stripplot.html">
+    <a href="../5-Data/data-type.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">条带图</div>
+        <div class="title">常见数据类型</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
