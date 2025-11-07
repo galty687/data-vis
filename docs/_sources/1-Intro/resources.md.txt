@@ -52,3 +52,4 @@
 ## 大模型辅助数据可视化
 
 - [microsoft](https://github.com/microsoft)[data-formulator](https://github.com/microsoft/data-formulator)
+- [Smart Excalidraw](https://smart-excalidraw.aizhi.site) (用自然语言，绘制专业图表)

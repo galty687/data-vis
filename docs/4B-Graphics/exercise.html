@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>描述性统计常见指标 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="故事类型" href="../6-Storytelling/stories.html" /><link rel="prev" title="常见分析方法" href="data-analysis.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>数据可视化练习1 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="常见数据类型" href="../5-Data/data-type.html" /><link rel="prev" title="因果分析挑战" href="casual.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="描述性统计常见指标"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="数据可视化练习1"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -79,20 +79,20 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../4-Graphics/sina.html">西纳图</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">探索性分析</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/scatter.html">散点图</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/CA.html">相关性分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual-chick.html">因果分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/PCA.html">主成分分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/FA.html">因子分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual.html">因果分析挑战</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/exercise.html">数据可视化练习1</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scatter.html">散点图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CA.html">相关性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="casual-chick.html">因果分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA.html">主成分分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FA.html">因子分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="casual.html">因果分析挑战</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据可视化练习1</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="data-type.html">常见数据类型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data-analysis.html">常见分析方法</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">描述性统计常见指标</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
 <ul>
@@ -114,11 +114,12 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id2">&#38598;&#20013;&#36235;&#21183;</a></li>
-<li><a class="reference internal" href="#id3">&#31163;&#25955;&#31243;&#24230;</a></li>
-<li><a class="reference internal" href="#id4">&#20998;&#24067;&#24418;&#24577;</a></li>
-<li><a class="reference internal" href="#id5">&#39057;&#29575;&#19982;&#27604;&#20363;</a></li>
-<li><a class="reference internal" href="#id6">&#30456;&#20851;&#24615;&#65288;&#31616;&#21333;&#25551;&#36848;&#65289;</a></li>
+<li><a class="reference internal" href="#id2">&#20219;&#21153;</a><ul>
+<li><a class="reference internal" href="#id3">&#25551;&#36848;&#24615;&#20998;&#26512;</a></li>
+<li><a class="reference internal" href="#id4">&#30456;&#20851;&#24615;&#20998;&#26512;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">&#35201;&#27714;</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -136,7 +137,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">描述性统计常见指标</strong>
+        <strong itemprop="name">数据可视化练习1</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -150,47 +151,44 @@ data-aria-dark="切换到自动模式">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
           <section id="id1">
-<h1>描述性统计常见指标<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>数据可视化练习1<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>集中趋势<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>平均值 (mean)：全体数据的大致水平</p></li>
-<li><p>中位数 (median)：一半人高于它，一半人低于它</p></li>
-<li><p>众数 (mode)：出现次数最多的值<br />
-这些指标告诉我们“数据的中心在哪里”</p></li>
-</ul>
-</section>
+<h2>任务<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>2025 年 10 月 31 日，交通运输部公布了<a class="reference external" href="https://xxgk.mot.gov.cn/2020/jigou/zhghs/202510/t20251031_4179130.html">2025年1-9月全国城市客运量</a>，请尝试用课程所学知识，对该数据进行可视化，以方便读者快速理解。</p>
 <section id="id3">
-<h2>离散程度<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>方差 / 标准差：数据分布得紧还是松</p></li>
-<li><p>极差：最高分和最低分的差距</p></li>
-<li><p>四分位差：中间 50% 数据的范围<br />
-这些帮助我们理解“差异大不大”</p></li>
-</ul>
+<h3>描述性分析<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>可视化各省市的客运总量的排名，以及各省市之间总量的差异。（条形图）</p></li>
+<li><p>可视化显示每个省市不同出行方式（公共汽电、出租车、轨道交通和轮渡）的对比。（分组柱状图）</p></li>
+<li><p>可视化对比北京、上海、江苏、广东、山东和河南的出行方式的结构差异（可用雷达图表示形状的差异，用 plotly 来绘制）</p></li>
+</ol>
 </section>
 <section id="id4">
-<h2>分布形态<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<h3>相关性分析<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>分析客运总量与公共汽电、出租车、轨道交通和轮渡这四种出行方式的相关性：</p>
+<ol class="arabic simple">
+<li><p>绘制成对关系图</p></li>
+<li><p>绘制所有变量的相关性热力图；</p></li>
+</ol>
+</li>
+<li><p>找到2025前三季度的各省市的GDP数据、各省市人口数据，然后分析GDP总量、人口总量和客运总量的相关性：</p>
 <ul class="simple">
-<li><p>偏态（左偏/右偏）：数据分布的倾斜方向</p></li>
-<li><p>峰态（扁平/尖锐）：分布的集中程度<br />
-例如：班级成绩左偏，说明高分多；右偏，说明低分多</p></li>
+<li><p>输出客运量、GDP和人口之间的关系热力图</p></li>
+<li><p>使用 scikit-learn 以 GDP 和人口为自变量，预测客运总量，并输出模型系数、R² 值</p></li>
+<li><p>输出GDP与客运量的散点图（需要绘制回归线、图例中标示 r 值和 p 值）</p></li>
 </ul>
+</li>
+</ol>
+</section>
 </section>
 <section id="id5">
-<h2>频率与比例<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>各区间人数、比例（直方图/饼图/柱状图）</p></li>
-<li><p>例如：多少人及格，多少人优秀<br />
-这样能直观展示“各部分占比”</p></li>
-</ul>
-</section>
-<section id="id6">
-<h2>相关性（简单描述）<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>两个变量之间的线性关系，如“学习时间和成绩的相关性”</p></li>
-<li><p>这里只是描述性，不是因果推断</p></li>
-</ul>
+<h2>要求<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>大家完成过程中，请主要使用本课程所介绍的工具链；</p></li>
+<li><p>在完成任务的过程，请尽可能使用各类AI工具协助处理数据、生成绘图代码和排除故障灯；</p></li>
+<li><p>如不能获取最新数据，可使用2025 年的上半年数据作为替代：<a class="reference external" href="https://xxgk.mot.gov.cn/jigou/zhghs/202507/t20250725_4173252.html">客运量</a>、<a class="reference external" href="https://data.stats.gov.cn/easyquery.htm?cn=E0102">GDP</a>、<a class="reference external" href="https://www.stats.gov.cn/zt_18555/zdtjgz/zgrkpc/dqcrkpc/ggl/202302/t20230215_1903999.html?utm_source=chatgpt.com">2020 年人口</a></p></li>
+</ol>
 </section>
 </section>
 
@@ -200,16 +198,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="data-analysis.html">
+    <a href="casual.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">常见分析方法</div></div>
+        <span>上一章</span><div class="title">因果分析挑战</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../6-Storytelling/stories.html">
+    <a href="../5-Data/data-type.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">故事类型</div>
+        <div class="title">常见数据类型</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

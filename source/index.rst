@@ -49,6 +49,7 @@
    4B-Graphics/PCA.md
    4B-Graphics/FA.md
    4B-Graphics/casual.md
+   4B-Graphics/exercise.md
    
    
 
@@ -66,3 +67,11 @@
    :caption: 数据叙事
 
    6-Storytelling/stories.md
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: 课程项目与期末论文
+
+   project/project-req.md
+   project/termpaper.md

@@ -201,6 +201,10 @@ plt.show()
 
 ## 拟合函数
 
+这一步需要用到scikit-learn这个开源机器学习库。
+
+> pip install scikit-learn
+
 ### 使用sklearn
 
 ```python
