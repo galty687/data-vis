@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>因果分析挑战 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="数据可视化练习1" href="exercise.html" /><link rel="prev" title="因子分析" href="FA.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>数据可视化练习：因果分析 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="常见数据类型" href="../5-Data/data-type.html" /><link rel="prev" title="数据可视化练习1：描述与相关" href="exercise.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="因果分析挑战"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="数据可视化练习：因果分析"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -68,6 +68,7 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/scilearn.html">Scikit-learn</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
 <ul>
@@ -85,8 +86,8 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="casual-chick.html">因果分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PCA.html">主成分分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="FA.html">因子分析</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">因果分析挑战</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exercise.html">数据可视化练习1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercise.html">数据可视化练习1：描述与相关</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据可视化练习：因果分析</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
 <ul>
@@ -97,6 +98,7 @@ data-aria-dark="切换到自动模式">
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/tech-rhetoric.html">技术修辞</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
 <ul>
@@ -140,7 +142,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">因果分析挑战</strong>
+        <strong itemprop="name">数据可视化练习：因果分析</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -154,7 +156,7 @@ data-aria-dark="切换到自动模式">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
           <section id="id1">
-<h1>因果分析挑战<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<h1>数据可视化练习：因果分析<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
 <h2>研究介绍<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <section id="id3">
@@ -243,16 +245,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="FA.html">
+    <a href="exercise.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">因子分析</div></div>
+        <span>上一章</span><div class="title">数据可视化练习1：描述与相关</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="exercise.html">
+    <a href="../5-Data/data-type.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">数据可视化练习1</div>
+        <div class="title">常见数据类型</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

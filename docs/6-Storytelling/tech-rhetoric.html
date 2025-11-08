@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>技术修辞 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="课程小组项目" href="../project/project-req.html" /><link rel="prev" title="故事类型" href="stories.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="技术修辞"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/scilearn.html">Scikit-learn</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/bar.html">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/sina.html">西纳图</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">探索性分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/scatter.html">散点图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/CA.html">相关性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual-chick.html">因果分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/PCA.html">主成分分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/FA.html">因子分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/exercise.html">数据可视化练习1：描述与相关</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual.html">数据可视化练习：因果分析</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="stories.html">故事类型</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">技术修辞</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../project/project-req.html">课程小组项目</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/termpaper.html">期末论文</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#20154;&#31867;&#30340;&#24863;&#30693;</a></li>
+<li><a class="reference internal" href="#id3">&#20462;&#36766;</a><ul>
+<li><a class="reference internal" href="#id4">&#25277;&#35937;&#27010;&#24565;&#30340;&#36523;&#20307;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id5">&#29983;&#27963;&#20013;&#30340;&#38544;&#21947;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">&#38544;&#21947;&#30340;&#31867;&#22411;</a><ul>
+<li><a class="reference internal" href="#id7">&#20301;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id8">&#36523;&#20307;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id9">&#31038;&#20250;&#20851;&#31995;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id10">&#30495;&#23454;&#19990;&#30028;&#38544;&#21947;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11">&#25216;&#26415;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id12">&#20462;&#36766;&#30340;&#26412;&#36136;</a></li>
+<li><a class="reference internal" href="#id13">&#20174;&#20449;&#24687;&#21040;&#24863;&#30693;</a></li>
+<li><a class="reference internal" href="#id14">&#24863;&#30693;&#30340;&#35821;&#27861;</a><ul>
+<li><a class="reference internal" href="#id15"><strong>&#24863;&#30693;&#31934;&#24230;&#25490;&#24207;&#65306;</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id16">&#35748;&#30693;&#36866;&#37197;&#29702;&#35770;</a><ul>
+<li><a class="reference internal" href="#id17">&#26680;&#24515;&#35266;&#28857;&#65306;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18">&#21487;&#35270;&#21270;&#20462;&#36766;</a><ul>
+<li><a class="reference internal" href="#id19">&#39068;&#33394;&#30340;&#20462;&#36766;&#65306;&#24773;&#32490;&#19982;&#20215;&#20540;&#23548;&#21521;</a></li>
+<li><a class="reference internal" href="#id20">&#32447;&#26465;&#19982;&#24418;&#29366;&#30340;&#20462;&#36766;&#65306;&#33410;&#22863;&#19982;&#21147;&#37327;&#24863;</a></li>
+<li><a class="reference internal" href="#id21">&#26500;&#22270;&#19982;&#31354;&#38388;&#30340;&#20462;&#36766;&#65306;&#31283;&#23450;&#19982;&#23545;&#27604;</a></li>
+<li><a class="reference internal" href="#id22">&#21160;&#24577;&#19982;&#20132;&#20114;&#30340;&#20462;&#36766;&#65306;&#26102;&#38388;&#24863;&#19982;&#21442;&#19982;&#24863;</a></li>
+<li><a class="reference internal" href="#id23">&#27604;&#20363;&#19982;&#23610;&#24230;&#30340;&#20462;&#36766;&#65306;&#25918;&#22823;&#25110;&#24369;&#21270;&#24046;&#24322;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">&#24635;&#32467;</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">技术修辞</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>技术修辞<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>人类的感知<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>在感知科学与心理物理学（psychophysics）中，人类获取环境信息主要依赖一组“可度量的维度”，这些维度构成我们与世界交互的基础：</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>信息类型</strong></p></th>
+<th class="head"><p><strong>感知方式</strong></p></th>
+<th class="head"><p><strong>举例</strong></p></th>
+<th class="head"><p><strong>功能</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>空间（Space）</strong></p></td>
+<td><p>视觉、触觉</p></td>
+<td><p>位置、方向、距离、大小、形状</p></td>
+<td><p>判断远近、避险、操作</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>时间（Time）</strong></p></td>
+<td><p>听觉、视觉</p></td>
+<td><p>持续时间、顺序、节奏、速度</p></td>
+<td><p>理解事件因果、计划行动</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>数量（Quantity）</strong></p></td>
+<td><p>视觉、逻辑</p></td>
+<td><p>多寡、多少、比例</p></td>
+<td><p>判断资源、决策分配</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>强度（Intensity）</strong></p></td>
+<td><p>多感官</p></td>
+<td><p>声音大/小、光亮/暗、力量强/弱</p></td>
+<td><p>反应威胁或机会</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>温度（Temperature）</strong></p></td>
+<td><p>触觉</p></td>
+<td><p>冷热</p></td>
+<td><p>生理调节与生存</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>质地（Texture）</strong></p></td>
+<td><p>触觉、视觉</p></td>
+<td><p>光滑、粗糙、湿、干</p></td>
+<td><p>判断食物、工具特性</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>颜色与光（Color &amp; Light）</strong></p></td>
+<td><p>视觉</p></td>
+<td><p>明暗、对比、饱和度</p></td>
+<td><p>识别环境、区分对象</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>运动（Motion）</strong></p></td>
+<td><p>视觉、前庭觉</p></td>
+<td><p>快慢、方向</p></td>
+<td><p>追踪目标、平衡控制</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>声音特征（Sound features）</strong></p></td>
+<td><p>听觉</p></td>
+<td><p>音高、音色、响度</p></td>
+<td><p>识别生物、语言交流</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>社会信号（Social cues）</strong></p></td>
+<td><p>视觉、听觉</p></td>
+<td><p>表情、语气、姿态</p></td>
+<td><p>理解他人意图与情绪</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>人类经过漫长的进化，这些已经成为了人类的本能。</p>
+</section>
+<section id="id3">
+<h2>修辞<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<p>修辞并不是“语言的美化”，而是人类将<strong>身体经验</strong>转化为抽象意义的感知认知机制。</p>
+<p>人类的思维起点不是逻辑，而是<strong>身体经验（embodied experience）</strong>。</p>
+<p>我们通过身体与世界互动——移动、抓取、感知冷热、感受力量——</p>
+<p>这些“具身经验”构成了认知的坐标系。</p>
+<p>于是，所有抽象概念（如时间、情感、价值、社会关系）</p>
+<p>都被“投射”到身体经验的空间维度上。</p>
+<section id="id4">
+<h3>抽象概念的身体隐喻<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>抽象概念</strong></p></th>
+<th class="head"><p><strong>源自身体经验的隐喻</strong></p></th>
+<th class="head"><p><strong>对应感知维度</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>时间</strong></p></td>
+<td><p>“向前看未来”“把过去抛在身后”</p></td>
+<td><p>空间方向（前后）</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>情感</strong></p></td>
+<td><p>“情绪高涨”“情绪低落”</p></td>
+<td><p>垂直空间（上/下）</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>价值</strong></p></td>
+<td><p>“高尚的人格”“低劣的行为”</p></td>
+<td><p>高度、重量</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>数量</strong></p></td>
+<td><p>“价格上涨”“通货膨胀下降”</p></td>
+<td><p>垂直位置</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>权力</strong></p></td>
+<td><p>“地位高”“被压制”</p></td>
+<td><p>力与空间</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>理性</strong></p></td>
+<td><p>“冷静分析”“激情蒙蔽理智”</p></td>
+<td><p>温度感受</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>关系</strong></p></td>
+<td><p>“两人很近”“我们渐行渐远”</p></td>
+<td><p>空间距离</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>社会结构</strong></p></td>
+<td><p>“社会阶梯”“底层人民”</p></td>
+<td><p>垂直等级结构</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这些表达看似语言习惯，</p>
+<p>但其实体现了人类大脑<strong>用感知经验映射抽象领域</strong>的方式。</p>
+<p>这种映射是普遍的、深层的、无意识的。</p>
+</section>
+<section id="id5">
+<h3>生活中的隐喻<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>他是李总的左膀右臂</p></li>
+<li><p>你是我的心肝宝贝</p></li>
+<li><p>父母官</p></li>
+<li><p>子民</p></li>
+<li><p>信息高速公路</p></li>
+<li><p>学术嗅觉</p></li>
+<li><p>牵着科技的牛鼻子</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>隐喻的类型<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h3>位隐喻<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p><strong>高兴为上，悲伤为下</strong></p>
+<ul class="simple">
+<li><p>今天她的情绪高涨</p></li>
+<li><p>我的心情到了低谷。</p></li>
+<li><p>feeling up</p></li>
+<li><p>boosted my spirits</p></li>
+<li><p>feeling down</p></li>
+<li><p>I am depressed.</p></li>
+</ul>
+<p><strong>有意识为上，无意识为下</strong></p>
+<ul class="simple">
+<li><p>get up</p></li>
+<li><p>wake up</p></li>
+<li><p>fell asleep</p></li>
+<li><p>sank into coma.</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>身体隐喻<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>你是我的左膀右臂</p></li>
+<li><p>你是我的小心肝</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>社会关系隐喻<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>父节点</p></li>
+<li><p>子节点</p></li>
+<li><p>根节点</p></li>
+<li><p>二叉树</p></li>
+</ul>
+</section>
+<section id="id10">
+<h3>真实世界隐喻<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>信息高速公路</p></li>
+<li><p>互联网</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>技术隐喻<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<p>案例1：用沙子的多，隐喻IP V6的地址多</p>
+<blockquote>
+<div><p>IP V6可以让地球上的每个沙子获得一个IP 地址。</p>
+</div></blockquote>
+<p>案例2：用水电来隐喻方便</p>
+<blockquote>
+<div><p>我们语联网的愿景就是 ：让人类像使用水和电一样方便地使用语言服务</p>
+</div></blockquote>
+<p>案例3：隐喻重要</p>
+<blockquote>
+<div><p>自然语言处理是人工智能皇冠上的明珠。</p>
+</div></blockquote>
+<p>尝试解释这些新概念</p>
+<ol class="arabic simple">
+<li><p>云计算</p></li>
+<li><p>物联网</p></li>
+<li><p>区块链</p></li>
+<li><p>低代码</p></li>
+</ol>
+</section>
+<section id="id12">
+<h2>修辞的本质<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<p>人类的修辞，本质上是<strong>用语言去影响、表达与建构意义的艺术</strong>。它并不仅仅是“说得好听”，而是一种让思想产生力量、让信息具有感染力的方式。</p>
+<blockquote>
+<div><p>“修辞的根源，是人类生存感知的结构。”</p>
+</div></blockquote>
+<ol class="arabic">
+<li><p><strong>修辞不是语言附加的“外衣”，而是思维的骨架。</strong></p>
+<p>我们表达的方式取决于我们如何感知世界。</p>
+</li>
+<li><p><strong>修辞手段源自身体经验的投射。</strong></p>
+<p>比喻、拟人、夸张、对比等修辞策略，本质上都是感知结构的再现。</p>
+</li>
+<li><p><strong>修辞体现了认知的具身性。</strong></p>
+<p>人类通过感官与身体的互动来理解世界——修辞语言正是这种“身体知识”的延伸形式。</p>
+</li>
+</ol>
+</section>
+<section id="id13">
+<h2>从信息到感知<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<p>数据只是数字或符号，例如 27、0.58、2025 等，人类感官无法直接理解这些符号所代表的数量、关系或变化</p>
+<p>数据可视化可将抽象信息转为具体的感知。人类的视觉系统能快速感知位置、长度、颜色、方向、大小等特征。于是我们把数据“映射”到这些视觉特征上，让人快速看出<strong>差异</strong>、<strong>模式</strong>和<strong>关系</strong>。</p>
+<p>这种“映射规则”就像语言的语法——它决定了意义如何被编码和解码。</p>
+<p>数据往往高维、抽象、不可直观。</p>
+<p>而人类的感知系统只能处理有限的维度（通常 2–3 个视觉变量 + 若干色彩/形状辅助）。</p>
+<p>因此可视化的任务，是把高维数据<strong>映射（mapping）到有限的感知维度</strong>上。</p>
+<p>例如：</p>
+<ul class="simple">
+<li><p>PCA（主成分分析） → 将高维特征投影到二维坐标平面；</p></li>
+<li><p>热力图（Heatmap） → 用色彩明度代表数值强弱；</p></li>
+<li><p>平行坐标图（Parallel Coordinates） → 用空间线条显示多维相关性。</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>感知的语法<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<p>法国学者 <strong>Jacques Bertin（1967）</strong> 在《图形符号学》（<em>Semiology of Graphics</em>）中首次提出：</p>
+<p>视觉有若干“变量”（visual variables），每一种变量对应一种人类感知维度。</p>
+<p><strong>7种视觉变量</strong>：</p>
+<ol class="arabic simple">
+<li><p>位置 (Position)</p></li>
+<li><p>大小 (Size)</p></li>
+<li><p>明度 (Value)</p></li>
+<li><p>纹理 (Texture)</p></li>
+<li><p>颜色 (Color)</p></li>
+<li><p>方向 (Orientation)</p></li>
+<li><p>形状 (Shape)</p></li>
+</ol>
+<p>这些变量可以类比为语言中的“词汇”，而它们的使用规则构成了“语法”。</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>视觉变量</strong></p></th>
+<th class="head"><p><strong>感知维度</strong></p></th>
+<th class="head"><p><strong>可表达的信息类型</strong></p></th>
+<th class="head"><p><strong>感知精度（高→低）</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>位置 (x, y)</strong></p></td>
+<td><p>空间、顺序</p></td>
+<td><p>精确比较、关联关系</p></td>
+<td><p>★★★★★</p></td>
+<td><p>散点图、折线图</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>长度 (length)</strong></p></td>
+<td><p>数量、比例</p></td>
+<td><p>数值比较</p></td>
+<td><p>★★★★☆</p></td>
+<td><p>柱状图</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>角度 / 方向 (angle, orientation)</strong></p></td>
+<td><p>方向、趋势</p></td>
+<td><p>流动、方向性关系</p></td>
+<td><p>★★★☆☆</p></td>
+<td><p>饼图、箭头图</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>面积 (area)</strong></p></td>
+<td><p>数量、等级</p></td>
+<td><p>大致大小关系</p></td>
+<td><p>★★☆☆☆</p></td>
+<td><p>气泡图、树图</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>颜色亮度 / 饱和度 (color luminance / saturation)</strong></p></td>
+<td><p>强弱、密度</p></td>
+<td><p>热度、强度</p></td>
+<td><p>★★☆☆☆</p></td>
+<td><p>热力图</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>形状 (shape)</strong></p></td>
+<td><p>分类、身份</p></td>
+<td><p>区分类别</p></td>
+<td><p>★★☆☆☆</p></td>
+<td><p>符号图</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>纹理 / 密度 (texture / density)</strong></p></td>
+<td><p>密集度</p></td>
+<td><p>模式识别</p></td>
+<td><p>★☆☆☆☆</p></td>
+<td><p>背景图、点密度图</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>**William Cleveland &amp; Robert McGill (1984)**在论文：《<em>Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods</em>》（<em>Journal of the American Statistical Association</em>）中对人类感知精度做了排序：</p>
+<section id="id15">
+<h3><strong>感知精度排序：</strong><a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p>位置（position）</p></li>
+<li><p>长度（length）</p></li>
+<li><p>角度 / 方向（angle / slope）</p></li>
+<li><p>面积（area）</p></li>
+<li><p>体积（volume）</p></li>
+<li><p>颜色亮度 / 饱和度（color / saturation）</p></li>
+</ol>
+<p>这一排序成为后来所有数据可视化教材与设计标准的基础。例如：</p>
+<p>为什么折线图优于饼图？为什么条形图比气泡图更清晰？答案都来自这个实验体系。</p>
+</section>
+</section>
+<section id="id16">
+<h2>认知适配理论<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<p><strong>代表人物：Iris Vessey (1991)</strong></p>
+<p>论文：《<em>Cognitive Fit: A Theory-Based Analysis of the Graphs versus Tables Literature</em>》</p>
+<section id="id17">
+<h3>核心观点：<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>信息呈现形式应与任务类型相匹配。</p></li>
+<li><p>可视化的价值取决于它是否<strong>适配用户的认知加工路径（cognitive processing path）</strong>。</p></li>
+<li></li>
+<li><p>空间任务（如趋势识别） → 适合图形化表示；
+符号任务（如精确查找） → 适合表格化表示。</p></li>
+</ul>
+</section>
+</section>
+<section id="id18">
+<h2>可视化修辞<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>感知结构</strong></p></th>
+<th class="head"><p><strong>语言修辞</strong></p></th>
+<th class="head"><p><strong>可视化修辞</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>空间方向</p></td>
+<td><p>“上升”“下降”</p></td>
+<td><p>折线图趋势、箭头方向</p></td>
+</tr>
+<tr class="row-odd"><td><p>强度感</p></td>
+<td><p>“强”“弱”</p></td>
+<td><p>颜色深浅、饱和度</p></td>
+</tr>
+<tr class="row-even"><td><p>大小感</p></td>
+<td><p>“巨大影响”</p></td>
+<td><p>圆面积、矩形尺寸</p></td>
+</tr>
+<tr class="row-odd"><td><p>距离感</p></td>
+<td><p>“拉近关系”</p></td>
+<td><p>节点间距、群组布局</p></td>
+</tr>
+<tr class="row-even"><td><p>温度感</p></td>
+<td><p>“冷淡”“热烈”</p></td>
+<td><p>热力图冷暖色系</p></td>
+</tr>
+<tr class="row-odd"><td><p>光暗感</p></td>
+<td><p>“前途光明”</p></td>
+<td><p>明暗对比</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如：</p>
+<ul class="simple">
+<li><p>色彩选择 → 暗示“风险”或“机遇”；</p></li>
+<li><p>坐标比例 → 放大或压缩变化趋势；</p></li>
+<li><p>动画与交互 → 引导用户注意“故事主线”。</p></li>
+</ul>
+<p>这种“降维映射”不是技术性操作，而是<strong>认知适配（cognitive fit）</strong>——</p>
+<p>即如何在人的注意力、工作记忆与模式识别能力的限制内，让数据仍然“说得清楚”。</p>
+<section id="id19">
+<h3>颜色的修辞：情绪与价值导向<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>可视化设计</strong></p></th>
+<th class="head"><p><strong>暗示与感受</strong></p></th>
+<th class="head"><p><strong>适用场景</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>红色上升线</strong></p></td>
+<td><p>强烈、危险、紧迫、增长、警示</p></td>
+<td><p>股票走势、风险预警、疫情曲线</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>绿色上升线</strong></p></td>
+<td><p>安全、增长、健康、积极</p></td>
+<td><p>收益率、环保指标</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>蓝色渐变热力图</strong></p></td>
+<td><p>稳定、冷静、理性</p></td>
+<td><p>科研数据、技术文档</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>橙色或黄色区域</strong></p></td>
+<td><p>活跃、创新、警觉</p></td>
+<td><p>行为分析、舆情趋势</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>灰色线条或背景</strong></p></td>
+<td><p>稳定、客观、中性</p></td>
+<td><p>辅助信息、历史基线</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id20">
+<h3>线条与形状的修辞：节奏与力量感<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>设计形式</strong></p></th>
+<th class="head"><p><strong>感知暗示</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>粗线条</strong></p></td>
+<td><p>强烈、有力、主导性高</p></td>
+<td><p>主趋势线</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>细线条</strong></p></td>
+<td><p>柔和、辅助、细节化</p></td>
+<td><p>对比组、预测线</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>虚线</strong></p></td>
+<td><p>不确定、未来、假设</p></td>
+<td><p>预测区间</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>曲线</strong></p></td>
+<td><p>自然、连续、平滑</p></td>
+<td><p>气候变化、人口趋势</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>折线</strong></p></td>
+<td><p>波动、动态、离散</p></td>
+<td><p>股价、网络流量</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如，在同一图中：</p>
+<p>粗实线代表“现实主趋势”，</p>
+<p>虚线代表“模型预测”，</p>
+<p>细线代表“子样本”，</p>
+<p>这种视觉语法让观众自动解读主次关系。</p>
+</section>
+<section id="id21">
+<h3>构图与空间的修辞：稳定与对比<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><strong>暗示意义</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>左到右上升</strong></p></td>
+<td><p>进步、发展</p></td>
+<td><p>经济增长</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>右到左下降</strong></p></td>
+<td><p>衰退、回落</p></td>
+<td><p>能源消耗</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>对称布局</strong></p></td>
+<td><p>平衡、比较、等势</p></td>
+<td><p>两组对比</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>中心辐射</strong></p></td>
+<td><p>权力、影响、扩散</p></td>
+<td><p>网络关系、生态系统</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>层级向下</strong></p></td>
+<td><p>从属、结构、系统性</p></td>
+<td><p>组织架构图</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id22">
+<h3>动态与交互的修辞：时间感与参与感<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>动效形式</strong></p></th>
+<th class="head"><p><strong>感知作用</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>动画渐变</strong></p></td>
+<td><p>展现演变过程</p></td>
+<td><p>气候变化、疫情传播</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>闪烁或脉动</strong></p></td>
+<td><p>吸引注意</p></td>
+<td><p>关键事件点</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>时间轴滑动</strong></p></td>
+<td><p>体现时序结构</p></td>
+<td><p>历史数据演变</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>交互悬停（hover）</strong></p></td>
+<td><p>鼓励探索</p></td>
+<td><p>信息可视分析仪表盘</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id23">
+<h3>比例与尺度的修辞：放大或弱化差异<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>操作</strong></p></th>
+<th class="head"><p><strong>效果</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>压缩纵轴</strong></p></td>
+<td><p>强化差异、制造戏剧性</p></td>
+<td><p>政治或商业演讲图</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>放大纵轴</strong></p></td>
+<td><p>弱化波动、显得平稳</p></td>
+<td><p>政府报告、企业财报</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>断轴（axis break）</strong></p></td>
+<td><p>突出异常值</p></td>
+<td><p>异常检测、事故报告</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>对数坐标</strong></p></td>
+<td><p>平衡极端数据</p></td>
+<td><p>科学数据、金融涨幅</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="id24">
+<h2>总结<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>层次</strong></p></th>
+<th class="head"><p><strong>内容</strong></p></th>
+<th class="head"><p><strong>核心概念</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>身体层</strong></p></td>
+<td><p>感知经验（方向、空间、温度、力量）</p></td>
+<td><p>Embodiment</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>认知层</strong></p></td>
+<td><p>概念隐喻结构（上=好，近=亲）</p></td>
+<td><p>Conceptual Metaphor</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>语言层</strong></p></td>
+<td><p>修辞与表达（上升、冷淡）</p></td>
+<td><p>Linguistic Realization</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>视觉层</strong></p></td>
+<td><p>图形、颜色、空间布局</p></td>
+<td><p>Visual Metaphor</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>社会层</strong></p></td>
+<td><p>文化与思维模式（权力=上位）</p></td>
+<td><p>Cultural Model</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="stories.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">故事类型</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../project/project-req.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">课程小组项目</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-YSF8MXKHBM"></script>
+      <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YSF8MXKHBM');
+</script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

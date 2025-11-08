@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>故事类型 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="技术修辞" href="tech-rhetoric.html" /><link rel="prev" title="描述性统计常见指标" href="../5-Data/descriptive.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Scikit-learn - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="条形图绘制" href="../4-Graphics/bar.html" /><link rel="prev" title="Seaborn 入门" href="seaborn.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="故事类型"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Scikit-learn"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -62,13 +62,13 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/scilearn.html">Scikit-learn</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="seaborn.html">Seaborn 入门</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scikit-learn</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
 <ul>
@@ -96,9 +96,9 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">故事类型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tech-rhetoric.html">技术修辞</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/tech-rhetoric.html">技术修辞</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
 <ul>
@@ -115,7 +115,13 @@ data-aria-dark="切换到自动模式">
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-lucide close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id1">&#20027;&#35201;&#29305;&#28857;</a></li>
+<li><a class="reference internal" href="#id2">&#24120;&#35265;&#24212;&#29992;&#22330;&#26223;</a></li>
+<li><a class="reference internal" href="#id3">&#23433;&#35013;</a></li>
+<li><a class="reference internal" href="#id4">&#24120;&#35265;&#26694;&#26550;&#23545;&#27604;</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
   <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
   <main class="sy-main w-full max-sm:max-w-full print:pt-6">
@@ -131,7 +137,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">故事类型</strong>
+        <strong itemprop="name">Scikit-learn</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -144,33 +150,75 @@ data-aria-dark="切换到自动模式">
 </div><div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="id1">
-<h1>故事类型<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<p>人类的故事，无论是神话、小说、戏剧还是电影，都可以归结为七种基本的叙事模式。这七种模式是：</p>
+          <section id="scikit-learn">
+<h1>Scikit-learn<a class="headerlink" href="#scikit-learn" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>（简称 sklearn）是一个基于 Python 的开源机器学习库，提供了大量用于数据挖掘、数据分析和建模的工具。它建立在 NumPy、SciPy 和 matplotlib 之上，以其简洁统一的 API、丰富的算法实现和高效的性能，成为最广泛使用的机器学习框架之一。</p>
+<section id="id1">
+<h2>主要特点<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Overcoming the Monster（战胜怪物）</strong>
-主人公面对强大的邪恶力量或怪物，最终将其击败，恢复秩序。
-例子：《贝奥武夫》、<em>Jaws</em>、《星球大战》。</p></li>
-<li><p><strong>Rags to Riches（白手起家）</strong>
-主人公从卑微或贫困的境地出发，经历挫折，最终获得财富、地位或幸福。
-例子：《灰姑娘》、<em>Aladdin</em>、《简·爱》。</p></li>
-<li><p><strong>The Quest（探险/寻求）</strong><br />
-主人公与同伴们踏上一段旅程，经历困难与考验，目标是找到某个宝物或完成任务。
-例子：《魔戒》、<em>Indiana Jones</em>、《西游记》。</p></li>
-<li><p><strong>Voyage and Return（历险归来）</strong><br />
-主人公进入一个陌生世界，经历奇异冒险或危险，最终带着成长和智慧回到原来的地方。
-例子：《爱丽丝梦游仙境》、<em>The Odyssey</em>、《纳尼亚传奇》。</p></li>
-<li><p><strong>Comedy（喜剧）</strong><br />
-通常是误会、阻碍和混乱带来冲突，最终真相揭开，误会化解，大家获得圆满结局。
-例子：莎士比亚《仲夏夜之梦》、浪漫喜剧电影。</p></li>
-<li><p><strong>Tragedy（悲剧）</strong><br />
-主人公的缺陷或错误导致堕落和毁灭，带来观众的怜悯和恐惧。
-例子：《麦克白》、<em>Hamlet</em>、《安娜·卡列尼娜》。</p></li>
-<li><p><strong>Rebirth（重生）</strong><br />
-主人公陷入困境或黑暗中，但通过某种启示、牺牲或转变获得新生。
-例子：《美女与野兽》、<em>A Christmas Carol</em>、《睡美人》。</p></li>
+<li><p>统一的接口设计
+scikit-learn 中的所有模型（如分类器、回归器、聚类算法等）都遵循一致的接口设计，包括 fit()、predict()、transform()、score() 等方法，使得不同算法之间的切换十分方便。</p></li>
+<li><p>丰富的算法库</p>
+<ul class="simple">
+<li><p>监督学习：线性回归、逻辑回归、决策树、随机森林、支持向量机（SVM）、K 近邻（KNN）等。</p></li>
+<li><p>无监督学习：K-Means、DBSCAN、PCA（主成分分析）等。</p></li>
+<li><p>模型选择与评估：交叉验证、网格搜索、学习曲线、混淆矩阵等。</p></li>
+<li><p>预处理工具：标准化、特征选择、特征降维、类别编码等。</p></li>
+</ul>
+</li>
+<li><p>与 Python 科学计算生态无缝衔接
+与 NumPy 的数组结构兼容，可轻松与 pandas、matplotlib、seaborn、xgboost、tensorflow 等库配合使用。</p></li>
+<li><p>高性能实现
+大部分算法底层由 Cython 实现，兼顾易用性和执行效率，适合中等规模的数据集建模和实验。</p></li>
 </ol>
-<p><img alt="cover" src="../_images/cover.png" /></p>
+</section>
+<section id="id2">
+<h2>常见应用场景<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>文本分类、情感分析</p></li>
+<li><p>图像特征提取与分类</p></li>
+<li><p>医疗数据分析与预测</p></li>
+<li><p>客户分群与推荐系统</p></li>
+<li><p>异常检测与金融风控</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>安装<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>pip install scikit-learn</p>
+</div></blockquote>
+</section>
+<section id="id4">
+<h2>常见框架对比<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>框架</p></th>
+<th class="head"><p>主要用途</p></th>
+<th class="head"><p>核心特点</p></th>
+<th class="head"><p>典型应用场景</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Scikit-learn</strong></p></td>
+<td><p>传统机器学习</p></td>
+<td><p>简单易用、封装完善、算法齐全</p></td>
+<td><p>分类、回归、聚类、特征工程、小型实验</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>TensorFlow</strong></p></td>
+<td><p>深度学习框架</p></td>
+<td><p>图计算模型、生产部署强、生态完备</p></td>
+<td><p>深度神经网络（CNN、RNN、Transformer）、工业部署</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PyTorch</strong></p></td>
+<td><p>深度学习框架</p></td>
+<td><p>动态计算图、代码更 Pythonic、研究友好</p></td>
+<td><p>学术研究、模型开发与实验、LLM 训练</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 
         </article><button class="back-to-top" type="button">
@@ -179,16 +227,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="../5-Data/descriptive.html">
+    <a href="seaborn.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">描述性统计常见指标</div></div>
+        <span>上一章</span><div class="title">Seaborn 入门</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="tech-rhetoric.html">
+    <a href="../4-Graphics/bar.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">技术修辞</div>
+        <div class="title">条形图绘制</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

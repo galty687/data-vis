@@ -24,6 +24,7 @@
    3-ToolChain/vs_code.md
    3-ToolChain/pandas.md
    3-ToolChain/seaborn.md
+   3-ToolChain/scilearn.md
 
 
 .. toctree::
@@ -48,8 +49,8 @@
    4B-Graphics/casual-chick.md
    4B-Graphics/PCA.md
    4B-Graphics/FA.md
-   4B-Graphics/casual.md
    4B-Graphics/exercise.md
+   4B-Graphics/casual.md
    
    
 
@@ -67,6 +68,7 @@
    :caption: 数据叙事
 
    6-Storytelling/stories.md
+   6-Storytelling/tech-rhetoric.md
 
 
 .. toctree::
