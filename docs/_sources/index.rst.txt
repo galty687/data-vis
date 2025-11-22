@@ -69,6 +69,7 @@
 
    6-Storytelling/stories.md
    6-Storytelling/tech-rhetoric.md
+   6-Storytelling/human-information-processing.md
 
 
 .. toctree::

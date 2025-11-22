@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>常见分析方法 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="描述性统计常见指标" href="descriptive.html" /><link rel="prev" title="常见数据类型" href="data-type.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>人的信息处理模型 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="课程小组项目" href="../project/project-req.html" /><link rel="prev" title="技术修辞" href="tech-rhetoric.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -19,7 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="常见分析方法"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="人的信息处理模型"/>
 <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -90,16 +90,16 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual.html">数据可视化练习：因果分析</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="data-type.html">常见数据类型</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">常见分析方法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="descriptive.html">描述性统计常见指标</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/tech-rhetoric.html">技术修辞</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/human-information-processing.html">人的信息处理模型</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="stories.html">故事类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech-rhetoric.html">技术修辞</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">人的信息处理模型</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
 <ul>
@@ -117,13 +117,14 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#descriptive-analysis">&#25551;&#36848;&#24615;&#20998;&#26512; (Descriptive Analysis)</a></li>
-<li><a class="reference internal" href="#inferential-analysis">&#25512;&#26029;&#24615;&#20998;&#26512; (Inferential Analysis)</a></li>
-<li><a class="reference internal" href="#id2">&#30456;&#20851;&#19982;&#22238;&#24402;&#20998;&#26512;</a></li>
-<li><a class="reference internal" href="#id3">&#32858;&#31867;&#19982;&#20998;&#31867;&#20998;&#26512;</a></li>
-<li><a class="reference internal" href="#id4">&#26102;&#38388;&#24207;&#21015;&#20998;&#26512;</a></li>
-<li><a class="reference internal" href="#id5">&#25991;&#26412;&#19982;&#38750;&#32467;&#26500;&#21270;&#25968;&#25454;&#20998;&#26512;</a></li>
-<li><a class="reference internal" href="#id6">&#24635;&#32467;</a></li>
+<li><a class="reference internal" href="#id2">&#20027;&#35201;&#32452;&#25104;&#37096;&#20998;</a><ul>
+<li><a class="reference internal" href="#sensory-memory">&#24863;&#23448;&#35760;&#24518;&#65288;Sensory Memory&#65289;</a></li>
+<li><a class="reference internal" href="#short-term-working-memory">&#30701;&#26102;&#35760;&#24518; / &#24037;&#20316;&#35760;&#24518;&#65288;Short-term / Working Memory&#65289;</a></li>
+<li><a class="reference internal" href="#long-term-memory">&#38271;&#26399;&#35760;&#24518;&#65288;Long-term Memory&#65289;</a></li>
+<li><a class="reference internal" href="#id3">&#20449;&#24687;&#21152;&#24037;&#30340;&#37325;&#35201;&#26426;&#21046;</a></li>
+<li><a class="reference internal" href="#id4">&#19982;&#35745;&#31639;&#26426;&#31867;&#27604;</a></li>
+</ul>
+</li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -141,7 +142,7 @@ data-aria-dark="切换到自动模式">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">常见分析方法</strong>
+        <strong itemprop="name">人的信息处理模型</strong>
         <meta itemprop="position" content="2" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -155,60 +156,95 @@ data-aria-dark="切换到自动模式">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
           <section id="id1">
-<h1>常见分析方法<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
-<section id="descriptive-analysis">
-<h2>描述性分析 (Descriptive Analysis)<a class="headerlink" href="#descriptive-analysis" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>方法：频数统计、均值、中位数、标准差、分布图表（柱状图、饼图、箱线图）</p></li>
-<li><p>用途：了解数据的总体情况</p></li>
-</ul>
-</section>
-<section id="inferential-analysis">
-<h2>推断性分析 (Inferential Analysis)<a class="headerlink" href="#inferential-analysis" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>方法：假设检验（t检验、卡方检验、方差分析 ANOVA）、置信区间</p></li>
-<li><p>用途：从样本推断总体特征</p></li>
-</ul>
-</section>
+<h1>人的信息处理模型<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<p>信息处理模型是一种以计算机信息处理过程为类比，解释人类如何接收、存储、处理和输出信息的认知模型。该理论认为人类认知系统可以被看作一个处理信息的系统，通过输入、编码、存储、检索等步骤完成学习与记忆。</p>
 <section id="id2">
-<h2>相关与回归分析<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>主要组成部分<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>信息处理模型通常包含三个主要阶段：</p>
+<section id="sensory-memory">
+<h3>感官记忆（Sensory Memory）<a class="headerlink" href="#sensory-memory" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>相关分析：皮尔森相关、斯皮尔曼相关</p></li>
-<li><p>回归分析：线性回归、逻辑回归、多元回归</p></li>
-<li><p>用途：研究变量之间的关系</p></li>
+<li><p>信息来源于外界刺激（视觉、听觉等）</p></li>
+<li><p>保持时间极短（0.5–3 秒）</p></li>
+<li><p>信息未注意即快速遗忘</p></li>
 </ul>
+<p>示例：看到路上闪过的汽车，但未加注意便忘记。</p>
+</section>
+<section id="short-term-working-memory">
+<h3>短时记忆 / 工作记忆（Short-term / Working Memory）<a class="headerlink" href="#short-term-working-memory" title="Link to this heading">¶</a></h3>
+<p>​	•	信息经过注意进入此阶段
+​	•	容量有限（约 7±2 个单位）
+​	•	持续时间短（10–30 秒）
+​	•	通过复述可转入长期记忆</p>
+<p>示例：临时记住一个电话号；听老师讲课时记录重点。</p>
+</section>
+<section id="long-term-memory">
+<h3>长期记忆（Long-term Memory）<a class="headerlink" href="#long-term-memory" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>信息被编码并长期存储</p></li>
+<li><p>容量巨大，无明显限制</p></li>
+<li><p>可分为情景记忆（事件）、语义记忆（知识）、程序性记忆（技能）</p></li>
+</ul>
+<p>示例：会骑自行车、记得中国的首都、记得小时候的生日。</p>
 </section>
 <section id="id3">
-<h2>聚类与分类分析<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>聚类 (Clustering)：K-means、层次聚类（无监督学习）</p></li>
-<li><p>分类 (Classification)：决策树、支持向量机、随机森林、神经网络（有监督学习）</p></li>
-<li><p>用途：分组、预测类别</p></li>
-</ul>
+<h3>信息加工的重要机制<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>机制</strong></p></th>
+<th class="head"><p><strong>说明</strong></p></th>
+<th class="head"><p><strong>示例</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>注意</p></td>
+<td><p>决定感觉信息是否进入短时记忆</p></td>
+<td><p>专注听课 vs 被手机分心</p></td>
+</tr>
+<tr class="row-odd"><td><p>编码</p></td>
+<td><p>将信息转化为可以存储的形式</p></td>
+<td><p>通过联想法记单词</p></td>
+</tr>
+<tr class="row-even"><td><p>复述</p></td>
+<td><p>保持/强化短时记忆</p></td>
+<td><p>不断读电话号码</p></td>
+</tr>
+<tr class="row-odd"><td><p>提取</p></td>
+<td><p>从长期记忆中恢复信息</p></td>
+<td><p>考试时回忆知识点</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="id4">
-<h2>时间序列分析<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>方法：趋势分析、移动平均、ARIMA、季节性分解</p></li>
-<li><p>用途：预测股价、天气、销售量</p></li>
-</ul>
+<h3>与计算机类比<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>认知阶段</strong></p></th>
+<th class="head"><p><strong>计算机类比</strong></p></th>
+<th class="head"><p><strong>人的例子</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>感觉记忆</p></td>
+<td><p>输入设备（键盘/摄像头）</p></td>
+<td><p>眼睛看到图像</p></td>
+</tr>
+<tr class="row-odd"><td><p>短时记忆</p></td>
+<td><p>内存RAM</p></td>
+<td><p>正在做算术题</p></td>
+</tr>
+<tr class="row-even"><td><p>长期记忆</p></td>
+<td><p>硬盘/云盘</p></td>
+<td><p>记住英语语法规则</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="id5">
-<h2>文本与非结构化数据分析<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>方法：文本挖掘、情感分析、主题建模、图像识别</p></li>
-<li><p>用途：分析社交媒体评论、客服反馈、图片分类</p></li>
-</ul>
-</section>
-<section id="id6">
-<h2>总结<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>描述性：告诉你“发生了什么”。</p></li>
-<li><p>诊断性：告诉你“为什么发生”。</p></li>
-<li><p>预测性：告诉你“未来会怎样”。</p></li>
-<li><p>规范性：告诉你“该怎么做”。</p></li>
-<li><p>探索性：帮助你“发现新的问题和模式”。</p></li>
-</ul>
 </section>
 </section>
 
@@ -218,16 +254,16 @@ data-aria-dark="切换到自动模式">
   </svg>
   <span>回到顶部</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="data-type.html">
+    <a href="tech-rhetoric.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>上一章</span><div class="title">常见数据类型</div></div>
+        <span>上一章</span><div class="title">技术修辞</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="descriptive.html">
+    <a href="../project/project-req.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">描述性统计常见指标</div>
+        <div class="title">课程小组项目</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

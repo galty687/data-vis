@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>技术修辞 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="课程小组项目" href="../project/project-req.html" /><link rel="prev" title="故事类型" href="stories.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>技术修辞 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="人的信息处理模型" href="human-information-processing.html" /><link rel="prev" title="故事类型" href="stories.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -99,6 +99,7 @@ data-aria-dark="切换到自动模式">
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="stories.html">故事类型</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">技术修辞</a></li>
+<li class="toctree-l1"><a class="reference internal" href="human-information-processing.html">人的信息处理模型</a></li>
 </ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
 <ul>
@@ -119,36 +120,38 @@ data-aria-dark="切换到自动模式">
 <li><a class="reference internal" href="#id2">&#20154;&#31867;&#30340;&#24863;&#30693;</a></li>
 <li><a class="reference internal" href="#id3">&#20462;&#36766;</a><ul>
 <li><a class="reference internal" href="#id4">&#25277;&#35937;&#27010;&#24565;&#30340;&#36523;&#20307;&#38544;&#21947;</a></li>
-<li><a class="reference internal" href="#id5">&#29983;&#27963;&#20013;&#30340;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id5">&#20013;&#22269;&#21476;&#20195;&#30340;&#19976;&#37327;&#21333;&#20301;</a></li>
+<li><a class="reference internal" href="#id6">&#33521;&#22269;&#21476;&#20195;&#30340;&#21333;&#20301;</a></li>
+<li><a class="reference internal" href="#id7">&#29983;&#27963;&#20013;&#30340;&#38544;&#21947;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">&#38544;&#21947;&#30340;&#31867;&#22411;</a><ul>
-<li><a class="reference internal" href="#id7">&#20301;&#38544;&#21947;</a></li>
-<li><a class="reference internal" href="#id8">&#36523;&#20307;&#38544;&#21947;</a></li>
-<li><a class="reference internal" href="#id9">&#31038;&#20250;&#20851;&#31995;&#38544;&#21947;</a></li>
-<li><a class="reference internal" href="#id10">&#30495;&#23454;&#19990;&#30028;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id8">&#38544;&#21947;&#30340;&#31867;&#22411;</a><ul>
+<li><a class="reference internal" href="#id9">&#20301;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id10">&#36523;&#20307;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id11">&#31038;&#20250;&#20851;&#31995;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id12">&#30495;&#23454;&#19990;&#30028;&#38544;&#21947;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id11">&#25216;&#26415;&#38544;&#21947;</a></li>
-<li><a class="reference internal" href="#id12">&#20462;&#36766;&#30340;&#26412;&#36136;</a></li>
-<li><a class="reference internal" href="#id13">&#20174;&#20449;&#24687;&#21040;&#24863;&#30693;</a></li>
-<li><a class="reference internal" href="#id14">&#24863;&#30693;&#30340;&#35821;&#27861;</a><ul>
-<li><a class="reference internal" href="#id15"><strong>&#24863;&#30693;&#31934;&#24230;&#25490;&#24207;&#65306;</strong></a></li>
+<li><a class="reference internal" href="#id13">&#25216;&#26415;&#38544;&#21947;</a></li>
+<li><a class="reference internal" href="#id14">&#20462;&#36766;&#30340;&#26412;&#36136;</a></li>
+<li><a class="reference internal" href="#id15">&#20174;&#20449;&#24687;&#21040;&#24863;&#30693;</a></li>
+<li><a class="reference internal" href="#id16">&#24863;&#30693;&#30340;&#35821;&#27861;</a><ul>
+<li><a class="reference internal" href="#id17"><strong>&#24863;&#30693;&#31934;&#24230;&#25490;&#24207;&#65306;</strong></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id16">&#35748;&#30693;&#36866;&#37197;&#29702;&#35770;</a><ul>
-<li><a class="reference internal" href="#id17">&#26680;&#24515;&#35266;&#28857;&#65306;</a></li>
+<li><a class="reference internal" href="#id18">&#35748;&#30693;&#36866;&#37197;&#29702;&#35770;</a><ul>
+<li><a class="reference internal" href="#id19">&#26680;&#24515;&#35266;&#28857;&#65306;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id18">&#21487;&#35270;&#21270;&#20462;&#36766;</a><ul>
-<li><a class="reference internal" href="#id19">&#39068;&#33394;&#30340;&#20462;&#36766;&#65306;&#24773;&#32490;&#19982;&#20215;&#20540;&#23548;&#21521;</a></li>
-<li><a class="reference internal" href="#id20">&#32447;&#26465;&#19982;&#24418;&#29366;&#30340;&#20462;&#36766;&#65306;&#33410;&#22863;&#19982;&#21147;&#37327;&#24863;</a></li>
-<li><a class="reference internal" href="#id21">&#26500;&#22270;&#19982;&#31354;&#38388;&#30340;&#20462;&#36766;&#65306;&#31283;&#23450;&#19982;&#23545;&#27604;</a></li>
-<li><a class="reference internal" href="#id22">&#21160;&#24577;&#19982;&#20132;&#20114;&#30340;&#20462;&#36766;&#65306;&#26102;&#38388;&#24863;&#19982;&#21442;&#19982;&#24863;</a></li>
-<li><a class="reference internal" href="#id23">&#27604;&#20363;&#19982;&#23610;&#24230;&#30340;&#20462;&#36766;&#65306;&#25918;&#22823;&#25110;&#24369;&#21270;&#24046;&#24322;</a></li>
+<li><a class="reference internal" href="#id20">&#21487;&#35270;&#21270;&#20462;&#36766;</a><ul>
+<li><a class="reference internal" href="#id21">&#39068;&#33394;&#30340;&#20462;&#36766;&#65306;&#24773;&#32490;&#19982;&#20215;&#20540;&#23548;&#21521;</a></li>
+<li><a class="reference internal" href="#id22">&#32447;&#26465;&#19982;&#24418;&#29366;&#30340;&#20462;&#36766;&#65306;&#33410;&#22863;&#19982;&#21147;&#37327;&#24863;</a></li>
+<li><a class="reference internal" href="#id23">&#26500;&#22270;&#19982;&#31354;&#38388;&#30340;&#20462;&#36766;&#65306;&#31283;&#23450;&#19982;&#23545;&#27604;</a></li>
+<li><a class="reference internal" href="#id24">&#21160;&#24577;&#19982;&#20132;&#20114;&#30340;&#20462;&#36766;&#65306;&#26102;&#38388;&#24863;&#19982;&#21442;&#19982;&#24863;</a></li>
+<li><a class="reference internal" href="#id25">&#27604;&#20363;&#19982;&#23610;&#24230;&#30340;&#20462;&#36766;&#65306;&#25918;&#22823;&#25110;&#24369;&#21270;&#24046;&#24322;</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id24">&#24635;&#32467;</a></li>
+<li><a class="reference internal" href="#id26">&#24635;&#32467;</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -308,7 +311,73 @@ data-aria-dark="切换到自动模式">
 <p>这种映射是普遍的、深层的、无意识的。</p>
 </section>
 <section id="id5">
-<h3>生活中的隐喻<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<h3>中国古代的丈量单位<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>单位</p></th>
+<th class="head"><p>意义</p></th>
+<th class="head"><p>用法</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>寸</p></td>
+<td><p>食指的第一节的长度，一寸</p></td>
+<td><p>三寸不烂之舌</p></td>
+</tr>
+<tr class="row-odd"><td><p>尺</p></td>
+<td><p>手腕到肘，一尺</p></td>
+<td><p>尺度不一</p></td>
+</tr>
+<tr class="row-even"><td><p>咫</p></td>
+<td><p>一掌+一尺</p></td>
+<td><p>近在咫尺</p></td>
+</tr>
+<tr class="row-odd"><td><p>丈</p></td>
+<td><p>一个成年男子的身高</p></td>
+<td><p>丈夫，丈人</p></td>
+</tr>
+<tr class="row-even"><td><p>寻</p></td>
+<td><p>张开双臂，两手之间的距离</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>尺有所短，寸有所长（每个人的关节长度不一样）</p>
+<p>丈二和尚摸不着头脑（佛像通常高一丈二尺，防止有人抬手模佛像）</p>
+</div></blockquote>
+</section>
+<section id="id6">
+<h3>英国古代的单位<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>单位</p></th>
+<th class="head"><p>来源</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>foot（英尺）</p></td>
+<td><p>脚长</p></td>
+</tr>
+<tr class="row-odd"><td><p>span（拃）</p></td>
+<td><p>大拇指到小指展开距离</p></td>
+</tr>
+<tr class="row-even"><td><p>fathom（英寻）</p></td>
+<td><p>双臂展开</p></td>
+</tr>
+<tr class="row-odd"><td><p>hand（英制测马高）</p></td>
+<td><p>四英寸，基于掌宽</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="Hand_Units_of_Measurement" src="../_images/Hand_Units_of_Measurement.png" /></p>
+</section>
+<section id="id7">
+<h3>生活中的隐喻<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>他是李总的左膀右臂</p></li>
 <li><p>你是我的心肝宝贝</p></li>
@@ -320,10 +389,10 @@ data-aria-dark="切换到自动模式">
 </ul>
 </section>
 </section>
-<section id="id6">
-<h2>隐喻的类型<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
-<section id="id7">
-<h3>位隐喻<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h2>隐喻的类型<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>位隐喻<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <p><strong>高兴为上，悲伤为下</strong></p>
 <ul class="simple">
 <li><p>今天她的情绪高涨</p></li>
@@ -341,15 +410,15 @@ data-aria-dark="切换到自动模式">
 <li><p>sank into coma.</p></li>
 </ul>
 </section>
-<section id="id8">
-<h3>身体隐喻<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>身体隐喻<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>你是我的左膀右臂</p></li>
 <li><p>你是我的小心肝</p></li>
 </ul>
 </section>
-<section id="id9">
-<h3>社会关系隐喻<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<section id="id11">
+<h3>社会关系隐喻<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>父节点</p></li>
 <li><p>子节点</p></li>
@@ -357,16 +426,16 @@ data-aria-dark="切换到自动模式">
 <li><p>二叉树</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>真实世界隐喻<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="id12">
+<h3>真实世界隐喻<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>信息高速公路</p></li>
 <li><p>互联网</p></li>
 </ul>
 </section>
 </section>
-<section id="id11">
-<h2>技术隐喻<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id13">
+<h2>技术隐喻<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
 <p>案例1：用沙子的多，隐喻IP V6的地址多</p>
 <blockquote>
 <div><p>IP V6可以让地球上的每个沙子获得一个IP 地址。</p>
@@ -387,8 +456,8 @@ data-aria-dark="切换到自动模式">
 <li><p>低代码</p></li>
 </ol>
 </section>
-<section id="id12">
-<h2>修辞的本质<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<section id="id14">
+<h2>修辞的本质<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
 <p>人类的修辞，本质上是<strong>用语言去影响、表达与建构意义的艺术</strong>。它并不仅仅是“说得好听”，而是一种让思想产生力量、让信息具有感染力的方式。</p>
 <blockquote>
 <div><p>“修辞的根源，是人类生存感知的结构。”</p>
@@ -405,8 +474,8 @@ data-aria-dark="切换到自动模式">
 </li>
 </ol>
 </section>
-<section id="id13">
-<h2>从信息到感知<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h2>
+<section id="id15">
+<h2>从信息到感知<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
 <p>数据只是数字或符号，例如 27、0.58、2025 等，人类感官无法直接理解这些符号所代表的数量、关系或变化</p>
 <p>数据可视化可将抽象信息转为具体的感知。人类的视觉系统能快速感知位置、长度、颜色、方向、大小等特征。于是我们把数据“映射”到这些视觉特征上，让人快速看出<strong>差异</strong>、<strong>模式</strong>和<strong>关系</strong>。</p>
 <p>这种“映射规则”就像语言的语法——它决定了意义如何被编码和解码。</p>
@@ -420,8 +489,8 @@ data-aria-dark="切换到自动模式">
 <li><p>平行坐标图（Parallel Coordinates） → 用空间线条显示多维相关性。</p></li>
 </ul>
 </section>
-<section id="id14">
-<h2>感知的语法<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h2>
+<section id="id16">
+<h2>感知的语法<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
 <p>法国学者 <strong>Jacques Bertin（1967）</strong> 在《图形符号学》（<em>Semiology of Graphics</em>）中首次提出：</p>
 <p>视觉有若干“变量”（visual variables），每一种变量对应一种人类感知维度。</p>
 <p><strong>7种视觉变量</strong>：</p>
@@ -492,8 +561,8 @@ data-aria-dark="切换到自动模式">
 </table>
 </div>
 <p>**William Cleveland &amp; Robert McGill (1984)**在论文：《<em>Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods</em>》（<em>Journal of the American Statistical Association</em>）中对人类感知精度做了排序：</p>
-<section id="id15">
-<h3><strong>感知精度排序：</strong><a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<section id="id17">
+<h3><strong>感知精度排序：</strong><a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p>位置（position）</p></li>
 <li><p>长度（length）</p></li>
@@ -504,25 +573,24 @@ data-aria-dark="切换到自动模式">
 </ol>
 <p>这一排序成为后来所有数据可视化教材与设计标准的基础。例如：</p>
 <p>为什么折线图优于饼图？为什么条形图比气泡图更清晰？答案都来自这个实验体系。</p>
-</section>
-</section>
-<section id="id16">
-<h2>认知适配理论<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
-<p><strong>代表人物：Iris Vessey (1991)</strong></p>
-<p>论文：《<em>Cognitive Fit: A Theory-Based Analysis of the Graphs versus Tables Literature</em>》</p>
-<section id="id17">
-<h3>核心观点：<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>信息呈现形式应与任务类型相匹配。</p></li>
-<li><p>可视化的价值取决于它是否<strong>适配用户的认知加工路径（cognitive processing path）</strong>。</p></li>
-<li></li>
-<li><p>空间任务（如趋势识别） → 适合图形化表示；
-符号任务（如精确查找） → 适合表格化表示。</p></li>
-</ul>
+<p><img alt="sensor-accuracy" src="../_images/sensor-accuracy.png" /></p>
 </section>
 </section>
 <section id="id18">
-<h2>可视化修辞<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<h2>认知适配理论<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<p><strong>代表人物：Iris Vessey (1991)</strong></p>
+<p>论文：《<em>Cognitive Fit: A Theory-Based Analysis of the Graphs versus Tables Literature</em>》</p>
+<section id="id19">
+<h3>核心观点：<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>信息呈现形式应与任务类型相匹配。</p></li>
+<li><p>可视化的价值取决于它是否<strong>适配用户的认知加工路径（cognitive processing path）</strong>。</p></li>
+<li><p>空间任务（如趋势识别） → 适合图形化表示；符号任务（如精确查找） → 适合表格化表示。</p></li>
+</ul>
+</section>
+</section>
+<section id="id20">
+<h2>可视化修辞<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -567,8 +635,8 @@ data-aria-dark="切换到自动模式">
 </ul>
 <p>这种“降维映射”不是技术性操作，而是<strong>认知适配（cognitive fit）</strong>——</p>
 <p>即如何在人的注意力、工作记忆与模式识别能力的限制内，让数据仍然“说得清楚”。</p>
-<section id="id19">
-<h3>颜色的修辞：情绪与价值导向<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<section id="id21">
+<h3>颜色的修辞：情绪与价值导向<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -602,8 +670,8 @@ data-aria-dark="切换到自动模式">
 </table>
 </div>
 </section>
-<section id="id20">
-<h3>线条与形状的修辞：节奏与力量感<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<section id="id22">
+<h3>线条与形状的修辞：节奏与力量感<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -642,8 +710,8 @@ data-aria-dark="切换到自动模式">
 <p>细线代表“子样本”，</p>
 <p>这种视觉语法让观众自动解读主次关系。</p>
 </section>
-<section id="id21">
-<h3>构图与空间的修辞：稳定与对比<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<section id="id23">
+<h3>构图与空间的修辞：稳定与对比<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -677,8 +745,8 @@ data-aria-dark="切换到自动模式">
 </table>
 </div>
 </section>
-<section id="id22">
-<h3>动态与交互的修辞：时间感与参与感<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<section id="id24">
+<h3>动态与交互的修辞：时间感与参与感<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -708,8 +776,8 @@ data-aria-dark="切换到自动模式">
 </table>
 </div>
 </section>
-<section id="id23">
-<h3>比例与尺度的修辞：放大或弱化差异<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<section id="id25">
+<h3>比例与尺度的修辞：放大或弱化差异<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -740,8 +808,8 @@ data-aria-dark="切换到自动模式">
 </div>
 </section>
 </section>
-<section id="id24">
-<h2>总结<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<section id="id26">
+<h2>总结<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -789,10 +857,10 @@ data-aria-dark="切换到自动模式">
         <span>上一章</span><div class="title">故事类型</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../project/project-req.html">
+    <a href="human-information-processing.html">
       <div class="page-info">
         <span>下一章</span>
-        <div class="title">课程小组项目</div>
+        <div class="title">人的信息处理模型</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
