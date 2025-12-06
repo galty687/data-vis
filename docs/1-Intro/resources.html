@@ -2,7 +2,7 @@
 <html lang="zh" data-accent-color="violet" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>课程资源 - data visulization 0.3 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Python 入门" href="../3-ToolChain/python.html" /><link rel="prev" title="课程大纲" href="intro.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>课程资源 - data visulization 0.9 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="Python 入门" href="../3-ToolChain/python.html" /><link rel="prev" title="课程大纲" href="intro.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
@@ -95,6 +95,10 @@ data-aria-dark="切换到自动模式">
 <li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
 </ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">社会网络分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../7-network/network.html">社会网络分析及其可视化</a></li>
+</ul>
 <p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
@@ -117,11 +121,12 @@ data-aria-dark="切换到自动模式">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id2">&#21487;&#35270;&#21270;&#22270;</a></li>
-<li><a class="reference internal" href="#id3">&#21160;&#24577;&#21487;&#35270;&#21270;</a></li>
+<li><a class="reference internal" href="#id2">&#21487;&#35270;&#21270;&#35821;&#27861;</a></li>
+<li><a class="reference internal" href="#id3">&#21487;&#35270;&#21270;&#26696;&#20363;</a></li>
 <li><a class="reference internal" href="#id4">&#24120;&#35265;&#25968;&#25454;&#24179;&#21488;</a></li>
 <li><a class="reference internal" href="#id5">&#25968;&#25454;&#36164;&#28304;</a></li>
-<li><a class="reference internal" href="#id6">&#22823;&#27169;&#22411;&#36741;&#21161;&#25968;&#25454;&#21487;&#35270;&#21270;</a></li>
+<li><a class="reference internal" href="#id6">&#25968;&#25454;&#21487;&#35270;&#21270;&#24037;&#20855;</a></li>
+<li><a class="reference internal" href="#id7">&#22823;&#27169;&#22411;&#36741;&#21161;&#25968;&#25454;&#21487;&#35270;&#21270;</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -155,13 +160,19 @@ data-aria-dark="切换到自动模式">
           <section id="id1">
 <h1>课程资源<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
 <section id="id2">
-<h2>可视化图<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>可视化语法<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://ft-interactive.github.io/visual-vocabulary/">Visual Vocabulary</a></p>
 <p><a class="reference external" href="https://datavizproject.com">各种图标大全</a></p>
 </section>
 <section id="id3">
-<h2>动态可视化<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
-<p><a class="reference external" href="https://seeing-theory.brown.edu/cn.html">看见统计</a> （基于D3.js开发）</p>
+<h2>可视化案例<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://seeing-theory.brown.edu/cn.html">看见统计</a> （基于D3.js开发）</p></li>
+<li><p><a class="reference external" href="https://pkudh.org/projects/">北京大学数字人文平台作品</a></p></li>
+<li><p><a class="reference external" href="https://senseable.mit.edu/treepedia">探索世界各地城市中的绿色树冠</a></p></li>
+<li><p><a class="reference external" href="https://www.nature.com/immersive/d42859-019-00121-0/index.html">Nature 150 年</a></p></li>
+<li><p><a class="reference external" href="https://www.theguardian.com/us-news/ng-interactive/2017/dec/20/bussed-out-america-moves-homeless-people-country-study">转运出城：美国如何安置无家可归者</a></p></li>
+</ol>
 </section>
 <section id="id4">
 <h2>常见数据平台<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
@@ -197,7 +208,15 @@ data-aria-dark="切换到自动模式">
 </ul>
 </section>
 <section id="id6">
-<h2>大模型辅助数据可视化<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<h2>数据可视化工具<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://shorthand.com">Shorthand</a></p></li>
+<li><p><a class="reference external" href="https://echarts.apache.org">Echarts</a></p></li>
+<li><p><a class="reference external" href="https://flourish.studio/examples/">Flourish</a></p></li>
+</ol>
+</section>
+<section id="id7">
+<h2>大模型辅助数据可视化<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/microsoft">microsoft</a><a class="reference external" href="https://github.com/microsoft/data-formulator">data-formulator</a></p></li>
 <li><p><a class="reference external" href="https://smart-excalidraw.aizhi.site">Smart Excalidraw</a> (用自然语言，绘制专业图表)</p></li>
@@ -245,7 +264,7 @@ data-aria-dark="切换到自动模式">
     </div>
   </div>
 </footer>
-      <script src="../_static/documentation_options.js?v=c16fcb61"></script>
+      <script src="../_static/documentation_options.js?v=717cf61d"></script>
       <script src="../_static/doctools.js?v=9a2dae69"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>

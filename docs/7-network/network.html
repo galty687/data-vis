@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>社会网络分析及其可视化 - data visulization 0.9 文档</title><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="故事类型" href="../6-Storytelling/stories.html" /><link rel="prev" title="描述性统计常见指标" href="../5-Data/descriptive.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=d48c410d" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ad0e1e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="社会网络分析及其可视化"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>data visulization</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">课程内容</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/intro.html">课程大纲</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1-Intro/resources.html">课程资源</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">工具链</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/python.html">Python 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/vs_code.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/pandas.html">Pandas 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/seaborn.html">Seaborn 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3-ToolChain/scilearn.html">Scikit-learn</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">描述性分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/bar.html">条形图绘制</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/histogram.html">直方图与核密度图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/boxplot.html">箱线图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/violin.html">小提琴图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/stripplot.html">条带图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4-Graphics/sina.html">西纳图</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">探索性分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/scatter.html">散点图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/CA.html">相关性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual-chick.html">因果分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/PCA.html">主成分分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/FA.html">因子分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/exercise.html">数据可视化练习1：描述与相关</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4B-Graphics/casual.html">数据可视化练习：因果分析</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据类型与分析</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-type.html">常见数据类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/data-analysis.html">常见分析方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5-Data/descriptive.html">描述性统计常见指标</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">社会网络分析</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">社会网络分析及其可视化</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">数据叙事</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/stories.html">故事类型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/tech-rhetoric.html">技术修辞</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6-Storytelling/human-information-processing.html">人的信息处理模型</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">课程项目与期末论文</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../project/project-req.html">课程小组项目</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/termpaper.html">期末论文</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#31038;&#20250;&#32593;&#32476;&#20998;&#26512;</a><ul>
+<li><a class="reference internal" href="#id3">&#30740;&#31350;&#20851;&#31995;&#32467;&#26500;&#65292;&#32780;&#19981;&#26159;&#23396;&#31435;&#30340;&#20010;&#20307;</a></li>
+<li><a class="reference internal" href="#id4">&#34913;&#37327;&#33410;&#28857;&#30340;&#37325;&#35201;&#24615;</a></li>
+<li><a class="reference internal" href="#id5">&#20998;&#26512;&#32593;&#32476;&#20013;&#30340;&#32676;&#20307;&#32467;&#26500;</a></li>
+<li><a class="reference internal" href="#id6">&#20856;&#22411;&#24212;&#29992;&#39046;&#22495;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">&#26696;&#20363;&#32972;&#26223;</a><ul>
+<li><a class="reference internal" href="#id8">&#20914;&#31361;&#30340;&#20986;&#29616;&#65306;&#20465;&#20048;&#37096;&#39046;&#23548;&#20154;&#19982;&#31649;&#29702;&#21592;&#24847;&#35265;&#19981;&#21512;</a></li>
+<li><a class="reference internal" href="#id9">&#26368;&#32456;&#32467;&#26524;&#65306;&#20465;&#20048;&#37096;&#20998;&#35010;&#25104;&#20004;&#20010;&#32452;&#32455;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">&#32593;&#32476;&#20998;&#26512;&#36807;&#31243;</a><ul>
+<li><a class="reference internal" href="#id11">&#26126;&#30830;&#20998;&#26512;&#23545;&#35937;</a></li>
+<li><a class="reference internal" href="#id12">&#25968;&#25454;&#25910;&#38598;</a></li>
+<li><a class="reference internal" href="#id13">&#25351;&#26631;&#20998;&#26512;</a><ul>
+<li><a class="reference internal" href="#degree-centrality">&#24230;&#20013;&#24515;&#24615;&#65288;Degree Centrality&#65289;</a></li>
+<li><a class="reference internal" href="#betweenness-centrality">&#20171;&#25968;&#20013;&#24515;&#24615;&#65288;Betweenness Centrality&#65289;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#community-detection">&#31038;&#21306;&#26816;&#27979;&#65288;Community Detection&#65289;</a></li>
+<li><a class="reference internal" href="#id14">&#21487;&#35270;&#21270;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">&#24037;&#20855;&#20171;&#32461;</a><ul>
+<li><a class="reference internal" href="#networkx-python">NetworkX (Python)</a></li>
+<li><a class="reference internal" href="#id16">&#21151;&#33021;</a></li>
+<li><a class="reference internal" href="#id17">&#20248;&#32570;&#28857;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18">&#20195;&#30721;&#23454;&#29616;</a><ul>
+<li><a class="reference internal" href="#networkx">0. &#23433;&#35013;networkx</a></li>
+<li><a class="reference internal" href="#id19"><strong>1. &#21152;&#36733;&#31354;&#25163;&#36947;&#25968;&#25454;</strong></a></li>
+<li><a class="reference internal" href="#id20">2. &#21487;&#35270;&#21270;&#19968;&#20010;&#32593;&#32476;</a></li>
+<li><a class="reference internal" href="#id21">3. &#35745;&#31639;&#24230;&#20013;&#24515;&#24615;&#65288;&#21512;&#20316;/&#36830;&#25509;&#26368;&#22810;&#30340;&#65289;</a></li>
+<li><a class="reference internal" href="#id22">4. &#20171;&#25968;&#20013;&#24515;&#24615;&#65288;&#8220;&#26725;&#26753;&#8221;&#35282;&#33394;&#65289;</a></li>
+<li><a class="reference internal" href="#pagerank">5. PageRank&#65288;&#26368;&#34987;&#20381;&#36182;/&#26368;&#8220;&#26435;&#23041;&#8221;&#30340;&#65289;</a></li>
+<li><a class="reference internal" href="#id23">6.&#20570;&#31616;&#21333;&#31038;&#21306;&#21010;&#20998;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">&#21487;&#35270;&#21270;</a><ul>
+<li><a class="reference internal" href="#id25">&#31038;&#21306;&#19978;&#33394;</a></li>
+<li><a class="reference internal" href="#id26">&#28909;&#21147;&#22270;</a></li>
+<li><a class="reference internal" href="#gephi">Gephi &#32654;&#21270;</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">data visulization</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">社会网络分析及其可视化</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="id1">
+<h1>社会网络分析及其可视化<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h1>
+<section id="id2">
+<h2>社会网络分析<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<p>社会网络分析（Social Network Analysis, SNA）是一套用来研究“人与人、组织与组织之间关系结构”的方法。它重点不在个人本身，而在于<strong>关系</strong>：谁和谁联系、联系强弱如何、信息在关系网络中如何流动、哪些节点在网络中最重要等。</p>
+<section id="id3">
+<h3>研究关系结构，而不是孤立的个体<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>社会网络分析把个体（人、组织、国家等）视为“节点”，把关系（合作、交流、交易、关注、信任等）视为“边”。</p>
+<p>它主要回答的问题包括：</p>
+<ul class="simple">
+<li><p>谁与谁联系得最紧密？</p></li>
+<li><p>网络中有没有“核心人物”“关键组织”？</p></li>
+<li><p>信息是怎样在网络中传播的？</p></li>
+<li><p>哪些节点连接了原本不相连的群体？</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>衡量节点的重要性<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p>SNA会计算一些指标来判断谁在网络中更关键，比如：</p>
+<ul class="simple">
+<li><p>度中心性（Degree centrality）：一个节点连接了多少人。</p></li>
+<li><p>中介中心性（Betweenness）：谁在网络中起“桥梁”作用。</p></li>
+<li><p>接近中心性（Closeness）：谁更容易接触到网络所有其他人。</p></li>
+<li><p>特征向量中心性（Eigenvector）：节点不仅自己重要，还连接重要的人。</p></li>
+</ul>
+<p>这些指标可以用来识别“影响力者”“传播关键节点”等。</p>
+</section>
+<section id="id5">
+<h3>分析网络中的群体结构<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p>SNA可以发现：</p>
+<ul class="simple">
+<li><p>社会群体（比如朋友圈、合作圈）</p></li>
+<li><p>组织内部的小群体或者部门壁垒</p></li>
+<li><p>社群之间的联系强度</p></li>
+<li><p>隐性关系或潜在合作路径</p></li>
+</ul>
+<p>技术上通常用到<strong>聚类、社区发现</strong>等方法。</p>
+</section>
+<section id="id6">
+<h3>典型应用领域<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p>社会网络分析非常广泛，常见于：</p>
+<ul class="simple">
+<li><p><strong>社交媒体分析</strong>（微博、推特上的关系、传播、意见领袖）</p></li>
+<li><p><strong>组织行为学</strong>（公司内部沟通分析、找出合作瓶颈）</p></li>
+<li><p><strong>公共卫生</strong>（疫情传播路径分析）</p></li>
+<li><p><strong>犯罪网络分析</strong>（揭示犯罪团伙的核心成员）</p></li>
+<li><p><strong>学术分析</strong>（合作网络、引用网络）</p></li>
+<li><p><strong>用户体验与语言服务领域</strong>（分析用户群体、知识传播结构）</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h2>案例背景<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p>故事发生在 20 世纪 70 年代早期，地点是美国一所大学的校园空手道俱乐部。俱乐部成员之间除了训练，还经常一起参加聚会、外出和社交活动，因此形成了密集的社交网络。</p>
+<p>研究者 Wayne W. Zachary 在 1970–1972 年间系统观察并记录了俱乐部内部：</p>
+<ul class="simple">
+<li><p>谁与谁一起活动</p></li>
+<li><p>成员之间的亲密程度</p></li>
+<li><p>社交互动次数</p></li>
+</ul>
+<p>他最终构建了一个 34 人的社交网络，每条边代表成员间的互动或友谊。</p>
+<section id="id8">
+<h3>冲突的出现：俱乐部领导人与管理员意见不合<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<p>俱乐部有两个核心人物：</p>
+<ol class="arabic simple">
+<li><p>Instructor（教练）——网络数据中对应节点 0（不同论文编号略有差异）</p></li>
+<li><p>Administrator（管理员）——对应 节点 33</p></li>
+</ol>
+<p>他们在俱乐部的运营方式、课程费用和管理理念上产生了尖锐分歧。</p>
+<p>随着时间推移，俱乐部成员开始在社交上“站队”：</p>
+<ul class="simple">
+<li><p>喜欢教练的成员逐渐围绕教练形成一个社群</p></li>
+<li><p>认同管理员的人围绕管理员形成另一群</p></li>
+</ul>
+<p>这些倾向在网络结构中体现得非常明显，**两个社区在网络中自然形成，没有任何算法都能肉眼看出。**这就是它为什么成为 SNA 经久不衰的示范案例的原因。</p>
+</section>
+<section id="id9">
+<h3>最终结果：俱乐部分裂成两个组织<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>冲突升级后，俱乐部最终 正式分裂成两个独立的俱乐部。</p>
+<p>成员分布如下：</p>
+<ul class="simple">
+<li><p>一些成员选择跟随原教练，加入他新的俱乐部</p></li>
+<li><p>另外一些成员留在原来的俱乐部，由管理员负责</p></li>
+</ul>
+<p>真实世界的结果与 Zachary 收集的社交网络结构 高度吻合：</p>
+<ul class="simple">
+<li><p>在网络里属于教练社区的人，大多数最终也选择了教练阵营</p></li>
+<li><p>社区划分算法（例如 Girvan–Newman 或 Louvain）几乎可以 100% 准确预测成员最终选择</p></li>
+</ul>
+<p>这使得该数据成为：</p>
+<ul class="simple">
+<li><p>社会网络分析中“社区检测”的标杆教材</p></li>
+<li><p>“社交结构如何预测行为”的最佳案例之一</p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2>网络分析过程<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<section id="id11">
+<h3>明确分析对象<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<p>Zachary 的研究对象：</p>
+<ul class="simple">
+<li><p>节点：空手道俱乐部 34 名成员</p></li>
+<li><p>边：成员之间在课外有交往（互动次数反映权重）</p></li>
+<li><p>网络类型：无向、加权图</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>数据收集<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<p>Zachary 在 1970–1972 对俱乐部成员进行了 参与式观察：</p>
+<ul class="simple">
+<li><p>记录成员之间的互动</p></li>
+<li><p>记录共同出席活动</p></li>
+<li><p>打分形成频率矩阵（interaction matrix）</p></li>
+</ul>
+<p>最终得到 34×34 的邻接矩阵（或边列表）</p>
+</section>
+<section id="id13">
+<h3>指标分析<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<section id="degree-centrality">
+<h4>度中心性（Degree Centrality）<a class="headerlink" href="#degree-centrality" title="Link to this heading">¶</a></h4>
+<p>用于找“最受欢迎”或“最活跃”的成员。</p>
+<p>在空手道俱乐部中：度中心性最高的人是 0 号（Mr. Hi）和 33 号（Club President John A）</p>
+<p>这对应了：一个是教练，一个是管理员，两派领袖。</p>
+<blockquote>
+<div><p><strong>他们很重要，连边很多，是自然的中心人物。</strong></p>
+</div></blockquote>
+</section>
+<section id="betweenness-centrality">
+<h4>介数中心性（Betweenness Centrality）<a class="headerlink" href="#betweenness-centrality" title="Link to this heading">¶</a></h4>
+<p>用于识别“桥梁人物”“分裂风险点”。</p>
+<p>使用 Brandes 算法计算最短路径上的关键节点。</p>
+<p>在空手道俱乐部中：</p>
+<ul class="simple">
+<li><p>节点 2、1、3 等有高介数中心性</p></li>
+<li><p>这些人并不是“最受欢迎”，但他们位于两派之间</p></li>
+<li><p>他们的立场左右着俱乐部分裂的方向</p></li>
+</ul>
+</section>
+</section>
+<section id="community-detection">
+<h3>社区检测（Community Detection）<a class="headerlink" href="#community-detection" title="Link to this heading">¶</a></h3>
+<p>算法：Girvan–Newman</p>
+<p>步骤：</p>
+<ol class="arabic simple">
+<li><p>找介数最高的边</p></li>
+<li><p>删除</p></li>
+<li><p>再计算</p></li>
+<li><p>不断迭代直到网络分裂成两块</p></li>
+</ol>
+<p>在空手道数据上：</p>
+<ul class="simple">
+<li><p>GN 算法自动把 34 个节点分成两群</p></li>
+<li><p>结果与俱乐部实际后来的现实分裂高度吻合</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>可视化<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<p>用力导向算法（Fruchterman-Reingold 或 ForceAtlas2）绘图：</p>
+<p>特点：</p>
+<ul class="simple">
+<li><p>边多的节点会更靠近</p></li>
+<li><p>关系密切的成员自然聚成团</p></li>
+<li><p>两派显著分离</p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2>工具介绍<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<section id="networkx-python">
+<h3>NetworkX (Python)<a class="headerlink" href="#networkx-python" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>特点</strong>：最经典、最易用的社会网络分析库。</p></li>
+<li><p><strong>能做什么</strong>：中心性、路径、社区发现、图可视化等。</p></li>
+<li><p><strong>适合</strong>：教学、科研、小中规模网络（几十万节点以内）。</p></li>
+<li><p><strong>优势</strong>：简单易用，生态丰富，与 pandas/scikit-learn 深度融合。</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>功能<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<p><strong>1. 创建并操作图结构</strong>
+支持：</p>
+<ul class="simple">
+<li><p>有向图</p></li>
+<li><p>无向图</p></li>
+<li><p>多重图（多条边）</p></li>
+<li><p>自定义节点属性、边属性</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+</span><span data-line="4"><span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><strong>2. 计算中心性指标（核心功能）</strong></p>
+<p>社会网络分析常用的所有指标都能算：</p>
+<ul class="simple">
+<li><p>Degree centrality（度中心性）</p></li>
+<li><p>Betweenness centrality（中介中心性）</p></li>
+<li><p>Closeness centrality（接近中心性）</p></li>
+<li><p>Eigenvector centrality（特征向量中心性）</p></li>
+<li><p>PageRank（网页排名指标）</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><strong>3. 分析网络结构</strong></p>
+<ul class="simple">
+<li><p>最短路径</p></li>
+<li><p>连通分量</p></li>
+<li><p>聚类系数</p></li>
+<li><p>图直径、平均距离</p></li>
+<li><p>社区发现（基于 Girvan–Newman、Louvain 等）</p></li>
+</ul>
+<p><strong>4. 可视化</strong></p>
+<p>NetworkX 有基本可视化功能（但不如 Gephi 好看）：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="2"><span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><strong>5. 与 Pandas、Numpy、Scikit-Learn 配合</strong></p>
+<p>可以从 CSV / DataFrame 直接构建图：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;edges.csv&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_edgelist</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>NLP / 文本处理背景的人，可以轻松用它分析：</p>
+<ul class="simple">
+<li><p>词语共现网络</p></li>
+<li><p>引文网络</p></li>
+<li><p>学术合作网络</p></li>
+<li><p>用户行为网络</p></li>
+<li><p>技术写作系统中的术语传播网络</p></li>
+</ul>
+</section>
+<section id="id17">
+<h3>优缺点<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<p>优点：</p>
+<ul class="simple">
+<li><p>入门简单，适合学习 SNA</p></li>
+<li><p>Python 生态完善</p></li>
+<li><p>小中规模图性能稳定（几十万节点以内）</p></li>
+<li><p>文档齐全，科研论文中非常常见</p></li>
+</ul>
+<p>缺点：</p>
+<ul class="simple">
+<li><p>不适合处理特别大的图（上千万节点）</p></li>
+<li><p>可视化能力不如 Gephi、Cytoscape</p></li>
+<li><p>高性能需求时可换 igraph 或 Graph-tool</p></li>
+</ul>
+<p>与Gephi的关系</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>工具</strong></p></th>
+<th class="head"><p><strong>类型</strong></p></th>
+<th class="head"><p><strong>用途</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NetworkX</strong></p></td>
+<td><p>Python 库</p></td>
+<td><p>计算、建模、算法、数据处理</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gephi</strong></p></td>
+<td><p>桌面可视化软件</p></td>
+<td><p>绘图、美化、探索式分析</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>实际研究中常常这样组合使用：</p>
+<ol class="arabic simple">
+<li><p>用 NetworkX 读取与处理数据、计算指标</p></li>
+<li><p>输出 GEXF 文件</p></li>
+<li><p>用 Gephi 打开 GEXF 进行布局与可视化</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">nx</span><span class="o">.</span><span class="n">write_gexf</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;network.gexf&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h2>代码实现<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
+<section id="networkx">
+<h3>0. 安装networkx<a class="headerlink" href="#networkx" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">!pip<span class="w"> </span>install<span class="w"> </span>networkx
+</span></pre></div>
+</div>
+</section>
+<section id="id19">
+<h3><strong>1. 加载空手道数据</strong><a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">())</span>
+</span></pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="mi">34</span> <span class="mi">78</span>
+</span><span data-line="2">
+</span></pre></div>
+</div>
+<p>表示这个图中有 34 个节点（共 34 名成员参与了 Zachary 的研究），有 78 条边（总共有 78 对成员在研究期间被观察到有社交联系）</p>
+</section>
+<section id="id20">
+<h3>2. 可视化一个网络<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span> <span class="c1">#每个节点的面积大小为 500（像素的平方）左右</span>
+</span><span data-line="4"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="network-viz" src="../_images/network-viz.png" /></p>
+</section>
+<section id="id21">
+<h3>3. 计算度中心性（合作/连接最多的）<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">deg</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span><span data-line="2"><span class="nb">sorted</span><span class="p">(</span><span class="n">deg</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">5</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<p>nx.degree_centrality(G) 的输出是每个节点的 <strong>度中心性</strong>，公式为：</p>
+<p>degree_centrality(node) = 该节点的度数 / (N - 1)</p>
+<p>其中 N 是整个图的节点数量。</p>
+<p>对于 Zachary 空手道俱乐部网络，N = 34，因此：</p>
+<p>分母 (N−1) = 33。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[(</span><span class="mi">33</span><span class="p">,</span> <span class="mf">0.5151515151515151</span><span class="p">),</span>
+</span><span data-line="2"> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.48484848484848486</span><span class="p">),</span>
+</span><span data-line="3"> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mf">0.36363636363636365</span><span class="p">),</span>
+</span><span data-line="4"> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.30303030303030304</span><span class="p">),</span>
+</span><span data-line="5"> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2727272727272727</span><span class="p">)]</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>节点</strong></p></th>
+<th class="head"><p><strong>度中心性</strong></p></th>
+<th class="head"><p><strong>解释</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>33</p></td>
+<td><p>0.515</p></td>
+<td><p>节点 33 与 17 个节点相连（17/33 ≈ 0.515）。它是全图最关键的“交往中心”，高度活跃，很可能是网络中的领导者或关键人物。</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0.485</p></td>
+<td><p>节点 0 与 16 个节点相连（16/33）。它也是非常核心的成员，是另一个主要中心节点。</p></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>0.364</p></td>
+<td><p>与约 12 个节点相连（12/33）。属于比较重要但没有 33、0 那么关键的次级中心。</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0.303</p></td>
+<td><p>与约 10 个节点相连（10/33）。处于网络较显眼位置，但不是最中心的人。</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0.273</p></td>
+<td><p>与约 9 个节点相连（9/33）。属于较活跃的成员，但中心性进一步降低。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这和经典研究的结论一致：</p>
+<ul class="simple">
+<li><p>节点 33 通常对应“Mr. Hi”阵营的核心</p></li>
+<li><p>节点 0 对应“John A”阵营的核心</p></li>
+</ul>
+</section>
+<section id="id22">
+<h3>4. 介数中心性（“桥梁”角色）<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">bet</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span><span data-line="2"><span class="nb">sorted</span><span class="p">(</span><span class="n">bet</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">5</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<p><strong>中介中心性（betweenness centrality）</strong> 衡量一个节点在网络中充当“桥梁”或“中间人”的程度。</p>
+<p>公式的核心思想：</p>
+<p>一个节点越多地位于其它节点之间的最短路径上，中介中心性越高。</p>
+<p>因此：</p>
+<ul class="simple">
+<li><p>高值 = 该节点对网络的连通、信息流动非常关键</p></li>
+<li><p>移除高值节点通常会破坏网络结构、导致群体分裂</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.43763528138528146</span><span class="p">),</span>
+</span><span data-line="2"> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mf">0.30407497594997596</span><span class="p">),</span>
+</span><span data-line="3"> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mf">0.145247113997114</span><span class="p">),</span>
+</span><span data-line="4"> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.14365680615680618</span><span class="p">),</span>
+</span><span data-line="5"> <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mf">0.13827561327561325</span><span class="p">)]</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>节点</strong></p></th>
+<th class="head"><p><strong>中介中心性</strong></p></th>
+<th class="head"><p><strong>意义</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>0</strong></p></td>
+<td><p>0.438</p></td>
+<td><p>处于最多最短路径上，是全图最关键的“桥梁节点”，在不同子群体之间起核心通道作用。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>33</strong></p></td>
+<td><p>0.304</p></td>
+<td><p>也是一个重要桥梁，但略弱于 0。仍是网络中核心领导者之一。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>32</strong></p></td>
+<td><p>0.145</p></td>
+<td><p>中等桥梁节点，连接了不同社区的重要路径。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2</strong></p></td>
+<td><p>0.144</p></td>
+<td><p>和 32 类似，也是跨社区的次级桥梁。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>31</strong></p></td>
+<td><p>0.138</p></td>
+<td><p>在特定社群之间的最短路径上出现频繁，是隐含的中介角色。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="pagerank">
+<h3>5. PageRank（最被依赖/最“权威”的）<a class="headerlink" href="#pagerank" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">pr</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span><span data-line="2"><span class="nb">sorted</span><span class="p">(</span><span class="n">pr</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">5</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<p>PageRank 衡量的是：</p>
+<p>一个节点的重要性取决于：</p>
+<ol class="arabic simple">
+<li><p>有多少节点指向它（连接数量）</p></li>
+<li><p>指向它的节点本身是否重要（连接质量）</p></li>
+</ol>
+<p>用一句话概括：</p>
+<p><strong>不仅要“朋友多”，还要“朋友的重要”。</strong></p>
+<p>因此，PageRank 代表的是一种“声望”或“影响力”指标。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[(</span><span class="mi">33</span><span class="p">,</span> <span class="mf">0.09698041880501741</span><span class="p">),</span>
+</span><span data-line="2"> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.08850807396280014</span><span class="p">),</span>
+</span><span data-line="3"> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mf">0.07592643687005646</span><span class="p">),</span>
+</span><span data-line="4"> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.06276686454603017</span><span class="p">),</span>
+</span><span data-line="5"> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.05741484049711006</span><span class="p">)]</span>
+</span></pre></div>
+</div>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>节点</strong></p></th>
+<th class="head"><p><strong>PageRank 值</strong></p></th>
+<th class="head"><p><strong>含义</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>33</strong></p></td>
+<td><p>0.097</p></td>
+<td><p>网络中声望最高的节点，具有最强的“影响力”。其他重要节点也倾向于连接它。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>0</strong></p></td>
+<td><p>0.089</p></td>
+<td><p>第二高影响力节点，位置重要性仅次于节点 33。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>32</strong></p></td>
+<td><p>0.076</p></td>
+<td><p>影响力稳固的中层核心节点。</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2</strong></p></td>
+<td><p>0.063</p></td>
+<td><p>连接数量与连接质量都不错，属于次中心。</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>1</strong></p></td>
+<td><p>0.057</p></td>
+<td><p>虽然不如前几名核心，但仍属于重要成员。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>度中心性前五是：</p>
+<p>33, 0, 32, 2, 1</p>
+<p>PageRank 前五也是：</p>
+<p>33, 0, 32, 2, 1</p>
+<p>这说明：</p>
+<ul class="simple">
+<li><p>Karate Club 图的结构使得连接数量本身就能很好代表“重要性”</p></li>
+<li><p>核心节点之间彼此互相连接，使 PageRank 权重也集中在它们身上</p></li>
+</ul>
+<blockquote>
+<div><p><strong>PageRank 是一种“加权的度中心性”，但这里网络本身具有明显核心结构，使得两者非常一致。</strong></p>
+</div></blockquote>
+</section>
+<section id="id23">
+<h3>6.做简单社区划分<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="kn">import</span> <span class="n">girvan_newman</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">communities</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">girvan_newman</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">])</span>
+</span><span data-line="5">
+</span><span data-line="6">
+</span></pre></div>
+</div>
+<p>这个算法通过 不断删除介数中心性最高的边，使网络自动分裂成多个社区。</p>
+<p>高介数的边通常是“跨社区的桥梁边”。
+当这些边被删掉后，网络会分成内部紧密、外部松散的两大块。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">]]</span>
+</span></pre></div>
+</div>
+<p>社区 A（15 个节点）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>中介中心性最高的是 node <strong>0</strong></p></li>
+<li><p>他是俱乐部管理员，对多个子群体有连接</p></li>
+<li><p>这个社区节点内部连接较密集，与社区 B 较少连接</p></li>
+</ul>
+<p>社区 B（19 个节点）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<ul class="simple">
+<li><p>节点 <strong>33</strong> 与大量节点直接相连，是训练师阵营的核心</p></li>
+<li><p>他社区内部结构紧密，连接强度高</p></li>
+<li><p>多个重要节点（32、31、2）支持这一社区</p></li>
+</ul>
+<p>这正对应了 <strong>Zachary 空手道俱乐部分裂后的两个派别</strong>：</p>
+<ul class="simple">
+<li><p><strong>社区 A</strong> 通常被认为属于 <strong>“John A”（俱乐部管理员）派别</strong></p></li>
+<li><p><strong>社区 B</strong> 属于 <strong>“Mr. Hi”（空手道教练）派别</strong></p></li>
+</ul>
+<p>研究者 Zachary 在 1970s 的观察中指出，这两个领导者的冲突最终导致俱乐部分裂，成员分别跟随两位领导者。</p>
+</section>
+</section>
+<section id="id24">
+<h2>可视化<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<section id="id25">
+<h3>社区上色<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">networkx.algorithms.community</span><span class="w"> </span><span class="kn">import</span> <span class="n">greedy_modularity_communities</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># 1. 读入图（空手道俱乐部示例）</span>
+</span><span data-line="6"><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># 2. 社区检测（这里用 greedy_modularity_communities，适合演示）</span>
+</span><span data-line="9"><span class="n">communities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="c1"># 3. 给每个节点一个社区编号</span>
+</span><span data-line="12"><span class="n">node2comm</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span data-line="13"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">com</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+</span><span data-line="14">    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">com</span><span class="p">:</span>
+</span><span data-line="15">        <span class="n">node2comm</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>   <span class="c1"># i 就是社区编号：0,1,2,...</span>
+</span><span data-line="16">
+</span><span data-line="17"><span class="c1"># 4. 准备颜色列表（每个节点对应一个社区编号）</span>
+</span><span data-line="18"><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">node2comm</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="c1"># 5. 画图：颜色 = 社区编号</span>
+</span><span data-line="21"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</span><span data-line="22"><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># 固定布局，方便反复对比</span>
+</span><span data-line="23">
+</span><span data-line="24"><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span>
+</span><span data-line="25">                       <span class="n">node_color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+</span><span data-line="26">                       <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Set1</span><span class="p">,</span>   <span class="c1"># 使用一个离散色图</span>
+</span><span data-line="27">                       <span class="n">node_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span><span data-line="28"><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</span><span data-line="29"><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</span><span data-line="30">
+</span><span data-line="31"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</span><span data-line="32"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="colored-network" src="../_images/colored-network.png" /></p>
+</section>
+<section id="id26">
+<h3>热力图<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># 如果你已经有 G 和 bet，可以从这里往下写</span>
+</span><span data-line="5"><span class="c1"># 这里用空手道俱乐部作为示例</span>
+</span><span data-line="6"><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+</span><span data-line="7"><span class="n">bet</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="c1"># 1. 计算布局</span>
+</span><span data-line="10"><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># seed 只是为了每次布局一致</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="c1"># 2. 把 betweenness 数值取出来</span>
+</span><span data-line="13"><span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bet</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="c1"># 3. 画图</span>
+</span><span data-line="16"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</span><span data-line="17">
+</span><span data-line="18"><span class="c1"># 节点：颜色 = betweenness，大小也随 betweenness 变化</span>
+</span><span data-line="19"><span class="n">nodes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span>
+</span><span data-line="20">    <span class="n">G</span><span class="p">,</span>
+</span><span data-line="21">    <span class="n">pos</span><span class="p">,</span>
+</span><span data-line="22">    <span class="n">node_color</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>                <span class="c1"># 用 betweenness 当颜色</span>
+</span><span data-line="23">    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">OrRd</span><span class="p">,</span>                 <span class="c1"># 热力图风格颜色（可以改成 viridis, plasma 等）</span>
+</span><span data-line="24">    <span class="n">node_size</span><span class="o">=</span><span class="p">[</span><span class="mi">300</span> <span class="o">+</span> <span class="mi">3000</span><span class="o">*</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">],</span>  <span class="c1"># 中介中心性越大，节点越大</span>
+</span><span data-line="25"><span class="p">)</span>
+</span><span data-line="26">
+</span><span data-line="27"><span class="c1"># 边</span>
+</span><span data-line="28"><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</span><span data-line="29">
+</span><span data-line="30"><span class="c1"># 节点标签（显示节点编号）</span>
+</span><span data-line="31"><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span data-line="32">
+</span><span data-line="33"><span class="c1"># 4. 加一个 colorbar，显示数值含义</span>
+</span><span data-line="34"><span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+</span><span data-line="35"><span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Betweenness centrality&quot;</span><span class="p">)</span>
+</span><span data-line="36">
+</span><span data-line="37"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Betweenness centrality heatmap on network&quot;</span><span class="p">)</span>
+</span><span data-line="38"><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</span><span data-line="39"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span data-line="40"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><img alt="network-heatmap" src="../_images/network-heatmap.png" /></p>
+</section>
+<section id="gephi">
+<h3>Gephi 美化<a class="headerlink" href="#gephi" title="Link to this heading">¶</a></h3>
+<p>导出数据</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">nx</span><span class="o">.</span><span class="n">write_gexf</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;karate_club.gexf&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>然后在 Gephi 里进行以下操作：</p>
+<p><strong>(1) 打开文件 → Statistics → 运行 “Modularity（模块度）”</strong>
+Gephi 会给节点自动上色，形成两个清晰的社区。</p>
+<p><strong>(2) 运行布局算法 → ForceAtlas2</strong>
+图像会自然展开，呈现两派分离结构。</p>
+<p><strong>(3) 设置节点大小 = 度中心性（Degree）</strong>
+你会看到俱乐部领导者节点会被放大（比如“Mr. Hi”和“Officer”）。</p>
+<p><img alt="geph-png" src="../_images/geph-png.png" /></p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../5-Data/descriptive.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">描述性统计常见指标</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../6-Storytelling/stories.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">故事类型</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2025, Zhijun Gao</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=717cf61d"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-YSF8MXKHBM"></script>
+      <script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YSF8MXKHBM');
+</script>
+      <script src="../_static/shibuya.js?v=e730760c"></script></body>
+</html>

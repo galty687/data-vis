@@ -2,7 +2,7 @@
 
 
 
-## 可视化图
+## 可视化语法
 
 [Visual Vocabulary](https://ft-interactive.github.io/visual-vocabulary/)
 
@@ -10,9 +10,15 @@
 
 
 
-## 动态可视化
+## 可视化案例
 
-[看见统计](https://seeing-theory.brown.edu/cn.html) （基于D3.js开发）
+1. [看见统计](https://seeing-theory.brown.edu/cn.html) （基于D3.js开发）
+2. [北京大学数字人文平台作品](https://pkudh.org/projects/)
+3. [探索世界各地城市中的绿色树冠](https://senseable.mit.edu/treepedia)
+4. [Nature 150 年](https://www.nature.com/immersive/d42859-019-00121-0/index.html)
+5. [转运出城：美国如何安置无家可归者](https://www.theguardian.com/us-news/ng-interactive/2017/dec/20/bussed-out-america-moves-homeless-people-country-study)
+
+
 
 
 
@@ -46,6 +52,14 @@
 - https://docs.google.com/document/d/1Ads4XsCjXmDrdGRgfmm_OgRdpFcl6Qhs6SOllNGyq7Y/edit
 - https://bagrow.com/dsv/datasets.html
 - https://www.datasciencecentral.com/
+
+
+
+## 数据可视化工具
+
+1. [Shorthand](https://shorthand.com)
+2. [Echarts](https://echarts.apache.org) 
+3. [Flourish](https://flourish.studio/examples/) 
 
 
 

@@ -62,6 +62,11 @@
    5-Data/data-analysis.md
    5-Data/descriptive.md
 
+.. toctree::
+   :maxdepth: 2
+   :caption: 社会网络分析
+
+   7-network/network.md
 
 .. toctree::
    :maxdepth: 2
